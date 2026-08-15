@@ -63,8 +63,8 @@ const projectsData = [
         id: "hackathon",
         category: "school",
         title: {
-            cz: "FairBank - Mikroslužbový Bankovní Systém",
-            en: "FairBank Microservices"
+            cz: "FairBank - Bankovní systém",
+            en: "FairBank - Banking System"
         },
         badge: {
             cz: "Hackathon 2026",
