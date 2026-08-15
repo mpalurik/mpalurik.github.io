@@ -60,10 +60,10 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Build card HTML
             let visualHTML = '';
-            if (project.image) {
+            if (project.images && project.images.length > 0) {
                 visualHTML = `
                 <div class="project-visual">
-                    <img src="${project.image}" alt="${project.title[currentLang]}" loading="lazy">
+                    <img src="${project.images[0]}" alt="${project.title[currentLang]}" loading="lazy">
                 </div>`;
             }
 
@@ -113,10 +113,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // Tech stack
         document.getElementById('modal-tech').innerHTML = project.tech.map(t => `<span>${t}</span>`).join('');
         
-        // Image
+        // Image Carousel
         const visualContainer = document.getElementById('modal-visual-container');
-        if (project.image) {
-            visualContainer.innerHTML = `<img src="${project.image}" alt="${project.title[currentLang]}">`;
+        if (project.images && project.images.length > 0) {
+            const imagesHTML = project.images.map(img => `<img src="${img}" alt="${project.title[currentLang]}">`).join('');
+            visualContainer.innerHTML = `<div class="gallery-carousel">${imagesHTML}</div>`;
             visualContainer.style.display = 'block';
         } else {
             visualContainer.innerHTML = '';

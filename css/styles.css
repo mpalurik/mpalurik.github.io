@@ -661,16 +661,44 @@ h1, h2, h3, h4 {
 .modal-visual {
     margin-bottom: 2rem;
     border-radius: 12px;
-    overflow: hidden;
-    box-shadow: var(--shadow-md);
-    background: rgba(0,0,0,0.2);
+    background: transparent;
 }
 
-.modal-visual img {
+.gallery-carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 1rem;
+    padding-bottom: 1rem;
+}
+
+.gallery-carousel::-webkit-scrollbar {
+    height: 8px;
+}
+
+.gallery-carousel::-webkit-scrollbar-thumb {
+    background: var(--accent-primary);
+    border-radius: 10px;
+}
+
+.gallery-carousel::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+[data-theme="light"] .gallery-carousel::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.gallery-carousel img {
+    flex: 0 0 100%;
+    scroll-snap-align: center;
     width: 100%;
     height: auto;
     max-height: 400px;
     object-fit: cover;
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
 }
 
 .modal-body .long-desc {
