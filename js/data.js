@@ -17,12 +17,10 @@ const projectsData = [
         longDesc: {
             cz: `Tato práce představuje "Production-ready" Python Bridge, vytvořený ve spolupráci se společností **Schneider Electric**. Spojuje svět profesionální budovní automatizace (KNX) s nejmodernějším standardem chytrých domácností (Matter).
             \nSrdcem celého systému je vývojová deska **NXP FRDM-i.MX93**, která funguje jako dedikovaný Matter Controller a Thread Border Router. Systém využívá utilitu \`chip-tool\` z Matter SDK a dokáže párovat (commission) reálná chytrá zařízení do vlastní sítě.
-            \nBrána zajišťuje obousměrnou synchronizaci stavů (Bidirectional Sync) s extrémně nízkou latencí. Propojení s KNX sběrnicí obstarává démon \`knxd\` (KNX/IP Tunneling). Celý systém je doplněn o integrované webové rozhraní běžící na portu 8080 pro jednoduchý management zařízení, live logování a mapování KNX skupin.
-            \nCelá dokumentace a kompletní zdrojové kódy architektury jsou k nalezení v mém GitHub repozitáři.`,
+            \nBrána zajišťuje obousměrnou synchronizaci stavů (Bidirectional Sync) s extrémně nízkou latencí. Propojení s KNX sběrnicí obstarává démon \`knxd\` (KNX/IP Tunneling). Celý systém je doplněn o integrované webové rozhraní běžící na portu 8080 pro jednoduchý management zařízení, live logování a mapování KNX skupin.`,
             en: `This project is a "Production-ready" Python Bridge developed in collaboration with **Schneider Electric**. It seamlessly bridges the world of professional building automation (KNX) with the cutting-edge smart home standard (Matter).
             \nThe system is built on the **NXP FRDM-i.MX93** evaluation board, which acts as a dedicated Matter Controller and Thread Border Router. It leverages the \`chip-tool\` utility from the Matter SDK to actively commission real smart devices into its own fabric.
-            \nThe gateway provides low-latency bidirectional state synchronization. Communication with the physical KNX bus is handled via the \`knxd\` daemon (KNX/IP Tunneling). The ecosystem includes a built-in web interface (port 8080) for easy device commissioning, live event logging, and KNX group address mapping.
-            \nThe full architecture documentation and source codes are publicly available in my GitHub repository.`
+            \nThe gateway provides low-latency bidirectional state synchronization. Communication with the physical KNX bus is handled via the \`knxd\` daemon (KNX/IP Tunneling). The ecosystem includes a built-in web interface (port 8080) for easy device commissioning, live event logging, and KNX group address mapping.`
         },
         tech: ["KNX", "Matter", "i.MX93", "Embedded Python", "Thread BR", "Schneider Electric"],
         images: ["assets/img/dipomka_1.png", "assets/img/diplomka_2.png", "assets/img/diplomka_3.png", "assets/img/diplomka_4.png", "assets/img/diplomka_5.png", "assets/img/diplomka_6.png", "assets/img/diplomka_7.png", "assets/img/diplomka_8.png"],
@@ -140,9 +138,7 @@ const projectsData = [
         },
         tech: ["Ionic", "Angular", "TypeScript", "Capacitor", "UI/UX"],
         images: ["assets/img/hscards_1.png", "assets/img/hscards_2.png", "assets/img/hscards_3.png", "assets/img/hscards_4.png"],
-        links: [
-            { icon: "fab fa-github", url: "https://github.com/mpalurik/HSCards", tooltip: "GitHub Repository" }
-        ]
+        links: []
     },
     {
         id: "hearthstonecards-native",
@@ -169,9 +165,7 @@ const projectsData = [
         },
         tech: ["Android", "Kotlin", "Jetpack Nav", "Retrofit", "REST API", "Room DB"],
         images: [],
-        links: [
-            { icon: "fab fa-github", url: "https://github.com/mpalurik/HearthstoneCards", tooltip: "GitHub Repository" }
-        ]
+        links: []
     },
     {
         id: "f1-app",
@@ -198,9 +192,7 @@ const projectsData = [
         },
         tech: ["iOS", "Swift", "REST API", "XCode"],
         images: ["assets/f1_ios.mp4"],
-        links: [
-            { icon: "fab fa-github", url: "https://github.com/mpalurik/Ios_F1_app", tooltip: "GitHub Repository" }
-        ]
+        links: []
     },
     {
         id: "jump-to-space",
@@ -254,9 +246,7 @@ const projectsData = [
         },
         tech: ["MongoDB", "Flutter (Dart)", "Python", "FastAPI/Flask", "NoSQL", "Indexing"],
         images: [],
-        links: [
-            { icon: "fab fa-github", url: "https://github.com/mpalurik/MovieDatabase", tooltip: "GitHub Repository" }
-        ]
+        links: []
     },
     {
         id: "sim-pedals",
@@ -293,8 +283,6 @@ const projectsData = [
         },
         tech: ["Raspberry Pi Pico", "Python", "CustomTkinter", "Pygame", "C/C++", "Hardware Modding", "Serial Comms"],
         images: ["assets/img/sim_pedals_1.png", "assets/img/sim_pedals_2.png", "assets/img/sim_pedals_3.png"],
-        links: [
-            { icon: "fab fa-github", url: "https://github.com/mpalurik/Sim-racing-pedals", tooltip: "GitHub Repository" }
-        ]
+        links: []
     }
 ];
