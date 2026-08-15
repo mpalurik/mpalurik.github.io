@@ -3,7 +3,7 @@ const projectsData = [
         id: "diplomka",
         category: "school",
         title: {
-            cz: "Propojení KNX a Matter",
+            cz: "Matter & KNX Bridge",
             en: "Matter & KNX Bridge"
         },
         badge: {
@@ -32,7 +32,7 @@ const projectsData = [
         id: "bakalarka",
         category: "school",
         title: {
-            cz: "Chytré řízení posuvné brány",
+            cz: "Smart Sliding Gate Controller",
             en: "Smart Sliding Gate Controller"
         },
         badge: {
@@ -114,32 +114,61 @@ const projectsData = [
         ]
     },
     {
-        id: "hscards",
+        id: "hscards-ionic",
         category: "mobile",
         title: {
-            cz: "HSCards Mobile App",
-            en: "HSCards Mobile App"
+            cz: "HSCards (Ionic/Angular)",
+            en: "HSCards (Ionic/Angular)"
         },
         badge: {
-            cz: "Mobilní Aplikace",
-            en: "Mobile Application"
+            cz: "Cross-platform App",
+            en: "Cross-platform App"
         },
         shortDesc: {
-            cz: "Aplikace s moderním UI/UX pro správu sad studijních karet. Zaměřeno na interaktivitu a vizuální čistotu.",
-            en: "An app with modern UI/UX for managing flashcard study sets. Focused on interactivity and visual clarity."
+            cz: "Multiplatformní mobilní aplikace vytvořená v Ionic frameworku a Angularu. Zaměřeno na moderní responzivní UI/UX pro správu karet.",
+            en: "Cross-platform mobile app built with Ionic framework and Angular. Focused on modern responsive UI/UX for managing cards."
         },
         longDesc: {
-            cz: `Mobilní aplikace HSCards byla vytvořena během 5. semestru. Slouží k rychlému ukládání, organizaci a procházení takzvaných flashcards (studijních karet).
-            \nHlavní prioritou tohoto projektu byl extrémní fokus na uživatelské rozhraní (UI) a uživatelský prožitek (UX). Aplikace implementuje moderní designové trendy, plynulé animace, card-swiping logiku a intuitivní responzivní ovládání. 
-            \nSkvěle demonstruje moji schopnost propojit náročný, graficky atraktivní design se spolehlivou backendovou logikou mobilní aplikace.`,
-            en: `The HSCards mobile application was developed during the 5th semester. It is designed for rapidly creating, organizing, and reviewing study flashcards.
-            \nThe absolute priority for this project was an extreme focus on User Interface (UI) and User Experience (UX) design. The app implements modern design trends, smooth physics-based animations, card-swiping logic, and intuitive responsive controls.
-            \nIt perfectly demonstrates my ability to bridge demanding, visually striking frontend designs with reliable mobile backend application logic.`
+            cz: `Jedna ze dvou verzí projektu HSCards. Tato verze je postavena jako multiplatformní (Cross-platform) mobilní aplikace s využitím moderních webových technologií.
+            \nJádro tvoří robustní frontend framework Angular společně s UI knihovnou Ionic, což umožňuje nasazení jedné kódové základny na iOS i Android. Aplikace je balena do nativních mobilních kontejnerů pomocí technologie Capacitor.
+            \nHlavní prioritou byl extrémní fokus na plynulost animací, responzivní design a intuitivní card-swiping logiku. Aplikace skvěle demonstruje výhody hybridního vývoje.`,
+            en: `One of the two versions of the HSCards project. This version is architected as a cross-platform mobile application utilizing modern web technologies.
+            \nThe core is built on the robust Angular frontend framework paired with the Ionic UI library, allowing deployment of a single codebase to both iOS and Android. The application is packaged into native mobile containers via Capacitor.
+            \nThe absolute priority was an extreme focus on smooth animations, responsive design, and intuitive card-swiping logic. The app perfectly demonstrates the benefits of hybrid mobile development.`
         },
-        tech: ["Mobile Dev", "UI/UX", "Frontend", "Animations"],
+        tech: ["Ionic", "Angular", "TypeScript", "Capacitor", "UI/UX"],
         image: "assets/img/hscards_1.png",
         links: [
             { icon: "fab fa-github", url: "https://github.com/mpalurik/HSCards", tooltip: "GitHub Repository" }
+        ]
+    },
+    {
+        id: "hearthstonecards-native",
+        category: "mobile",
+        title: {
+            cz: "HearthstoneCards (Native)",
+            en: "HearthstoneCards (Native)"
+        },
+        badge: {
+            cz: "Nativní Android App",
+            en: "Native Android App"
+        },
+        shortDesc: {
+            cz: "Nativní Android aplikace (Kotlin) pro komplexní správu kolekcí karet do hry Hearthstone. Optimalizovaný životní cyklus a nativní komponenty.",
+            en: "Native Android app (Kotlin) for managing Hearthstone card collections. Highly optimized lifecycle and native UI components."
+        },
+        longDesc: {
+            cz: `Druhá verze projektu pro správu karet, avšak tentokrát vyvinutá čistě jako nativní Android aplikace pomocí programovacího jazyka Kotlin v prostředí Android Studio.
+            \nTento projekt zkoumá a využívá veškeré výhody nativního vývoje. Klade silný důraz na pochopení a správu Android životního cyklu (Activity/Fragment lifecycle), využití efektivních RecyclerViews pro zobrazení masivních seznamů karet a integraci lokální databáze (Room).
+            \nDíky nativní implementaci aplikace poskytuje maximální možný výkon a perfektní integraci s operačním systémem Android.`,
+            en: `The second version of the card management project, but this time developed entirely as a Native Android application using Kotlin in Android Studio.
+            \nThis project explores and utilizes all the advantages of native development. It places a strong emphasis on understanding and managing the Android lifecycle (Activity/Fragment), implementing highly efficient RecyclerViews for displaying massive lists of cards, and integrating local storage (Room database).
+            \nDue to the native implementation, the application provides maximum performance and perfect integration with the Android operating system.`
+        },
+        tech: ["Android", "Kotlin", "Native Mobile", "RecyclerView"],
+        image: null,
+        links: [
+            { icon: "fab fa-github", url: "https://github.com/mpalurik/HearthstoneCards", tooltip: "GitHub Repository" }
         ]
     },
     {
@@ -202,26 +231,26 @@ const projectsData = [
         id: "movie-database",
         category: "school",
         title: {
-            cz: "NoSQL Movie Database",
-            en: "NoSQL Movie Database"
+            cz: "Fullstack Movie Database",
+            en: "Fullstack Movie Database"
         },
         badge: {
             cz: "Pokročilé Databáze",
             en: "Advanced Databases"
         },
         shortDesc: {
-            cz: "Architektura databáze pro rozsáhlý filmový katalog. Zaměřeno na výkon MongoDB, optimalizaci indexů a full-textové vyhledávání.",
-            en: "Database architecture for a massive movie catalog. Focused on MongoDB performance, index optimization, and full-text search."
+            cz: "Fullstack systém skládající se z Flutter frontendu a Python backendu, napojený na obří NoSQL MongoDB databázi.",
+            en: "Fullstack system consisting of a Flutter frontend and a Python backend, connected to a massive NoSQL MongoDB database."
         },
         longDesc: {
-            cz: `Projekt pro kurz Pokročilé databáze zkoumající limity nerelačních databázových systémů. Pro uložení a efektivní prohledávání velkých datasetů filmových záznamů a uživatelských recenzí využívá dokumentově orientovanou NoSQL databázi MongoDB.
-            \nDůraz nebyl kladen na samotnou aplikaci, ale primárně na architekturu pod kapotou: návrh a strukturování dokumentových kolekcí, de-normalizaci dat pro zvýšení read-výkonu a aplikaci agregačních pipeline (Aggregation Framework).
-            \nZásadní částí projektu byla pokročilá optimalizace indexování, která dramaticky snížila latenci u složitých full-textových vyhledávacích dotazů napříč miliony záznamů.`,
-            en: `An academic project for the Advanced Databases course exploring the capabilities and limits of non-relational database systems. It leverages the MongoDB document-oriented NoSQL database to store and effectively search massive datasets of movie records and user reviews.
-            \nThe primary focus was not on the frontend application, but heavily on the underlying architecture: document collection design, strategic data de-normalization to maximize read-throughput, and heavy use of the Aggregation Framework.
-            \nA crucial milestone of the project was advanced index optimization, which drastically reduced query latency for complex full-text searches executed across millions of records.`
+            cz: `Projekt pro kurz Pokročilé databáze zkoumající limity nerelačních databázových systémů. Jedná se o kompletní fullstack architekturu rozdělenou na frontend a backend.
+            \nZákaznická část (Frontend) je napsaná v moderním frameworku **Flutter** (Dart), což zaručuje plynulý chod na různých zařízeních s jednotnou kódovou základnou. Komunikaci s databází obstarává rychlý **Python backend** (FastAPI / Flask).
+            \nPod kapotou běží dokumentově orientovaná NoSQL databáze **MongoDB**. Důraz byl kladen primárně na architekturu pod kapotou: návrh a strukturování dokumentových kolekcí, strategickou de-normalizaci dat pro zvýšení read-výkonu a aplikaci agregačních pipeline (Aggregation Framework). Zásadní částí projektu byla pokročilá optimalizace indexování, která dramaticky snížila latenci u složitých full-textových vyhledávacích dotazů napříč miliony záznamů.`,
+            en: `An academic project for the Advanced Databases course exploring the capabilities of non-relational database systems. It is built as a complete fullstack architecture separated into frontend and backend components.
+            \nThe client-facing interface (Frontend) is developed using the modern **Flutter** (Dart) framework, ensuring smooth cross-platform performance from a single codebase. The business logic and database communication are handled by a blazing-fast **Python backend** (FastAPI / Flask).
+            \nUnder the hood runs a document-oriented **MongoDB** NoSQL database. The primary academic focus was on the underlying architecture: document collection design, strategic data de-normalization to maximize read-throughput, and heavy use of the Aggregation Framework. A crucial milestone of the project was advanced index optimization, drastically reducing query latency for complex full-text searches across millions of records.`
         },
-        tech: ["MongoDB", "NoSQL", "Database Design", "Indexing"],
+        tech: ["MongoDB", "Flutter (Dart)", "Python", "FastAPI/Flask", "NoSQL", "Indexing"],
         image: null,
         links: [
             { icon: "fab fa-github", url: "https://github.com/mpalurik/MovieDatabase", tooltip: "GitHub Repository" }
