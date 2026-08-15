@@ -25,7 +25,7 @@ const projectsData = [
             \nThe full architecture documentation and source codes are publicly available in my GitHub repository.`
         },
         tech: ["KNX", "Matter", "i.MX93", "Embedded Python", "Thread BR", "Schneider Electric"],
-        images: [],
+        images: ["assets/img/dipomka_1.png", "assets/img/diplomka_2.png", "assets/img/diplomka_3.png", "assets/img/diplomka_4.png", "assets/img/diplomka_5.png", "assets/img/diplomka_6.png", "assets/img/diplomka_7.png", "assets/img/diplomka_8.png"],
         links: [
             { icon: "fas fa-microchip", url: "#", tooltip: "Hardware Project" }
         ]
@@ -161,13 +161,13 @@ const projectsData = [
         },
         longDesc: {
             cz: `Druhá verze projektu pro správu karet, avšak tentokrát vyvinutá čistě jako nativní Android aplikace pomocí programovacího jazyka Kotlin v prostředí Android Studio.
-            \nTento projekt zkoumá a využívá veškeré výhody nativního vývoje. Klade silný důraz na pochopení a správu Android životního cyklu (Activity/Fragment lifecycle), využití efektivních RecyclerViews pro zobrazení masivních seznamů karet bez zamrznutí UI a integraci lokální databáze (Room).
+            \nTento projekt zkoumá a využívá veškeré výhody nativního vývoje. Klade silný důraz na pochopení a správu Android životního cyklu (Activity/Fragment lifecycle), využití efektivních RecyclerViews pro zobrazení masivních seznamů karet bez zamrznutí UI a integraci lokální databáze (Room). Pro přesuny mezi obrazovkami (např. z výpisu hledání do detailu konkrétní karty) je implementován moderní **Jetpack Navigation Component**, který zajišťuje bezpečné předávání parametrů a plynulé animace přechodů.
             \nAplikace navíc dynamicky komunikovala s veřejným herním REST API (prostřednictvím platformy RapidAPI). Pro elegantní a asynchronní stahování dat o kartách byla využita populární HTTP knihovna Retrofit, která společně s převodníkem Gson rovnou parsovala JSON odpovědi do Kotlin data-class modelů.`,
             en: `The second version of the card management project, but this time developed entirely as a Native Android application using Kotlin in Android Studio.
-            \nThis project explores and utilizes all the advantages of native development. It places a strong emphasis on understanding and managing the Android lifecycle (Activity/Fragment), implementing highly efficient RecyclerViews for displaying massive lists of cards without UI blocking, and integrating local storage (Room database).
+            \nThis project explores and utilizes all the advantages of native development. It places a strong emphasis on understanding and managing the Android lifecycle (Activity/Fragment), implementing highly efficient RecyclerViews for displaying massive lists of cards without UI blocking, and integrating local storage (Room database). Screen transitions (like moving from search results to card details) are handled by the modern **Jetpack Navigation Component**, ensuring safe argument passing and fluid animations.
             \nThe application dynamically communicated with a public game REST API via the RapidAPI platform. For elegant and asynchronous data fetching, the popular Retrofit HTTP client was used, combined with the Gson converter to seamlessly parse JSON responses directly into Kotlin data models.`
         },
-        tech: ["Android", "Kotlin", "Retrofit", "REST API", "Room DB"],
+        tech: ["Android", "Kotlin", "Jetpack Nav", "Retrofit", "REST API", "Room DB"],
         images: [],
         links: [
             { icon: "fab fa-github", url: "https://github.com/mpalurik/HearthstoneCards", tooltip: "GitHub Repository" }
