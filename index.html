@@ -52,7 +52,7 @@
             <p class="role">Software & Hardware Developer</p>
             <p class="bio">
                 Věnuji se vývoji mobilních aplikací, webových řešení a propojování světa hardwaru a softwaru. 
-                Rád zkoumám nové technologie, od IoT (ESP32, Matter, KNX) až po moderní herní a databázové systémy.
+                Rád zkoumám nové technologie, od IoT (ESP32, Matter, KNX) přes moderní architekturu až po databázové systémy.
             </p>
             <div class="hero-buttons">
                 <a href="#projects" class="btn btn-primary">Moje práce</a>
@@ -89,6 +89,12 @@
                 
                 <!-- Ing. Thesis -->
                 <div class="project-card" data-category="school">
+                    <div class="card-image">
+                        <div class="placeholder">
+                            <i class="fas fa-image"></i>
+                            <small>Zde nahraj obrázek</small>
+                        </div>
+                    </div>
                     <div class="card-content">
                         <div class="project-header">
                             <span class="badge">Diplomová práce (Ing.)</span>
@@ -98,20 +104,26 @@
                         </div>
                         <h3 class="project-title">Propojení KNX a Matter</h3>
                         <p class="project-desc">
-                            V rámci diplomové práce vznikla brána na procesoru i.MX93, která umožňuje připojení Matter zařízení a následné řízení KNX prvků přes ethernet. Obsahuje integrované webové rozhraní pro snadnou konfiguraci. 
-                            <br><small><i>*Detailní implementace je chráněna NDA.</i></small>
+                            V rámci diplomové práce vznikla HW/SW brána na procesoru i.MX93, která umožňuje připojení Matter zařízení a následné řízení KNX prvků přes ethernet. Obsahuje integrované webové rozhraní pro snadnou konfiguraci sítě a protokolů.
+                            <br><br><small><i>*Detailní implementace je chráněna NDA.</i></small>
                         </p>
                         <div class="tech-stack">
                             <span>KNX</span>
                             <span>Matter</span>
                             <span>i.MX93</span>
-                            <span>Networking</span>
+                            <span>Embedded</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Bc. Thesis -->
                 <div class="project-card" data-category="school">
+                    <div class="card-image">
+                        <div class="placeholder">
+                            <i class="fas fa-image"></i>
+                            <small>Zde nahraj obrázek</small>
+                        </div>
+                    </div>
                     <div class="card-content">
                         <div class="project-header">
                             <span class="badge">Bakalářská práce (Bc.)</span>
@@ -121,19 +133,53 @@
                         </div>
                         <h3 class="project-title">Řízení posuvné brány</h3>
                         <p class="project-desc">
-                            Návrh a realizace HW a SW pro řízení posuvné brány. Systém využívá ESP32 pro vzdálené ovládání, sledování polohy koncových spínačů a monitorování odběru motoru v reálném čase.
+                            Kompletní návrh HW i SW pro chytrou bránu. Obsahuje asynchronní webový server (AsyncTCP) běžící na ESP32 (C++). Dále komunikuje s laserovým senzorem překážek přes I2C a pomocí modulu INA219 precizně sleduje odběr motoru pro okamžitou detekci přetížení. Součástí byl i návrh vlastních 3D modelů ozubeného hřebenu.
                         </p>
                         <div class="tech-stack">
                             <span>ESP32</span>
-                            <span>C++ / Arduino</span>
-                            <span>IoT</span>
-                            <span>Hardware Design</span>
+                            <span>C++</span>
+                            <span>AsyncTCP</span>
+                            <span>I2C</span>
+                            <span>3D Print</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hackathon 2026 -->
+                <div class="project-card" data-category="school">
+                    <div class="card-image">
+                        <div class="placeholder">
+                            <i class="fas fa-image"></i>
+                            <small>Zde nahraj obrázek</small>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="project-header">
+                            <span class="badge">Hackathon 2026</span>
+                        </div>
+                        <h3 class="project-title">Bankovní Systém FairBank</h3>
+                        <p class="project-desc">
+                            Vysoce škálovatelný bankovní systém postavený na moderní mikroslužbové architektuře. Frontend využívá Blazor WASM a komunikuje přes centrální API Gateway (C# / .NET 8). Backend zahrnuje přes 8 microservices (Identity, Payments, Cards, Chat) synchronizovaných pomocí Apache Kafka. Databáze je řešena přes PostgreSQL v režimu Primary-Replica a celé řešení je kontejnerizováno v Dockeru.
+                        </p>
+                        <div class="tech-stack">
+                            <span>.NET 8</span>
+                            <span>Blazor WASM</span>
+                            <span>Docker</span>
+                            <span>Kafka</span>
+                            <span>PostgreSQL</span>
+                            <span>Microservices</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Lorax -->
                 <div class="project-card" data-category="school">
+                    <div class="card-image">
+                        <div class="placeholder">
+                            <i class="fas fa-image"></i>
+                            <small>Zde nahraj obrázek</small>
+                        </div>
+                    </div>
                     <div class="card-content">
                         <div class="project-header">
                             <span class="badge">Školní projekt</span>
@@ -143,7 +189,7 @@
                         </div>
                         <h3 class="project-title">Lorax - Prodej lístků</h3>
                         <p class="project-desc">
-                            Týmový projekt z předmětu Vybrané techniky vývoje SW. Komplexní aplikace zaměřená na prodej a správu lístků. Kladen byl důraz na moderní softwarovou architekturu a týmovou spolupráci.
+                            Týmový projekt z předmětu Vybrané techniky vývoje SW. Komplexní aplikace zaměřená na prodej a správu lístků. Kladen byl extrémní důraz na moderní softwarovou architekturu, čistý kód a efektivní týmovou spolupráci (Git, Code Review).
                         </p>
                         <div class="tech-stack">
                             <span>Software Architecture</span>
@@ -153,29 +199,11 @@
                     </div>
                 </div>
 
-                <!-- iOS F1 App -->
-                <div class="project-card" data-category="mobile">
-                    <div class="card-content">
-                        <div class="project-header">
-                            <span class="badge">iOS App</span>
-                            <div class="project-links">
-                                <a href="https://github.com/mpalurik/Ios_F1_app" target="_blank" aria-label="GitHub repozitář"><i class="fab fa-github"></i></a>
-                            </div>
-                        </div>
-                        <h3 class="project-title">F1 Tracker</h3>
-                        <p class="project-desc">
-                            Nativní iOS aplikace využívající veřejné F1 API pro zobrazení výsledků závodů, soupisky jezdců a dokonce přehrávání radio zpráv. Vyvinuto v rámci předmětu Pokročilé mobilní technologie.
-                        </p>
-                        <div class="tech-stack">
-                            <span>iOS</span>
-                            <span>Swift</span>
-                            <span>REST API</span>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- HSCards -->
                 <div class="project-card" data-category="mobile">
+                    <div class="card-image">
+                        <img src="assets/img/hscards_1.png" alt="HSCards App Screenshot" loading="lazy">
+                    </div>
                     <div class="card-content">
                         <div class="project-header">
                             <span class="badge">Mobilní App</span>
@@ -185,74 +213,76 @@
                         </div>
                         <h3 class="project-title">HSCards</h3>
                         <p class="project-desc">
-                            Mobilní aplikace vytvořená během pátého semestru. Slouží jako interaktivní ukázka práce s daty a mobilním uživatelským rozhraním.
+                            Mobilní aplikace vytvořená během pátého semestru zaměřená na efektivní a moderní uživatelské rozhraní (UI/UX) pro práci se sadami karet (případně flashcards). Ukázka propojení interaktivního designu s logikou aplikace.
                         </p>
                         <div class="tech-stack">
                             <span>Mobile Dev</span>
                             <span>UI/UX</span>
+                            <span>Frontend</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Sim Racing Pedals -->
-                <div class="project-card" data-category="other">
+                <!-- iOS F1 App -->
+                <div class="project-card" data-category="mobile">
+                    <div class="card-image">
+                        <div class="placeholder">
+                            <i class="fas fa-image"></i>
+                            <small>Zde nahraj obrázek</small>
+                        </div>
+                    </div>
                     <div class="card-content">
                         <div class="project-header">
-                            <span class="badge">Hobby HW/SW</span>
+                            <span class="badge">iOS App</span>
                             <div class="project-links">
-                                <a href="https://github.com/mpalurik/Sim-racing-pedals" target="_blank" aria-label="GitHub repozitář"><i class="fab fa-github"></i></a>
+                                <a href="https://github.com/mpalurik/Ios_F1_app" target="_blank" aria-label="GitHub repozitář"><i class="fab fa-github"></i></a>
                             </div>
                         </div>
-                        <h3 class="project-title">Custom Sim-Racing pedály</h3>
+                        <h3 class="project-title">F1 Tracker</h3>
                         <p class="project-desc">
-                            Úprava a vylepšení designu open-source sim-racing pedálů. Migrace z Arduino Uno na Raspberry Pi Pico, tvorba vlastního PC GUI pro snadnou konfiguraci bez nutnosti flashování firmwaru.
+                            Nativní iOS aplikace vyvíjená ve Swiftu. Systém dynamicky komunikuje s veřejným REST F1 API a prezentuje uživateli aktuální výsledky závodů, detailní statistiky jezdců a také podporuje přehrávání oficiálních audio záznamů (team radios).
                         </p>
                         <div class="tech-stack">
-                            <span>Raspberry Pi Pico</span>
-                            <span>Python GUI</span>
-                            <span>C++</span>
-                            <span>Modding</span>
+                            <span>iOS</span>
+                            <span>Swift</span>
+                            <span>REST API</span>
+                            <span>XCode</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- JumpToSpace -->
                 <div class="project-card" data-category="school">
+                    <div class="card-image">
+                        <div class="placeholder">
+                            <i class="fas fa-image"></i>
+                            <small>Zde nahraj obrázek</small>
+                        </div>
+                    </div>
                     <div class="card-content">
                         <div class="project-header">
                             <span class="badge">Game Dev</span>
                         </div>
                         <h3 class="project-title">Jump To Space</h3>
                         <p class="project-desc">
-                            Školní počítačová hra vytvořená v předmětu Vývoj počítačových her. Inspirace populární hrou Doodle Jump, ovšem zasazená do vesmírného prostředí s vlastními unikátními mechanikami.
+                            Akční počítačová hra vyvinutá v herním enginu Unity (C#) pro předmět Vývoj počítačových her. Herní mechanismy jsou inspirované klasikou "Doodle Jump", avšak hra obsahuje vlastní vesmírnou fyziku, animace a originální překážky.
                         </p>
                         <div class="tech-stack">
-                            <span>Game Development</span>
-                            <span>Game Engine</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Hackathon 2026 -->
-                <div class="project-card" data-category="school">
-                    <div class="card-content">
-                        <div class="project-header">
-                            <span class="badge">Hackathon</span>
-                        </div>
-                        <h3 class="project-title">Bankovní Systém</h3>
-                        <p class="project-desc">
-                            Řešení vytvořené na školním Hackathonu 2026. Jednalo se o návrh a vývoj bankovního systému splňujícího mnoho složitých požadavků na bezpečnost a transakční zpracování pod časovým tlakem.
-                        </p>
-                        <div class="tech-stack">
-                            <span>Backend</span>
-                            <span>Security</span>
-                            <span>Teamwork</span>
+                            <span>Unity 3D</span>
+                            <span>C#</span>
+                            <span>Game Physics</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- MovieDatabase -->
                 <div class="project-card" data-category="school">
+                    <div class="card-image">
+                        <div class="placeholder">
+                            <i class="fas fa-image"></i>
+                            <small>Zde nahraj obrázek</small>
+                        </div>
+                    </div>
                     <div class="card-content">
                         <div class="project-header">
                             <span class="badge">Databáze</span>
@@ -262,12 +292,40 @@
                         </div>
                         <h3 class="project-title">MovieDatabase</h3>
                         <p class="project-desc">
-                            Aplikace zaměřená na práci s pokročilými databázemi. Projekt využívá NoSQL databázi (MongoDB) pro efektivní uchovávání a vyhledávání velkého množství filmových dat.
+                            Projekt pro kurz Pokročilé databáze. Pro uložení a efektivní prohledávání velkých datasetů filmových záznamů využívá dokumentově orientovanou NoSQL databázi MongoDB. Důraz byl kladen na návrh kolekcí, indexování a rychlé vyhledávací dotazy.
                         </p>
                         <div class="tech-stack">
                             <span>MongoDB</span>
                             <span>NoSQL</span>
                             <span>Database Design</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sim Racing Pedals -->
+                <div class="project-card" data-category="other">
+                    <div class="card-image">
+                        <div class="placeholder">
+                            <i class="fas fa-image"></i>
+                            <small>Zde nahraj obrázek</small>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="project-header">
+                            <span class="badge">Hobby HW/SW</span>
+                            <div class="project-links">
+                                <a href="https://github.com/mpalurik/Sim-racing-pedals" target="_blank" aria-label="GitHub repozitář"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                        <h3 class="project-title">Custom Sim-Racing pedály</h3>
+                        <p class="project-desc">
+                            Inovace open-source projektu pro závodní simulátory. Nahrazení pevných gumových bloků pružinovým systémem pro lepší zpětnou vazbu. Kód byl migrován z Arduino Uno na Raspberry Pi Pico (Python/C++) a projekt byl obohacen o desktopové GUI, které umožňuje kalibraci bez nutnosti neustálého flashování firmwaru.
+                        </p>
+                        <div class="tech-stack">
+                            <span>Raspberry Pi Pico</span>
+                            <span>Python GUI</span>
+                            <span>C++ / C</span>
+                            <span>Hardware Modding</span>
                         </div>
                     </div>
                 </div>
