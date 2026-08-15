@@ -292,7 +292,7 @@ const projectsData = [
             \n- Seamlessly flash and persist these calibration profiles directly into the microcontroller's memory.`
         },
         tech: ["Raspberry Pi Pico", "Python", "CustomTkinter", "Pygame", "C/C++", "Hardware Modding", "Serial Comms"],
-        images: [],
+        images: ["assets/img/sim_pedals_1.png", "assets/img/sim_pedals_2.png", "assets/img/sim_pedals_3.png"],
         links: [
             { icon: "fab fa-github", url: "https://github.com/mpalurik/Sim-racing-pedals", tooltip: "GitHub Repository" }
         ]
