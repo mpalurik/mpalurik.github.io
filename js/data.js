@@ -214,19 +214,19 @@ const projectsData = [
             en: "Game Dev (Unity)"
         },
         shortDesc: {
-            cz: "Akční 3D hra vytvořená v enginu Unity. Inovativní fyzika nulové gravitace, procedurální překážky a vlastní animace.",
-            en: "Action 3D game built in Unity Engine. Features innovative zero-G physics, procedural obstacles, and custom animations."
+            cz: "Akční 2D arkádovka vytvořená v enginu Unity (C#). Nabízí procedurální level design, různé power-upy a skryté easter eggy.",
+            en: "Action 2D arcade game built in Unity (C#). Features procedural level generation, various power-ups, and hidden cheat codes."
         },
         longDesc: {
-            cz: `Akční počítačová hra vyvinutá v herním enginu Unity za použití jazyka C# pro předmět Vývoj počítačových her.
-            \nZákladní herní mechanismy jsou volně inspirované legendární hrou "Doodle Jump" (skákání po plošinách vzhůru). Cosmic Jump 3D to však posouvá dál zavedením unikátní vesmírné fyziky (úprava gravitace enginu, setrvačné driftování) a přechodem do plného 3D prostoru.
-            \nBěhem vývoje jsem čelil náročným výzvám: programování logiky procedurálního generování nekonečných (endless) levelů bez přetížení paměti, správa 3D kolizí, návrh state-machines pro nepřátele a implementace plynulých přechodů animací hráčského avatara.`,
-            en: `An action-packed 3D video game developed using the Unity Engine and C# for the Computer Game Development course.
-            \nWhile the core gameplay loop is loosely inspired by the legendary "Doodle Jump" (platform hopping upwards), Cosmic Jump 3D pushes the concept further by moving into a full 3D space and introducing custom zero-gravity physics (engine gravity manipulation, inertia drift mechanics).
-            \nDuring development, I tackled complex challenges such as procedural endless-level generation algorithms with object pooling, rigorous 3D collision detection, finite state-machines for enemy AI, and smooth player animation transitions.`
+            cz: `Akční 2D počítačová hra vyvinutá v herním enginu Unity za použití jazyka C# pro předmět Vývoj počítačových her. Základní herní mechanismy jsou inspirované legendární hrou "Doodle Jump".
+            \nNejvětší výzvou byl algoritmus procedurálního generování nekonečných (endless) levelů. Napsal jsem pokročilý \`PlatformSpawner\`, který dynamicky škáluje počet cest (1-3) podle šířky obrazovky, zabraňuje překrývání platforem a s rostoucím skóre postupně spawnuje nové typy překážek (křehké/pohyblivé platformy, mimozemské drony, meteority a černé díry). Dále jsem implementoval plynulý "Screen wrap-around" (hráč vyletí z pravé strany obrazovky a objeví se vlevo) a řadu power-upů jako Anti-gravitační boty, Time Bubble (zpomalení času) a Magnetické pole.
+            \nSpecialitou a mým osobním zpestřením je integrovaný systém tajných kódů (cheatů) ve skriptu \`EasterEggController\`. Pokud hráč na klávesnici napíše specifická slova (např. "fly", "metal", "meme"), aplikace to zachytí, spustí tajnou hudbu, umožní nekonečné skákání a dynamicky na UI Canvas vykreslí vtipné easter-egg ikonky.`,
+            en: `An action-packed 2D arcade video game developed using the Unity Engine and C# for the Computer Game Development course. The core gameplay loop is heavily inspired by the legendary "Doodle Jump".
+            \nThe biggest challenge was writing the procedural endless-level generation algorithm. I developed an advanced \`PlatformSpawner\` that dynamically scales the number of generated paths based on the device's screen width, safely prevents platform overlapping, and introduces new hazards as the score increases (fragile platforms, moving platforms, meteorites, and black holes). I also implemented seamless screen wrap-around mechanics and a robust Power-Up system including Anti-Grav boots, Time Bubbles, and Magnetic fields.
+            \nA fun personal addition is the secret cheat-code system handled by the \`EasterEggController\`. If the player types specific keywords (like "fly", "metal", or "meme") during gameplay, the game catches the input buffer, activates hidden music tracks, enables unlimited jumping, and dynamically instantiates funny easter-egg icons directly onto the UI Canvas.`
         },
-        tech: ["Unity 3D", "C#", "Game Physics", "Procedural Gen"],
-        images: [],
+        tech: ["Unity 2D", "C#", "Procedural Gen", "Game Physics", "Easter Eggs"],
+        images: ["assets/img/jump_to_space_0.png", "assets/img/jump_to_space_1.png", "assets/img/jump_to_space_2.png", "assets/img/jump_to_space_3.png", "assets/img/jump_to_space_4.png"],
         links: []
     },
     {
