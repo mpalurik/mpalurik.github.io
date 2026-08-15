@@ -198,13 +198,14 @@ h1, h2, h3, h4 {
 .nav-links {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 1.5rem;
 }
 
 .nav-links a {
     font-weight: 600;
     font-size: 1rem;
     position: relative;
+    margin-right: 1rem;
 }
 
 .nav-links a::after {
@@ -222,13 +223,31 @@ h1, h2, h3, h4 {
     width: 100%;
 }
 
-.theme-toggle {
+.theme-toggle, .lang-toggle {
     background: transparent;
     border: none;
     color: var(--text-primary);
     font-size: 1.2rem;
     cursor: pointer;
     transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lang-toggle {
+    font-weight: 800;
+    font-family: var(--font-mono);
+    border: 1px solid var(--card-border);
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 0.9rem;
+}
+
+.lang-toggle:hover {
+    background: var(--card-hover);
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
 }
 
 .theme-toggle:hover {
@@ -440,6 +459,10 @@ h1, h2, h3, h4 {
     animation: fadeInUp 0.5s forwards ease;
 }
 
+.project-card.clickable-card {
+    cursor: pointer;
+}
+
 .project-card:hover {
     transform: translateY(-10px);
     box-shadow: var(--shadow-lg);
@@ -471,16 +494,6 @@ h1, h2, h3, h4 {
     font-family: var(--font-mono);
 }
 
-.project-links a, .project-links i {
-    color: var(--text-secondary);
-    font-size: 1.2rem;
-    transition: var(--transition);
-}
-
-.project-links a:hover {
-    color: var(--accent-primary);
-}
-
 .project-title {
     font-size: 1.5rem;
     margin-bottom: 1rem;
@@ -493,7 +506,7 @@ h1, h2, h3, h4 {
     flex: 1;
 }
 
-/* NEW UX: Elegant Inline Image PREVIEW block */
+/* Inline Image PREVIEW block on Cards */
 .project-visual {
     margin-top: 1rem;
     margin-bottom: 1.5rem;
@@ -510,15 +523,10 @@ h1, h2, h3, h4 {
     background: rgba(255, 255, 255, 0.5);
 }
 
-.project-visual:hover {
-    transform: scale(1.02);
-    box-shadow: var(--shadow-md);
-}
-
 .project-visual img {
     width: 100%;
     height: auto;
-    max-height: 220px;
+    max-height: 160px;
     object-fit: cover;
     object-position: top center;
     display: block;
@@ -528,7 +536,7 @@ h1, h2, h3, h4 {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
-    margin-top: auto; /* Push tech stack to bottom */
+    margin-top: auto; 
 }
 
 .tech-stack span {
@@ -543,6 +551,147 @@ h1, h2, h3, h4 {
 [data-theme="light"] .tech-stack span {
     background: rgba(0, 0, 0, 0.05);
 }
+
+/* =========================================
+   PROJECT MODAL
+   ========================================= */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-container {
+    background: var(--card-bg);
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    border-radius: 20px;
+    border: 1px solid var(--card-border);
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow-y: auto;
+    transform: scale(0.95);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modal-overlay.active .modal-container {
+    transform: scale(1);
+}
+
+[data-theme="light"] .modal-container {
+    background: var(--bg-color-alt);
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: var(--transition);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+[data-theme="light"] .modal-close {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.modal-close:hover {
+    background: var(--accent-primary);
+    color: white;
+    transform: rotate(90deg);
+}
+
+.modal-content {
+    padding: 3rem;
+}
+
+.modal-header {
+    margin-bottom: 2rem;
+}
+
+.modal-title {
+    font-size: 2.5rem;
+    margin: 1rem 0;
+}
+
+.modal-tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.modal-tech-stack span {
+    background: var(--gradient-primary);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 50px;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.modal-visual {
+    margin-bottom: 2rem;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    background: rgba(0,0,0,0.2);
+}
+
+.modal-visual img {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: cover;
+}
+
+.modal-body .long-desc {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.modal-body .long-desc p {
+    margin-bottom: 1.5rem;
+}
+
+.modal-footer {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--card-border);
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
 
 /* =========================================
    FOOTER
@@ -626,17 +775,6 @@ h1, h2, h3, h4 {
     }
 }
 
-/* Stagger card animations */
-.project-card:nth-child(1) { animation-delay: 0.1s; }
-.project-card:nth-child(2) { animation-delay: 0.2s; }
-.project-card:nth-child(3) { animation-delay: 0.3s; }
-.project-card:nth-child(4) { animation-delay: 0.4s; }
-.project-card:nth-child(5) { animation-delay: 0.5s; }
-.project-card:nth-child(6) { animation-delay: 0.6s; }
-.project-card:nth-child(7) { animation-delay: 0.7s; }
-.project-card:nth-child(8) { animation-delay: 0.8s; }
-.project-card:nth-child(9) { animation-delay: 0.9s; }
-
 
 /* =========================================
    RESPONSIVE DESIGN
@@ -656,4 +794,6 @@ h1, h2, h3, h4 {
     .name { font-size: 2.5rem; }
     
     .footer-content { flex-direction: column; text-align: center; }
+    .modal-content { padding: 1.5rem; }
+    .modal-title { font-size: 1.8rem; }
 }

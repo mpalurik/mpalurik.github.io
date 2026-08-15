@@ -1,104 +1,243 @@
+const translations = {
+    "nav-home": { cz: "Domů", en: "Home" },
+    "nav-projects": { cz: "Projekty", en: "Projects" },
+    "nav-contact": { cz: "Kontakt", en: "Contact" },
+    "hero-greeting": { cz: "Ahoj, já jsem", en: "Hello, I am" },
+    "hero-role": { cz: "Software & Hardware Developer", en: "Software & Hardware Developer" },
+    "hero-bio": { 
+        cz: "Věnuji se vývoji mobilních aplikací, webových řešení a propojování světa hardwaru a softwaru. Rád zkoumám nové technologie, od IoT (ESP32, Matter, KNX) přes moderní architekturu až po databázové systémy.", 
+        en: "I specialize in mobile app development, web solutions, and bridging the gap between hardware and software. I love exploring new technologies, from IoT (ESP32, Matter, KNX) and modern architecture to database systems." 
+    },
+    "hero-btn-work": { cz: "Moje práce", en: "My Work" },
+    "projects-title": { cz: "Vybrané <span>Projekty</span>", en: "Selected <span>Projects</span>" },
+    "filter-all": { cz: "Vše", en: "All" },
+    "filter-school": { cz: "Škola & Závěrečné práce", en: "School & Thesis" },
+    "filter-mobile": { cz: "Mobilní Aplikace", en: "Mobile Apps" },
+    "filter-other": { cz: "Hobby & Ostatní", en: "Hobby & Other" },
+    "footer-desc": { cz: "Otevřený novým výzvám v oblasti vývoje software a IoT.", en: "Open to new challenges in software development and IoT." },
+    "footer-rights": { cz: "© 2026 Michal Paluřík. Všechna práva vyhrazena.", en: "© 2026 Michal Paluřík. All rights reserved." }
+};
+
 document.addEventListener('DOMContentLoaded', () => {
-    /* =========================================
-       THEME TOGGLE
-       ========================================= */
+    // ----------------------------------------------------
+    // STATE
+    // ----------------------------------------------------
+    let currentLang = localStorage.getItem('lang') || 'cz';
+    let currentTheme = localStorage.getItem('theme') || 'dark';
+    
+    // Elements
+    const projectsContainer = document.getElementById('projects-container');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const langToggleBtn = document.getElementById('lang-toggle');
     const themeToggleBtn = document.getElementById('theme-toggle');
-    const htmlElement = document.documentElement;
-    const themeIcon = themeToggleBtn.querySelector('i');
     
-    // Check for saved theme preference or system preference
-    const savedTheme = localStorage.getItem('theme');
-    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    // Modal Elements
+    const modalOverlay = document.getElementById('project-modal');
+    const modalCloseBtn = document.getElementById('modal-close');
     
-    if (savedTheme) {
-        htmlElement.setAttribute('data-theme', savedTheme);
-        updateThemeIcon(savedTheme);
-    } else if (!systemPrefersDark) {
-        htmlElement.setAttribute('data-theme', 'light');
-        updateThemeIcon('light');
-    }
-    
-    themeToggleBtn.addEventListener('click', () => {
-        const currentTheme = htmlElement.getAttribute('data-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    // ----------------------------------------------------
+    // INIT
+    // ----------------------------------------------------
+    initTheme();
+    initLang();
+    renderProjects('all');
+
+    // ----------------------------------------------------
+    // RENDER PROJECTS
+    // ----------------------------------------------------
+    function renderProjects(filter) {
+        projectsContainer.innerHTML = '';
         
-        htmlElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-        updateThemeIcon(newTheme);
+        let filteredData = projectsData;
+        if (filter !== 'all') {
+            filteredData = projectsData.filter(p => p.category === filter);
+        }
+
+        filteredData.forEach((project, index) => {
+            const card = document.createElement('div');
+            card.className = `project-card clickable-card`;
+            card.style.animationDelay = `${index * 0.1}s`;
+            
+            // Build card HTML
+            let visualHTML = '';
+            if (project.image) {
+                visualHTML = `
+                <div class="project-visual">
+                    <img src="${project.image}" alt="${project.title[currentLang]}" loading="lazy">
+                </div>`;
+            }
+
+            let techHTML = project.tech.map(t => `<span>${t}</span>`).join('');
+
+            card.innerHTML = `
+                <div class="card-content">
+                    <div class="project-header">
+                        <span class="badge">${project.badge[currentLang]}</span>
+                    </div>
+                    <h3 class="project-title">${project.title[currentLang]}</h3>
+                    <p class="project-desc">${project.shortDesc[currentLang]}</p>
+                    ${visualHTML}
+                    <div class="tech-stack">
+                        ${techHTML}
+                    </div>
+                </div>
+            `;
+            
+            card.addEventListener('click', () => openModal(project));
+            projectsContainer.appendChild(card);
+        });
+    }
+
+    // ----------------------------------------------------
+    // FILTERS
+    // ----------------------------------------------------
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            e.target.classList.add('active');
+            renderProjects(e.target.getAttribute('data-filter'));
+        });
+    });
+
+    // ----------------------------------------------------
+    // MODAL LOGIC
+    // ----------------------------------------------------
+    function openModal(project) {
+        document.getElementById('modal-badge').textContent = project.badge[currentLang];
+        document.getElementById('modal-title').textContent = project.title[currentLang];
+        
+        // Parse line breaks for long description
+        const formattedDesc = project.longDesc[currentLang].replace(/\n/g, '<br>');
+        document.getElementById('modal-desc').innerHTML = formattedDesc;
+        
+        // Tech stack
+        document.getElementById('modal-tech').innerHTML = project.tech.map(t => `<span>${t}</span>`).join('');
+        
+        // Image
+        const visualContainer = document.getElementById('modal-visual-container');
+        if (project.image) {
+            visualContainer.innerHTML = `<img src="${project.image}" alt="${project.title[currentLang]}">`;
+            visualContainer.style.display = 'block';
+        } else {
+            visualContainer.innerHTML = '';
+            visualContainer.style.display = 'none';
+        }
+        
+        // Links
+        const linksContainer = document.getElementById('modal-links');
+        if (project.links && project.links.length > 0) {
+            linksContainer.innerHTML = project.links.map(link => 
+                `<a href="${link.url}" target="_blank" class="btn btn-secondary" title="${link.tooltip}">
+                    <i class="${link.icon}"></i> ${link.tooltip}
+                </a>`
+            ).join('');
+            linksContainer.style.display = 'flex';
+        } else {
+            linksContainer.innerHTML = '';
+            linksContainer.style.display = 'none';
+        }
+
+        modalOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    }
+
+    function closeModal() {
+        modalOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    modalCloseBtn.addEventListener('click', closeModal);
+    modalOverlay.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) closeModal();
     });
     
-    function updateThemeIcon(theme) {
-        if (theme === 'dark') {
-            themeIcon.className = 'fas fa-sun';
+    // Close modal on escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+            closeModal();
+        }
+    });
+
+    // ----------------------------------------------------
+    // I18N (LANGUAGE TOGGLE)
+    // ----------------------------------------------------
+    function initLang() {
+        updateLangUI();
+        applyTranslations();
+    }
+
+    function updateLangUI() {
+        // Toggle btn shows the *other* language
+        langToggleBtn.querySelector('.lang-text').textContent = currentLang === 'cz' ? 'EN' : 'CZ';
+    }
+
+    function applyTranslations() {
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (translations[key]) {
+                el.innerHTML = translations[key][currentLang];
+            }
+        });
+        
+        // Re-render active filter
+        const activeFilter = document.querySelector('.filter-btn.active').getAttribute('data-filter');
+        renderProjects(activeFilter);
+    }
+
+    langToggleBtn.addEventListener('click', () => {
+        currentLang = currentLang === 'cz' ? 'en' : 'cz';
+        localStorage.setItem('lang', currentLang);
+        updateLangUI();
+        applyTranslations();
+    });
+
+    // ----------------------------------------------------
+    // THEME TOGGLE
+    // ----------------------------------------------------
+    function initTheme() {
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        updateThemeIcon();
+    }
+
+    function updateThemeIcon() {
+        const icon = themeToggleBtn.querySelector('i');
+        if (currentTheme === 'dark') {
+            icon.className = 'fas fa-sun';
         } else {
-            themeIcon.className = 'fas fa-moon';
+            icon.className = 'fas fa-moon';
         }
     }
 
-    /* =========================================
-       MOBILE MENU
-       ========================================= */
+    themeToggleBtn.addEventListener('click', () => {
+        currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        localStorage.setItem('theme', currentTheme);
+        updateThemeIcon();
+    });
+
+    // ----------------------------------------------------
+    // MOBILE MENU
+    // ----------------------------------------------------
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const mobileNav = document.querySelector('.mobile-nav');
-    const mobileLinks = document.querySelectorAll('.mobile-link');
     
     mobileMenuBtn.addEventListener('click', () => {
         mobileNav.classList.toggle('active');
         const icon = mobileMenuBtn.querySelector('i');
         if (mobileNav.classList.contains('active')) {
-            icon.className = 'fas fa-times';
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
         } else {
-            icon.className = 'fas fa-bars';
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
         }
     });
     
-    mobileLinks.forEach(link => {
+    document.querySelectorAll('.mobile-link').forEach(link => {
         link.addEventListener('click', () => {
             mobileNav.classList.remove('active');
-            mobileMenuBtn.querySelector('i').className = 'fas fa-bars';
+            mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+            mobileMenuBtn.querySelector('i').classList.add('fa-bars');
         });
-    });
-
-    /* =========================================
-       PROJECT FILTERING
-       ========================================= */
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const projectCards = document.querySelectorAll('.project-card');
-    
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            // Remove active class from all buttons
-            filterBtns.forEach(b => b.classList.remove('active'));
-            // Add active class to clicked button
-            btn.classList.add('active');
-            
-            const filterValue = btn.getAttribute('data-filter');
-            
-            projectCards.forEach(card => {
-                // Reset animation to trigger it again
-                card.style.animation = 'none';
-                card.offsetHeight; /* trigger reflow */
-                
-                if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
-                    card.style.display = 'flex';
-                    card.style.animation = 'fadeInUp 0.5s forwards ease';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        });
-    });
-
-    /* =========================================
-       NAVBAR SCROLL EFFECT
-       ========================================= */
-    const navbar = document.querySelector('.navbar');
-    
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            navbar.style.boxShadow = 'var(--shadow-md)';
-        } else {
-            navbar.style.boxShadow = 'none';
-        }
     });
 });

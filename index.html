@@ -23,10 +23,13 @@
         <div class="nav-container">
             <a href="#" class="logo">MP<span>.</span></a>
             <div class="nav-links">
-                <a href="#hero">Domů</a>
-                <a href="#projects">Projekty</a>
-                <a href="#contact">Kontakt</a>
-                <button id="theme-toggle" class="theme-toggle" aria-label="Přepnout téma">
+                <a href="#hero" data-i18n="nav-home">Domů</a>
+                <a href="#projects" data-i18n="nav-projects">Projekty</a>
+                <a href="#contact" data-i18n="nav-contact">Kontakt</a>
+                <button id="lang-toggle" class="lang-toggle" aria-label="Switch Language">
+                    <span class="lang-text">EN</span>
+                </button>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
                     <i class="fas fa-sun"></i>
                 </button>
             </div>
@@ -39,23 +42,23 @@
 
     <!-- Mobile Nav Overlay -->
     <div class="mobile-nav">
-        <a href="#hero" class="mobile-link">Domů</a>
-        <a href="#projects" class="mobile-link">Projekty</a>
-        <a href="#contact" class="mobile-link">Kontakt</a>
+        <a href="#hero" class="mobile-link" data-i18n="nav-home">Domů</a>
+        <a href="#projects" class="mobile-link" data-i18n="nav-projects">Projekty</a>
+        <a href="#contact" class="mobile-link" data-i18n="nav-contact">Kontakt</a>
     </div>
 
     <!-- Hero Section -->
     <section id="hero" class="hero">
         <div class="hero-content">
-            <h2 class="greeting">Ahoj, já jsem</h2>
+            <h2 class="greeting" data-i18n="hero-greeting">Ahoj, já jsem</h2>
             <h1 class="name">Michal Paluřík</h1>
-            <p class="role">Software & Hardware Developer</p>
-            <p class="bio">
+            <p class="role" data-i18n="hero-role">Software & Hardware Developer</p>
+            <p class="bio" data-i18n="hero-bio">
                 Věnuji se vývoji mobilních aplikací, webových řešení a propojování světa hardwaru a softwaru. 
                 Rád zkoumám nové technologie, od IoT (ESP32, Matter, KNX) přes moderní architekturu až po databázové systémy.
             </p>
             <div class="hero-buttons">
-                <a href="#projects" class="btn btn-primary">Moje práce</a>
+                <a href="#projects" class="btn btn-primary" data-i18n="hero-btn-work">Moje práce</a>
                 <a href="https://github.com/mpalurik" target="_blank" class="btn btn-secondary">
                     <i class="fab fa-github"></i> GitHub
                 </a>
@@ -74,241 +77,75 @@
     <!-- Projects Section -->
     <section id="projects" class="projects">
         <div class="container">
-            <h2 class="section-title">Vybrané <span>Projekty</span></h2>
+            <h2 class="section-title" data-i18n="projects-title">Vybrané <span>Projekty</span></h2>
             
             <!-- Filters -->
             <div class="project-filters">
-                <button class="filter-btn active" data-filter="all">Vše</button>
-                <button class="filter-btn" data-filter="school">Škola & Závěrečné práce</button>
-                <button class="filter-btn" data-filter="mobile">Mobilní Aplikace</button>
-                <button class="filter-btn" data-filter="other">Hobby & Ostatní</button>
+                <button class="filter-btn active" data-filter="all" data-i18n="filter-all">Vše</button>
+                <button class="filter-btn" data-filter="school" data-i18n="filter-school">Škola & Závěrečné práce</button>
+                <button class="filter-btn" data-filter="mobile" data-i18n="filter-mobile">Mobilní Aplikace</button>
+                <button class="filter-btn" data-filter="other" data-i18n="filter-other">Hobby & Ostatní</button>
             </div>
 
-            <!-- Projects Grid -->
-            <div class="projects-grid">
-                
-                <!-- Ing. Thesis -->
-                <div class="project-card" data-category="school">
-                    <div class="card-content">
-                        <div class="project-header">
-                            <span class="badge">Diplomová práce (Ing.)</span>
-                            <div class="project-links">
-                                <i class="fas fa-microchip"></i>
-                            </div>
-                        </div>
-                        <h3 class="project-title">Propojení KNX a Matter</h3>
-                        <p class="project-desc">
-                            V rámci diplomové práce vznikla HW/SW brána na procesoru i.MX93, která umožňuje připojení Matter zařízení a následné řízení KNX prvků přes ethernet. Obsahuje integrované webové rozhraní pro snadnou konfiguraci sítě a protokolů.
-                            <br><br><small><i>*Detailní implementace je chráněna NDA.</i></small>
-                        </p>
-                        <div class="tech-stack">
-                            <span>KNX</span>
-                            <span>Matter</span>
-                            <span>i.MX93</span>
-                            <span>Embedded</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Bc. Thesis -->
-                <div class="project-card" data-category="school">
-                    <div class="card-content">
-                        <div class="project-header">
-                            <span class="badge">Bakalářská práce (Bc.)</span>
-                            <div class="project-links">
-                                <i class="fas fa-cogs"></i>
-                            </div>
-                        </div>
-                        <h3 class="project-title">Řízení posuvné brány</h3>
-                        <p class="project-desc">
-                            Kompletní návrh HW i SW pro chytrou bránu. Obsahuje asynchronní webový server (AsyncTCP) běžící na ESP32 (C++). Dále komunikuje s laserovým senzorem překážek přes I2C a pomocí modulu INA219 precizně sleduje odběr motoru pro okamžitou detekci přetížení. Součástí byl i návrh vlastních 3D modelů ozubeného hřebenu.
-                        </p>
-                        <div class="tech-stack">
-                            <span>ESP32</span>
-                            <span>C++</span>
-                            <span>AsyncTCP</span>
-                            <span>I2C</span>
-                            <span>3D Print</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Hackathon 2026 -->
-                <div class="project-card" data-category="school">
-                    <div class="card-content">
-                        <div class="project-header">
-                            <span class="badge">Hackathon 2026</span>
-                        </div>
-                        <h3 class="project-title">Bankovní Systém FairBank</h3>
-                        <p class="project-desc">
-                            Vysoce škálovatelný bankovní systém postavený na moderní mikroslužbové architektuře. Frontend využívá Blazor WASM a komunikuje přes centrální API Gateway (C# / .NET 8). Backend zahrnuje přes 8 microservices (Identity, Payments, Cards, Chat) synchronizovaných pomocí Apache Kafka. Databáze je řešena přes PostgreSQL v režimu Primary-Replica a celé řešení je kontejnerizováno v Dockeru.
-                        </p>
-                        <div class="tech-stack">
-                            <span>.NET 8</span>
-                            <span>Blazor WASM</span>
-                            <span>Docker</span>
-                            <span>Kafka</span>
-                            <span>PostgreSQL</span>
-                            <span>Microservices</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Lorax -->
-                <div class="project-card" data-category="school">
-                    <div class="card-content">
-                        <div class="project-header">
-                            <span class="badge">Školní projekt</span>
-                            <div class="project-links">
-                                <a href="https://tomas-juri.github.io/STAG-AUIUI-P8VT/docs/2025/" target="_blank" aria-label="Dokumentace"><i class="fas fa-external-link-alt"></i></a>
-                            </div>
-                        </div>
-                        <h3 class="project-title">Lorax - Prodej lístků</h3>
-                        <p class="project-desc">
-                            Týmový projekt z předmětu Vybrané techniky vývoje SW. Komplexní aplikace zaměřená na prodej a správu lístků. Kladen byl extrémní důraz na moderní softwarovou architekturu, čistý kód a efektivní týmovou spolupráci (Git, Code Review).
-                        </p>
-                        
-                        <div class="project-visual">
-                            <img src="assets/img/lorax_1.png" alt="Lorax App Screenshot" loading="lazy">
-                        </div>
-
-                        <div class="tech-stack">
-                            <span>Software Architecture</span>
-                            <span>Teamwork</span>
-                            <span>Web Dev</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- HSCards -->
-                <div class="project-card" data-category="mobile">
-                    <div class="card-content">
-                        <div class="project-header">
-                            <span class="badge">Mobilní App</span>
-                            <div class="project-links">
-                                <a href="https://github.com/mpalurik/HSCards" target="_blank" aria-label="GitHub repozitář"><i class="fab fa-github"></i></a>
-                            </div>
-                        </div>
-                        <h3 class="project-title">HSCards</h3>
-                        <p class="project-desc">
-                            Mobilní aplikace vytvořená během pátého semestru zaměřená na efektivní a moderní uživatelské rozhraní (UI/UX) pro práci se sadami karet. Ukázka propojení interaktivního designu s logikou aplikace.
-                        </p>
-                        
-                        <div class="project-visual">
-                            <img src="assets/img/hscards_1.png" alt="HSCards App Screenshot" loading="lazy">
-                        </div>
-
-                        <div class="tech-stack">
-                            <span>Mobile Dev</span>
-                            <span>UI/UX</span>
-                            <span>Frontend</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- iOS F1 App -->
-                <div class="project-card" data-category="mobile">
-                    <div class="card-content">
-                        <div class="project-header">
-                            <span class="badge">iOS App</span>
-                            <div class="project-links">
-                                <a href="https://github.com/mpalurik/Ios_F1_app" target="_blank" aria-label="GitHub repozitář"><i class="fab fa-github"></i></a>
-                            </div>
-                        </div>
-                        <h3 class="project-title">F1 Tracker</h3>
-                        <p class="project-desc">
-                            Nativní iOS aplikace vyvíjená ve Swiftu. Systém dynamicky komunikuje s veřejným REST F1 API a prezentuje uživateli aktuální výsledky závodů, detailní statistiky jezdců a také podporuje přehrávání oficiálních audio záznamů.
-                        </p>
-                        <div class="tech-stack">
-                            <span>iOS</span>
-                            <span>Swift</span>
-                            <span>REST API</span>
-                            <span>XCode</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- JumpToSpace -->
-                <div class="project-card" data-category="school">
-                    <div class="card-content">
-                        <div class="project-header">
-                            <span class="badge">Game Dev</span>
-                        </div>
-                        <h3 class="project-title">Jump To Space</h3>
-                        <p class="project-desc">
-                            Akční počítačová hra vyvinutá v herním enginu Unity (C#) pro předmět Vývoj počítačových her. Herní mechanismy jsou inspirované klasikou "Doodle Jump", avšak hra obsahuje vlastní vesmírnou fyziku, animace a originální překážky.
-                        </p>
-                        <div class="tech-stack">
-                            <span>Unity 3D</span>
-                            <span>C#</span>
-                            <span>Game Physics</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- MovieDatabase -->
-                <div class="project-card" data-category="school">
-                    <div class="card-content">
-                        <div class="project-header">
-                            <span class="badge">Databáze</span>
-                            <div class="project-links">
-                                <a href="https://github.com/mpalurik/MovieDatabase" target="_blank" aria-label="GitHub repozitář"><i class="fab fa-github"></i></a>
-                            </div>
-                        </div>
-                        <h3 class="project-title">MovieDatabase</h3>
-                        <p class="project-desc">
-                            Projekt pro kurz Pokročilé databáze. Pro uložení a efektivní prohledávání velkých datasetů filmových záznamů využívá dokumentově orientovanou NoSQL databázi MongoDB. Důraz byl kladen na návrh kolekcí, indexování a rychlé vyhledávací dotazy.
-                        </p>
-                        <div class="tech-stack">
-                            <span>MongoDB</span>
-                            <span>NoSQL</span>
-                            <span>Database Design</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Sim Racing Pedals -->
-                <div class="project-card" data-category="other">
-                    <div class="card-content">
-                        <div class="project-header">
-                            <span class="badge">Hobby HW/SW</span>
-                            <div class="project-links">
-                                <a href="https://github.com/mpalurik/Sim-racing-pedals" target="_blank" aria-label="GitHub repozitář"><i class="fab fa-github"></i></a>
-                            </div>
-                        </div>
-                        <h3 class="project-title">Custom Sim-Racing pedály</h3>
-                        <p class="project-desc">
-                            Inovace open-source projektu pro závodní simulátory. Nahrazení pevných gumových bloků pružinovým systémem pro lepší zpětnou vazbu. Kód byl migrován z Arduino Uno na Raspberry Pi Pico a projekt byl obohacen o desktopové GUI.
-                        </p>
-                        <div class="tech-stack">
-                            <span>Raspberry Pi Pico</span>
-                            <span>Python GUI</span>
-                            <span>C++ / C</span>
-                            <span>Hardware Modding</span>
-                        </div>
-                    </div>
-                </div>
-
+            <!-- Dynamic Projects Grid -->
+            <div class="projects-grid" id="projects-container">
+                <!-- Injected via script.js -->
             </div>
         </div>
     </section>
+
+    <!-- Project Detail Modal Overlay -->
+    <div id="project-modal" class="modal-overlay">
+        <div class="modal-container">
+            <button class="modal-close" id="modal-close"><i class="fas fa-times"></i></button>
+            
+            <div class="modal-content">
+                <!-- Header -->
+                <div class="modal-header">
+                    <span class="badge" id="modal-badge"></span>
+                    <h2 class="modal-title" id="modal-title">Project Title</h2>
+                    <div class="modal-tech-stack" id="modal-tech">
+                        <!-- Tech spans injected here -->
+                    </div>
+                </div>
+
+                <!-- Visual Gallery -->
+                <div class="modal-visual" id="modal-visual-container">
+                    <!-- Images injected here -->
+                </div>
+
+                <!-- Deep Dive Description -->
+                <div class="modal-body">
+                    <div class="long-desc" id="modal-desc">
+                        <!-- Description injected here -->
+                    </div>
+                </div>
+                
+                <!-- Footer Links -->
+                <div class="modal-footer" id="modal-links">
+                    <!-- Links injected here -->
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer / Contact -->
     <footer id="contact" class="footer">
         <div class="container footer-content">
             <div class="footer-info">
                 <h3>Michal Paluřík</h3>
-                <p>Otevřený novým výzvám v oblasti vývoje software a IoT.</p>
+                <p data-i18n="footer-desc">Otevřený novým výzvám v oblasti vývoje software a IoT.</p>
             </div>
             <div class="social-links">
                 <a href="https://github.com/mpalurik" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 Michal Paluřík. Všechna práva vyhrazena.</p>
+            <p data-i18n="footer-rights">&copy; 2026 Michal Paluřík. Všechna práva vyhrazena.</p>
         </div>
     </footer>
 
+    <script src="js/data.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>
