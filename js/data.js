@@ -139,7 +139,7 @@ const projectsData = [
             \nThe absolute priority was an extreme focus on smooth animations, responsive design, and intuitive card-swiping logic. The app perfectly demonstrates the benefits of hybrid mobile development.`
         },
         tech: ["Ionic", "Angular", "TypeScript", "Capacitor", "UI/UX"],
-        images: ["assets/img/hscards_1.png"],
+        images: ["assets/img/hscards_1.png", "assets/img/hscards_2.png", "assets/img/hscards_3.png", "assets/img/hscards_4.png"],
         links: [
             { icon: "fab fa-github", url: "https://github.com/mpalurik/HSCards", tooltip: "GitHub Repository" }
         ]
@@ -162,12 +162,12 @@ const projectsData = [
         longDesc: {
             cz: `Druhá verze projektu pro správu karet, avšak tentokrát vyvinutá čistě jako nativní Android aplikace pomocí programovacího jazyka Kotlin v prostředí Android Studio.
             \nTento projekt zkoumá a využívá veškeré výhody nativního vývoje. Klade silný důraz na pochopení a správu Android životního cyklu (Activity/Fragment lifecycle), využití efektivních RecyclerViews pro zobrazení masivních seznamů karet bez zamrznutí UI a integraci lokální databáze (Room).
-            \nDíky nativní implementaci aplikace poskytuje maximální možný výkon a perfektní integraci s operačním systémem Android.`,
+            \nAplikace navíc dynamicky komunikovala s veřejným herním REST API (prostřednictvím platformy RapidAPI). Pro elegantní a asynchronní stahování dat o kartách byla využita populární HTTP knihovna Retrofit, která společně s převodníkem Gson rovnou parsovala JSON odpovědi do Kotlin data-class modelů.`,
             en: `The second version of the card management project, but this time developed entirely as a Native Android application using Kotlin in Android Studio.
             \nThis project explores and utilizes all the advantages of native development. It places a strong emphasis on understanding and managing the Android lifecycle (Activity/Fragment), implementing highly efficient RecyclerViews for displaying massive lists of cards without UI blocking, and integrating local storage (Room database).
-            \nDue to the native implementation, the application provides maximum performance and perfect integration with the Android operating system.`
+            \nThe application dynamically communicated with a public game REST API via the RapidAPI platform. For elegant and asynchronous data fetching, the popular Retrofit HTTP client was used, combined with the Gson converter to seamlessly parse JSON responses directly into Kotlin data models.`
         },
-        tech: ["Android", "Kotlin", "Native Mobile", "RecyclerView"],
+        tech: ["Android", "Kotlin", "Retrofit", "REST API", "Room DB"],
         images: [],
         links: [
             { icon: "fab fa-github", url: "https://github.com/mpalurik/HearthstoneCards", tooltip: "GitHub Repository" }
