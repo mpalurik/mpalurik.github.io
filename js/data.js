@@ -48,13 +48,13 @@ const projectsData = [
         longDesc: {
             cz: `Komplexní vlastní řešení pro automatizaci posuvné brány od návrhu po realizaci. Srdcem celého systému je mikrokontrolér ESP32, na kterém běží vysoce responzivní asynchronní webový server (AsyncTCP) napsaný v C++.
             \nSystém přes I2C sběrnici komunikuje s laserovými senzory vzdálenosti (VL53L0X) pro přesnou detekci překážek a pomocí modulu INA219 provádí měření proudu motoru v reálném čase. Softwarově je tak naprogramována pojistka detekce přetížení a zablokování brány. 
-            \nSoučástí projektu byl také 3D návrh a samotný tisk zakázkových mechanických částí, jako jsou modulární ozubené hřebeny (Rack-and-pinion transmission).`,
+            \nSoučástí projektu byl také 3D návrh a samotný tisk zakázkových mechanických částí (Rack-and-pinion transmission). Webové rozhraní je navíc chráněno proti brute-force útokům pomocí automatického zámku po 5 neúspěšných pokusech o přihlášení.`,
             en: `A complete custom hardware and software solution for intelligent gate control. Powered by an ESP32 microcontroller running a highly responsive C++ asynchronous web server (AsyncTCP).
             \nIt communicates with I2C laser sensors (VL53L0X) for precise obstacle detection and uses the INA219 module for real-time motor current monitoring, implementing a robust software overload protection. 
-            \nThe project also involved the 3D-modeling and printing of custom mechanical parts, such as the rack-and-pinion transmission.`
+            \nThe project also involved the 3D-modeling and printing of custom mechanical parts, such as the rack-and-pinion transmission. The web interface is secured against brute-force attacks via an automatic lockout after 5 failed login attempts.`
         },
         tech: ["ESP32", "C++", "AsyncTCP", "I2C", "3D Print"],
-        images: [],
+        images: ["assets/img/bakalarka_1.png", "assets/img/bakalarka_2.png"],
         links: [
             { icon: "fas fa-cogs", url: "#", tooltip: "IoT Project" }
         ]
@@ -83,7 +83,7 @@ const projectsData = [
             \nThe backend consists of over 8 completely independent microservices (Identity, Accounts, Payments, Cards, Chat, Documents, Products, Notifications). Rather than direct HTTP calls, these services synchronize asynchronously via an **Apache Kafka** event streaming broker. Data persistence is handled by a **PostgreSQL** database deployed in a highly-available **Primary-Replica** cluster. The entire ecosystem of 10+ containers is fully containerized and orchestrated using Docker Compose.`
         },
         tech: [".NET 8", "Blazor WASM", "Docker", "Kafka", "PostgreSQL", "Microservices"],
-        images: [],
+        images: ["assets/img/hackathon_1.png", "assets/img/hackathon_2.png", "assets/img/hackathon_3.png", "assets/img/hackathon_4.png", "assets/img/hackathon_5.png", "assets/img/hackathon_6.png", "assets/img/hackathon_7.png", "assets/img/hackathon_8.png"],
         links: []
     },
     {
