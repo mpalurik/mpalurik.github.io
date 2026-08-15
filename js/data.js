@@ -197,7 +197,7 @@ const projectsData = [
             \nA standout technical feature is the implementation of asynchronous audio streaming – the application supports fetching and smoothly playing official audio recordings (Team Radios) directly within the app, all handled asynchronously in the background.`
         },
         tech: ["iOS", "Swift", "REST API", "XCode"],
-        images: [],
+        images: ["assets/f1_ios.mp4"],
         links: [
             { icon: "fab fa-github", url: "https://github.com/mpalurik/Ios_F1_app", tooltip: "GitHub Repository" }
         ]

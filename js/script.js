@@ -116,8 +116,14 @@ document.addEventListener('DOMContentLoaded', () => {
         // Image Carousel
         const visualContainer = document.getElementById('modal-visual-container');
         if (project.images && project.images.length > 0) {
-            const imagesHTML = project.images.map(img => `<img src="${img}" alt="${project.title[currentLang]}">`).join('');
-            visualContainer.innerHTML = `<div class="gallery-carousel">${imagesHTML}</div>`;
+            const mediaHTML = project.images.map(media => {
+                if (media.endsWith('.mp4')) {
+                    return `<video src="${media}" controls muted loop style="max-width: 100%; max-height: 400px; border-radius: 8px;"></video>`;
+                } else {
+                    return `<img src="${media}" alt="${project.title[currentLang]}">`;
+                }
+            }).join('');
+            visualContainer.innerHTML = `<div class="gallery-carousel">${mediaHTML}</div>`;
             visualContainer.style.display = 'block';
         } else {
             visualContainer.innerHTML = '';
