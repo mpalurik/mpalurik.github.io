@@ -75,12 +75,12 @@ const projectsData = [
             en: "Highly scalable banking system built in C# .NET 8 using microservices, Apache Kafka, Docker, and PostgreSQL."
         },
         longDesc: {
-            cz: `Tento projekt byl vytvořen během Hackathonu 2026 a představuje vysoce škálovatelný, distribuovaný bankovní systém navržený s důrazem na moderní architektonické standardy.
-            \nZáklad tvoří mikroslužbová architektura (Microservices) napsaná v C# na platformě .NET 8. Zákaznický frontend využívá Blazor WASM a se serverem komunikuje přes centrální API Gateway. 
-            \nBackend se skládá z více než 8 nezávislých služeb (Identity, Payments, Cards, Chat, Documents), které jsou asynchronně synchronizovány skrze message broker Apache Kafka. Perzistence dat je řešena relační databází PostgreSQL, běžící v Primary-Replica uspořádání. Celý systém (včetně Admin UI a databází) je kontejnerizován pomocí Docker Compose.`,
-            en: `A highly scalable, distributed banking system designed during Hackathon 2026, heavily emphasizing modern architectural patterns.
-            \nBuilt on a microservices architecture using C# and .NET 8. The client-facing frontend utilizes Blazor WASM and communicates through a central API Gateway. 
-            \nThe backend consists of over 8 distinct microservices (Identity, Payments, Cards, Chat, Documents) seamlessly synchronized via an Apache Kafka message broker. Data persistence is handled by a PostgreSQL database deployed in a Primary-Replica cluster, and the entire stack (including an Admin Dashboard) is containerized using Docker Compose.`
+            cz: `Tento projekt byl vytvořen během Hackathonu 2026 a představuje vysoce škálovatelný, distribuovaný bankovní systém navržený s extrémním důrazem na moderní Enterprise architekturu.
+            \nJedná se o obrovskou kódovou základnu skládající se z více než 15 nezávislých .NET 8 projektů. Zákaznický frontend není monolitický, nýbrž využívá pokročilou **Micro-Frontend architekturu** v Blazor WASM (moduly pro Auth, Přehledy, Platby, Karty, atd.), která komunikuje se serverem přes centrální API Gateway.
+            \nBackend se skládá z více než 8 zcela nezávislých mikroslužeb (Identity, Accounts, Payments, Cards, Chat, Documents, Products, Notifications). Tyto služby spolu nekomunikují napřímo, ale asynchronně se synchronizují skrze masivní message broker **Apache Kafka**. Perzistence dat je řešena relační databází **PostgreSQL**, která z důvodu vysoké dostupnosti běží v **Primary-Replica** clusterovém uspořádání. Celý ekosystém čítající přes 10 běžících kontejnerů je plně orchestratizován přes Docker Compose.`,
+            en: `A highly scalable, distributed banking system designed during Hackathon 2026, heavily emphasizing modern Enterprise architectural patterns.
+            \nThe massive codebase consists of over 15 distinct .NET 8 projects. The client-facing frontend avoids monolithic design by utilizing an advanced **Micro-Frontend architecture** built in Blazor WASM (separate modules for Auth, Dashboard, Payments, Cards, etc.), communicating through a central API Gateway.
+            \nThe backend consists of over 8 completely independent microservices (Identity, Accounts, Payments, Cards, Chat, Documents, Products, Notifications). Rather than direct HTTP calls, these services synchronize asynchronously via an **Apache Kafka** event streaming broker. Data persistence is handled by a **PostgreSQL** database deployed in a highly-available **Primary-Replica** cluster. The entire ecosystem of 10+ containers is fully containerized and orchestrated using Docker Compose.`
         },
         tech: [".NET 8", "Blazor WASM", "Docker", "Kafka", "PostgreSQL", "Microservices"],
         images: [],
@@ -110,7 +110,7 @@ const projectsData = [
             \nThe team operated under the Agile Scrum framework. We heavily utilized modern Git workflows (Trunk-based development), conducted rigorous Code Reviews, and implemented CI/CD pipelines (Azure) for automated unit testing and deployment.`
         },
         tech: ["C#", "Agile", "CI/CD", "Clean Architecture", "Teamwork"],
-        images: ["assets/img/lorax_1.png", "assets/img/lorax_2.png"],
+        images: ["assets/img/lorax_1.png", "assets/img/lorax_2.png", "assets/img/lorax_3.png", "assets/img/lorax_4.png", "assets/img/lorax_5.png", "assets/img/lorax_6.png", "assets/img/lorax_7.png", "assets/img/lorax_8.png"],
         links: [
             { icon: "fas fa-external-link-alt", url: "https://tomas-juri.github.io/STAG-AUIUI-P8VT/docs/2025/", tooltip: "Documentation" }
         ]
@@ -206,8 +206,8 @@ const projectsData = [
         id: "jump-to-space",
         category: "school",
         title: {
-            cz: "Cosmic Jump 3D",
-            en: "Cosmic Jump 3D"
+            cz: "Jump to Space",
+            en: "Jump to Space"
         },
         badge: {
             cz: "Vývoj her (Unity)",
@@ -246,11 +246,11 @@ const projectsData = [
         },
         longDesc: {
             cz: `Projekt pro kurz Pokročilé databáze zkoumající limity nerelačních databázových systémů. Jedná se o kompletní fullstack architekturu rozdělenou na frontend a backend.
-            \nZákaznická část (Frontend) je napsaná v moderním frameworku **Flutter** (Dart), což zaručuje plynulý chod na různých zařízeních (Web/Mobile/Desktop) s jednotnou kódovou základnou. Komunikaci s databází a byznys logiku obstarává neuvěřitelně rychlý **Python backend** (REST API přes FastAPI / Flask).
-            \nPod kapotou běží dokumentově orientovaná NoSQL databáze **MongoDB**. Důraz byl kladen primárně na architekturu pod kapotou: pokročilý návrh a strukturování dokumentových kolekcí, strategická de-normalizace dat pro zvýšení read-výkonu a aplikace složitých agregačních pipeline (Aggregation Framework). Zásadní částí projektu byla pokročilá optimalizace indexování, která dramaticky snížila latenci u komplexních full-textových vyhledávacích dotazů napříč miliony záznamů.`,
+            \nZákaznická část (Frontend) je napsaná v moderním frameworku **Flutter** (Dart), což zaručuje plynulý chod na různých zařízeních (Web/Mobile/Desktop) s jednotnou kódovou základnou. Uživatelé v aplikaci mohou **vyhledávat filmy přes rychlý Full-Text Search**, prohlížet detailní záznamy o režisérech i filmech a dynamicky data přidávat či upravovat (kompletní CRUD). Komunikaci s databází a byznys logiku obstarává neuvěřitelně rychlý **Python backend** (REST API přes FastAPI), mapovaný přes MongoEngine.
+            \nPod kapotou běží dokumentově orientovaná NoSQL databáze **MongoDB**. Důraz byl kladen primárně na architekturu: pokročilý návrh a strukturování dokumentových kolekcí, strategická de-normalizace dat pro zvýšení read-výkonu a aplikace složitých agregačních pipeline (Aggregation Framework). Zásadní částí projektu byla pokročilá optimalizace textových indexů, která dramaticky snížila latenci u komplexních vyhledávacích dotazů napříč miliony záznamů.`,
             en: `An academic project for the Advanced Databases course exploring the capabilities of non-relational database systems. It is built as a complete fullstack architecture separated into frontend and backend components.
-            \nThe client-facing interface (Frontend) is developed using the modern **Flutter** (Dart) framework, ensuring smooth cross-platform performance from a single codebase. The business logic and database communication are handled by a blazing-fast **Python backend** (REST API via FastAPI / Flask).
-            \nUnder the hood runs a document-oriented **MongoDB** NoSQL database. The primary academic focus was on the underlying architecture: advanced document collection design, strategic data de-normalization to maximize read-throughput, and heavy use of the Aggregation Framework. A crucial milestone of the project was advanced index optimization, drastically reducing query latency for complex full-text searches across millions of records.`
+            \nThe client-facing interface (Frontend) is developed using the modern **Flutter** (Dart) framework, ensuring smooth cross-platform performance from a single codebase. Within the app, users can **search movies using blazing-fast Full-Text Search**, view detailed records of directors and movies, and dynamically manage data (Full CRUD capabilities). The business logic and database communication are handled by a blazing-fast **Python backend** (REST API via FastAPI), mapped via MongoEngine.
+            \nUnder the hood runs a document-oriented **MongoDB** NoSQL database. The primary academic focus was on the underlying architecture: advanced document collection design, strategic data de-normalization to maximize read-throughput, and heavy use of the Aggregation Framework. A crucial milestone of the project was advanced text index optimization, drastically reducing query latency for complex searches across millions of records.`
         },
         tech: ["MongoDB", "Flutter (Dart)", "Python", "FastAPI/Flask", "NoSQL", "Indexing"],
         images: [],
