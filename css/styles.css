@@ -1092,3 +1092,85 @@ h1, h2, h3, h4 {
     }
 }
 
+
+
+/* =========================================
+   CUSTOM CURSOR
+   ========================================= */
+.cursor-dot,
+.cursor-outline {
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.cursor-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent-primary);
+}
+
+.cursor-outline {
+    width: 40px;
+    height: 40px;
+    border: 2px solid rgba(59, 130, 246, 0.5);
+    transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s;
+}
+
+/* Hover state for cursor */
+.cursor-outline.hovered {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(59, 130, 246, 0.1);
+    border-color: var(--accent-primary);
+}
+
+/* Hide default cursor only if not touch device */
+@media (pointer: fine) {
+    body {
+        cursor: none;
+    }
+    a, button, .clickable-card {
+        cursor: none;
+    }
+}
+
+/* Hide custom cursor on mobile/touch */
+@media (pointer: coarse) {
+    .cursor-dot, .cursor-outline {
+        display: none !important;
+    }
+}
+
+/* =========================================
+   PARTICLES JS BACKGROUND
+   ========================================= */
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0; /* behind content */
+    pointer-events: auto; /* let particles intercept mouse */
+}
+
+.hero .hero-content, .hero .hero-graphics {
+    position: relative;
+    z-index: 10;
+}
+
+/* =========================================
+   FOCUS HOVER EFFECT (Cinematic Focus)
+   ========================================= */
+/* Grid dims other items when one is hovered */
+.projects-grid:hover .project-card:not(:hover),
+.timeline:hover .timeline-item:not(:hover) {
+    opacity: 0.4;
+    filter: blur(2px);
+    transform: scale(0.98);
+}

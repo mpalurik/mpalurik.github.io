@@ -19,7 +19,11 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
+<body class="light-theme">
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" data-cursor-dot></div>
+    <div class="cursor-outline" data-cursor-outline></div>
+
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
@@ -51,6 +55,7 @@
 
     <!-- Hero Section -->
     <section id="hero" class="hero">
+        <div id="particles-js"></div>
         <div class="hero-content">
             <h2 class="greeting" data-i18n="hero-greeting">Ahoj, já jsem</h2>
             <h1 class="name">Michal Paluřík</h1>
@@ -166,6 +171,7 @@
     </div>
 
     <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
