@@ -40,11 +40,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // ----------------------------------------------------
     // INIT
     // ----------------------------------------------------
-    AOS.init({ duration: 800, once: true });
     initTheme();
     initLang();
     renderExperience();
     renderProjects('all');
+    AOS.init({ duration: 800, once: true });
 
 
     // ----------------------------------------------------
@@ -132,6 +132,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 'max-glare': 0.2
             });
         }
+
+        // Refresh AOS to recognize new elements
+        if (typeof AOS !== 'undefined') AOS.refresh();
     }
 
     // ----------------------------------------------------
@@ -284,6 +287,7 @@ document.addEventListener('DOMContentLoaded', () => {
         renderExperience();
         const activeFilter = document.querySelector('.filter-btn.active').getAttribute('data-filter');
         renderProjects(activeFilter);
+        if (typeof AOS !== 'undefined') AOS.refresh();
     }
 
     langToggleBtn.addEventListener('click', () => {
