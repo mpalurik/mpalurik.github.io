@@ -446,6 +446,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     document.body.classList.add('loaded');
                     document.getElementById('main-nav').classList.add('visible');
                     initParticles();
+                    gsap.to('#particles-js', { opacity: 1, duration: 2.5, ease: 'power2.inOut' });
                     setTimeout(initScrollAnimations, 200);
                 }
             }, "-=0.5");
