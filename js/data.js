@@ -289,3 +289,62 @@ const projectsData = [
         links: []
     }
 ];
+
+const experienceData = [
+    {
+        type: "work",
+        date: { cz: "Srpen 2026 – Současnost", en: "Aug 2026 – Present" },
+        title: { cz: "Embedded Software Engineer", en: "Embedded Software Engineer" },
+        company: "MESIT",
+        desc: { cz: "Vývoj vestavěného softwaru na plný úvazek.", en: "Full-time embedded software development." },
+        icon: "fas fa-microchip"
+    },
+    {
+        type: "work",
+        date: { cz: "Srpen 2025 – Současnost", en: "Aug 2025 – Present" },
+        title: { cz: "Firmware Engineering Junior Specialist", en: "Firmware Engineering Junior Specialist" },
+        company: "Schneider Electric",
+        desc: { cz: "Práce na firmwaru pro IoT zařízení.", en: "Firmware development for IoT devices." },
+        icon: "fas fa-network-wired"
+    },
+    {
+        type: "work",
+        date: { cz: "Listopad 2024 – Březen 2026", en: "Nov 2024 – Mar 2026" },
+        title: { cz: "Programátor", en: "Programmer" },
+        company: "Wattee",
+        desc: { cz: "Vývoj softwaru a programování aplikací.", en: "Software development and application programming." },
+        icon: "fas fa-code"
+    },
+    {
+        type: "edu",
+        date: { cz: "Srpen 2024 – Červen 2026", en: "Aug 2024 – Jun 2026" },
+        title: { cz: "Inženýr (Ing.), Computer Software Engineering", en: "Master's Degree (Ing.), Computer Software Engineering" },
+        company: "Univerzita Tomáše Bati ve Zlíně",
+        desc: { cz: "Závěrečná práce: Propojení Matter a KNX (HW/SW Brána).", en: "Thesis: Matter & KNX Bridge (HW/SW Gateway)." },
+        icon: "fas fa-graduation-cap"
+    },
+    {
+        type: "work",
+        date: { cz: "Leden 2024 – Září 2024", en: "Jan 2024 – Sep 2024" },
+        title: { cz: "Softwarové a elektromontážní práce", en: "Software and Electrical Assembly" },
+        company: "DOT CONTROLS a.s.",
+        desc: { cz: "Softwarová a hardwarová integrace řídicích systémů.", en: "Software and hardware integration of control systems." },
+        icon: "fas fa-bolt"
+    },
+    {
+        type: "edu",
+        date: { cz: "2021 – 2024", en: "2021 – 2024" },
+        title: { cz: "Bakalář (Bc.), Computer Software Engineering", en: "Bachelor's Degree (Bc.), Computer Software Engineering" },
+        company: "Univerzita Tomáše Bati ve Zlíně",
+        desc: { cz: "Závěrečná práce: Chytré řízení posuvné brány s ESP32.", en: "Thesis: Smart Sliding Gate Controller with ESP32." },
+        icon: "fas fa-graduation-cap"
+    },
+    {
+        type: "work",
+        date: { cz: "2021 – 2023", en: "2021 – 2023" },
+        title: { cz: "Lektor - Robotický kroužek", en: "Instructor - Robotics Club" },
+        company: "Univerzita Tomáše Bati ve Zlíně",
+        desc: { cz: "Výuka a vedení projektů v oblasti robotiky.", en: "Teaching and mentoring in robotics projects." },
+        icon: "fas fa-robot"
+    }
+];
