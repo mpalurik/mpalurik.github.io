@@ -191,7 +191,7 @@ const projectsData = [
             \nA standout technical feature is the implementation of asynchronous audio streaming – the application supports fetching and smoothly playing official audio recordings (Team Radios) directly within the app, all handled asynchronously in the background.`
         },
         tech: ["iOS", "Swift", "REST API", "XCode"],
-        images: ["assets/f1_ios.mp4"],
+        images: ["assets/img/f1_ios.png", "assets/f1_ios.mp4"],
         links: []
     },
     {
@@ -244,8 +244,15 @@ const projectsData = [
             \nThe client-facing interface (Frontend) is developed using the modern **Flutter** (Dart) framework, ensuring smooth cross-platform performance from a single codebase. Within the app, users can **search movies using blazing-fast Full-Text Search**, view detailed records of directors and movies, and dynamically manage data (Full CRUD capabilities). The business logic and database communication are handled by a blazing-fast **Python backend** (REST API via FastAPI), mapped via MongoEngine.
             \nUnder the hood runs a document-oriented **MongoDB** NoSQL database. The primary academic focus was on the underlying architecture: advanced document collection design, strategic data de-normalization to maximize read-throughput, and heavy use of the Aggregation Framework. A crucial milestone of the project was advanced text index optimization, drastically reducing query latency for complex searches across millions of records.`
         },
-        tech: ["MongoDB", "Flutter (Dart)", "Python", "FastAPI/Flask", "NoSQL", "Indexing"],
-        images: [],
+        tech: ["MongoDB", "Flutter", "Dart", "Python", "FastAPI", "MongoEngine", "NoSQL"],
+        images: [
+            "assets/img/movie_database_1.png", 
+            "assets/img/movie_database_2.png",
+            "https://beam-images.warnermediacdn.com/BEAM_LWM_DELIVERABLES/fb9f961f-6302-4776-91d7-f1b7a69fb61d/58b8bd07-dcf7-11f0-8a08-0afffe07dfc1?host=wbd-images.prod-vod.h264.io&partner=beamcom",
+            "https://spoilertown.com/wp-content/uploads/2024/06/lotr-two-towers-2002.webp",
+            "https://image.pmgstatic.com/cache/resized/w960h634/files/images/film/soundtracks/covers/164/117/164117961_08ccc2.jpg",
+            "https://www.moviezone.cz/obr/YXJ0aWNsZU1haW4vMjQ1ODY4"
+        ],
         links: []
     },
     {

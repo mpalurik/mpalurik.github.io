@@ -118,13 +118,19 @@ document.addEventListener('DOMContentLoaded', () => {
         if (project.images && project.images.length > 0) {
             const mediaHTML = project.images.map(media => {
                 if (media.endsWith('.mp4')) {
-                    return `<video src="${media}" controls muted loop style="max-width: 100%; max-height: 400px; border-radius: 8px;"></video>`;
+                    return `<video src="${media}" controls muted loop playsinline class="carousel-media video-player" style="max-width: 100%; max-height: 400px; border-radius: 8px;"></video>`;
                 } else {
-                    return `<img src="${media}" alt="${project.title[currentLang]}">`;
+                    return `<img src="${media}" alt="${project.title[currentLang]}" class="carousel-img">`;
                 }
             }).join('');
             visualContainer.innerHTML = `<div class="gallery-carousel">${mediaHTML}</div>`;
             visualContainer.style.display = 'block';
+            
+            // Attach lightbox events
+            const carouselImages = visualContainer.querySelectorAll('.carousel-img');
+            carouselImages.forEach(img => {
+                img.addEventListener('click', () => openLightbox(img.src));
+            });
         } else {
             visualContainer.innerHTML = '';
             visualContainer.style.display = 'none';
@@ -160,10 +166,44 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Close modal on escape
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
-            closeModal();
+        if (e.key === 'Escape') {
+            if (typeof lightboxOverlay !== 'undefined' && lightboxOverlay && lightboxOverlay.classList.contains('active')) {
+                closeLightbox();
+            } else if (modalOverlay.classList.contains('active')) {
+                closeModal();
+            }
         }
     });
+
+    // ----------------------------------------------------
+    // LIGHTBOX LOGIC
+    // ----------------------------------------------------
+    const lightboxOverlay = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCloseBtn = document.getElementById('lightbox-close');
+
+    function openLightbox(src) {
+        if (!lightboxOverlay) return;
+        lightboxImg.src = src;
+        lightboxOverlay.classList.add('active');
+    }
+
+    function closeLightbox() {
+        if (!lightboxOverlay) return;
+        lightboxOverlay.classList.remove('active');
+        setTimeout(() => { lightboxImg.src = ''; }, 300); // Clear after fade out
+    }
+
+    if (lightboxCloseBtn) {
+        lightboxCloseBtn.addEventListener('click', closeLightbox);
+    }
+
+    if (lightboxOverlay) {
+        lightboxOverlay.addEventListener('click', (e) => {
+            // Close only if clicking outside the image
+            if (e.target === lightboxOverlay) closeLightbox();
+        });
+    }
 
     // ----------------------------------------------------
     // I18N (LANGUAGE TOGGLE)

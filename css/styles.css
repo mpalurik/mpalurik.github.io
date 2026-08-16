@@ -690,7 +690,7 @@ h1, h2, h3, h4 {
     background: rgba(0, 0, 0, 0.05);
 }
 
-.gallery-carousel img {
+.gallery-carousel img, .gallery-carousel video {
     flex: 0 0 100%;
     scroll-snap-align: center;
     width: 100%;
@@ -699,6 +699,78 @@ h1, h2, h3, h4 {
     background: rgba(0, 0, 0, 0.2);
     border-radius: 12px;
     box-shadow: var(--shadow-md);
+}
+
+.carousel-img {
+    cursor: zoom-in;
+    transition: transform 0.2s ease;
+}
+
+.carousel-img:hover {
+    transform: scale(1.01);
+}
+
+/* =========================================
+   LIGHTBOX
+   ========================================= */
+.lightbox-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 3000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    backdrop-filter: blur(8px);
+}
+
+.lightbox-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: var(--transition);
+    z-index: 3010;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-close:hover {
+    background: var(--accent-primary);
+    transform: rotate(90deg);
+}
+
+.lightbox-overlay img {
+    max-width: 95%;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: var(--shadow-lg);
+    transform: scale(0.95);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.lightbox-overlay.active img {
+    transform: scale(1);
 }
 
 .modal-body .long-desc {
