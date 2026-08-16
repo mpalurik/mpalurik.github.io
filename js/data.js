@@ -247,11 +247,7 @@ const projectsData = [
         tech: ["MongoDB", "Flutter", "Dart", "Python", "FastAPI", "MongoEngine", "NoSQL"],
         images: [
             "assets/img/movie_database_1.png", 
-            "assets/img/movie_database_2.png",
-            "https://beam-images.warnermediacdn.com/BEAM_LWM_DELIVERABLES/fb9f961f-6302-4776-91d7-f1b7a69fb61d/58b8bd07-dcf7-11f0-8a08-0afffe07dfc1?host=wbd-images.prod-vod.h264.io&partner=beamcom",
-            "https://spoilertown.com/wp-content/uploads/2024/06/lotr-two-towers-2002.webp",
-            "https://image.pmgstatic.com/cache/resized/w960h634/files/images/film/soundtracks/covers/164/117/164117961_08ccc2.jpg",
-            "https://www.moviezone.cz/obr/YXJ0aWNsZU1haW4vMjQ1ODY4"
+            "assets/img/movie_database_2.png"
         ],
         links: []
     },
