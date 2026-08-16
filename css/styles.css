@@ -283,7 +283,7 @@ body.loaded .cursor-dot, body.loaded .cursor-outline { opacity: 1; }
 }
 
 /* ==================== SECTION: CONTACT ==================== */
-.section-contact { text-align: center; background: linear-gradient(to top, var(--bg-color) 0%, transparent 100%); position: relative; z-index: 10; padding: 6rem 5%; }
+.section-contact { text-align: center; background: linear-gradient(to top, var(--bg-color) 0%, transparent 100%); position: relative; z-index: 10; padding: 6rem 5%; max-width: 100%; width: 100%; }
 .contact-info { max-width: 800px; margin: 0 auto; }
 .contact-info h3 { font-size: 2rem; margin-bottom: 0.5rem; color: var(--text-primary); }
 .contact-cards { display: flex; gap: 2rem; justify-content: center; margin-top: 2.5rem; flex-wrap: wrap; }
