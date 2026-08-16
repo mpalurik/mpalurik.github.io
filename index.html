@@ -9,7 +9,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
     
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -18,17 +18,32 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/styles.css">
 </head>
-<body class="light-theme">
+<body>
+    <!-- =============================================
+         LOADING SCREEN - "System Boot" 
+         ============================================= -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="boot-container">
+            <div class="boot-logo">MP<span>.</span></div>
+            <div class="boot-terminal" id="boot-terminal"></div>
+            <div class="boot-progress-container">
+                <div class="boot-progress-bar" id="boot-progress"></div>
+            </div>
+            <div class="boot-status" id="boot-status">Initializing system...</div>
+        </div>
+    </div>
+
     <!-- Custom Cursor -->
     <div class="cursor-dot" data-cursor-dot></div>
     <div class="cursor-outline" data-cursor-outline></div>
 
     <!-- Navigation -->
-    <nav class="navbar">
+    <nav class="navbar" id="main-nav">
         <div class="nav-container">
             <a href="#" class="logo">MP<span>.</span></a>
             <div class="nav-links">
                 <a href="#hero" data-i18n="nav-home">Domů</a>
+                <a href="#experience" data-i18n="nav-experience">Zkušenosti</a>
                 <a href="#projects" data-i18n="nav-projects">Projekty</a>
                 <a href="#contact" data-i18n="nav-contact">Kontakt</a>
                 <button id="lang-toggle" class="lang-toggle" aria-label="Switch Language">
@@ -38,130 +53,115 @@
                     <i class="fas fa-sun"></i>
                 </button>
             </div>
-            <!-- Mobile Menu Button -->
-            <button class="mobile-menu-btn">
-                <i class="fas fa-bars"></i>
-            </button>
+            <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
         </div>
     </nav>
 
     <!-- Mobile Nav Overlay -->
     <div class="mobile-nav">
         <a href="#hero" class="mobile-link" data-i18n="nav-home">Domů</a>
+        <a href="#experience" class="mobile-link" data-i18n="nav-experience">Zkušenosti</a>
         <a href="#projects" class="mobile-link" data-i18n="nav-projects">Projekty</a>
         <a href="#contact" class="mobile-link" data-i18n="nav-contact">Kontakt</a>
     </div>
 
     <!-- Hero Section -->
-    <section id="hero" class="hero">
+    <section id="hero" class="hero-cinematic">
         <div id="particles-js"></div>
-        <div class="hero-content">
-            <h2 class="greeting" data-i18n="hero-greeting">Ahoj, já jsem</h2>
-            <h1 class="name">Michal Paluřík</h1>
-            <p class="role" data-i18n="hero-role">Software & Hardware Developer</p>
-            <p class="bio" data-i18n="hero-bio">
+        <div class="hero-inner">
+            <h2 class="hero-greeting" data-i18n="hero-greeting">Ahoj, já jsem</h2>
+            <h1 class="hero-name">Michal Paluřík</h1>
+            <p class="hero-role" data-i18n="hero-role">Software &amp; Hardware Developer</p>
+            <p class="hero-bio" data-i18n="hero-bio">
                 Věnuji se vývoji mobilních aplikací, webových řešení a propojování světa hardwaru a softwaru. 
                 Rád zkoumám nové technologie, od IoT (ESP32, Matter, KNX) přes moderní architekturu až po databázové systémy.
             </p>
             <div class="hero-buttons">
-                <a href="#projects" class="btn btn-primary" data-i18n="hero-btn-work">Moje práce</a>
+                <a href="#horizontal-wrapper" class="btn btn-primary" data-i18n="hero-btn-work">Moje práce</a>
                 <a href="https://github.com/mpalurik" target="_blank" class="btn btn-secondary">
                     <i class="fab fa-github"></i> GitHub
                 </a>
             </div>
         </div>
-        <div class="hero-graphics">
-            <div class="shape shape-1"></div>
-            <div class="shape shape-2"></div>
-            <div class="glass-card">
-                <i class="fas fa-code"></i>
-                <span>Code. Build. Innovate.</span>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+            <span data-i18n="scroll-hint">Scrolluj dolů</span>
+        </div>
+    </section>
+
+    <!-- Horizontal Scroll Wrapper -->
+    <section id="horizontal-wrapper" class="horizontal-wrapper">
+        <div class="horizontal-track" id="horizontal-track">
+
+            <!-- Panel: Experience Intro -->
+            <div class="h-panel panel-experience-intro" id="experience">
+                <div class="panel-content">
+                    <h2 class="panel-giant-title" data-i18n="exp-title">Pracovní <span>Zkušenosti</span> &amp; Vzdělání</h2>
+                    <p class="panel-subtitle" data-i18n="exp-subtitle">Můj profesní příběh od univerzity po průmysl</p>
+                </div>
+            </div>
+
+            <!-- Panel: Experience Timeline -->
+            <div class="h-panel panel-experience-timeline">
+                <div class="panel-content panel-timeline-scroll">
+                    <div class="timeline-cinematic" id="timeline-container"></div>
+                </div>
+            </div>
+
+            <!-- Panel: Projects Intro -->
+            <div class="h-panel panel-projects-intro" id="projects">
+                <div class="panel-content">
+                    <h2 class="panel-giant-title" data-i18n="projects-title">Vybrané <span>Projekty</span></h2>
+                    <p class="panel-subtitle" data-i18n="projects-subtitle">Od vášně k akademickým úspěchům.</p>
+                    <div class="project-filters" id="project-filters">
+                        <button class="filter-btn active" data-filter="all" data-i18n="filter-all">Vše</button>
+                        <button class="filter-btn" data-filter="school" data-i18n="filter-school">Škola</button>
+                        <button class="filter-btn" data-filter="mobile" data-i18n="filter-mobile">Mobilní</button>
+                        <button class="filter-btn" data-filter="other" data-i18n="filter-other">Hobby</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project Panels Container (injected via JS) -->
+            <div id="project-panels-container" class="project-panels-inline"></div>
+
+            <!-- Final Panel: Contact -->
+            <div class="h-panel panel-contact" id="contact">
+                <div class="panel-content contact-content">
+                    <h2 class="panel-giant-title">Kontakt</h2>
+                    <div class="contact-info">
+                        <h3>Michal Paluřík</h3>
+                        <p data-i18n="footer-desc">Otevřený novým výzvám v oblasti vývoje software a IoT.</p>
+                        <div class="social-links-cinematic">
+                            <a href="https://github.com/mpalurik" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    <div class="footer-bottom-cinematic">
+                        <p data-i18n="footer-rights">&copy; 2026 Michal Paluřík. Všechna práva vyhrazena.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Experience Section -->
-    <section id="experience" class="section experience-section">
-        <div class="container">
-            <h2 class="section-title" data-i18n="exp-title">Pracovní <span>Zkušenosti</span> & Vzdělání</h2>
-            <div class="timeline" id="timeline-container">
-                <!-- Timeline items rendered via JS -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="section projects-section">
-        <div class="container">
-            <h2 class="section-title" data-i18n="projects-title" data-aos="fade-up">Vybrané <span>Projekty</span></h2>
-            <p class="section-subtitle" data-i18n="projects-subtitle" data-aos="fade-up" data-aos-delay="100" style="text-align: center; color: var(--text-secondary); max-width: 700px; margin: -1rem auto 2.5rem; font-size: 1rem; line-height: 1.5;"></p>
-            
-            <div class="filter-container" data-aos="fade-up" data-aos-delay="200">
-            <div class="project-filters">
-                <button class="filter-btn active" data-filter="all" data-i18n="filter-all">Vše</button>
-                <button class="filter-btn" data-filter="school" data-i18n="filter-school">Škola & Závěrečné práce</button>
-                <button class="filter-btn" data-filter="mobile" data-i18n="filter-mobile">Mobilní Aplikace</button>
-                <button class="filter-btn" data-filter="other" data-i18n="filter-other">Hobby & Ostatní</button>
-            </div>
-            </div>
-
-            <!-- Dynamic Projects Grid -->
-            <div class="projects-grid" id="projects-container">
-                <!-- Injected via script.js -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Project Detail Modal Overlay -->
+    <!-- Project Detail Modal -->
     <div id="project-modal" class="modal-overlay">
         <div class="modal-container">
             <button class="modal-close" id="modal-close"><i class="fas fa-times"></i></button>
-            
             <div class="modal-content">
-                <!-- Header -->
                 <div class="modal-header">
                     <span class="badge" id="modal-badge"></span>
                     <h2 class="modal-title" id="modal-title">Project Title</h2>
-                    <div class="modal-tech-stack" id="modal-tech">
-                        <!-- Tech spans injected here -->
-                    </div>
+                    <div class="modal-tech-stack" id="modal-tech"></div>
                 </div>
-
-                <!-- Visual Gallery -->
-                <div class="modal-visual" id="modal-visual-container">
-                    <!-- Images injected here -->
-                </div>
-
-                <!-- Deep Dive Description -->
+                <div class="modal-visual" id="modal-visual-container"></div>
                 <div class="modal-body">
-                    <div class="long-desc" id="modal-desc">
-                        <!-- Description injected here -->
-                    </div>
+                    <div class="long-desc" id="modal-desc"></div>
                 </div>
-                
-                <!-- Footer Links -->
-                <div class="modal-footer" id="modal-links">
-                    <!-- Links injected here -->
-                </div>
+                <div class="modal-footer" id="modal-links"></div>
             </div>
         </div>
     </div>
-
-    <!-- Footer / Contact -->
-    <footer id="contact" class="footer">
-        <div class="container footer-content">
-            <div class="footer-info">
-                <h3>Michal Paluřík</h3>
-                <p data-i18n="footer-desc">Otevřený novým výzvám v oblasti vývoje software a IoT.</p>
-            </div>
-            <div class="social-links">
-                <a href="https://github.com/mpalurik" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p data-i18n="footer-rights">&copy; 2026 Michal Paluřík. Všechna práva vyhrazena.</p>
-        </div>
-    </footer>
 
     <!-- Lightbox Modal -->
     <div id="lightbox" class="lightbox-overlay">
