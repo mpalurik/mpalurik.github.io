@@ -440,14 +440,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 scale: 1.1,
                 duration: 1.5,
                 ease: 'power3.inOut',
-                onStart: () => clearInterval(matrixInterval),
-                onComplete: () => {
-                    document.getElementById('loading-screen').style.display = 'none';
+                onStart: () => {
+                    clearInterval(matrixInterval);
                     document.body.classList.add('loaded');
                     document.getElementById('main-nav').classList.add('visible');
                     initParticles();
-                    gsap.to('#particles-js', { opacity: 1, duration: 2.5, ease: 'power2.inOut' });
-                    setTimeout(initScrollAnimations, 200);
+                    gsap.to('#particles-js', { opacity: 1, duration: 1.5, ease: 'power2.inOut' });
+                    initScrollAnimations();
+                },
+                onComplete: () => {
+                    document.getElementById('loading-screen').style.display = 'none';
                 }
             }, "-=0.5");
         }

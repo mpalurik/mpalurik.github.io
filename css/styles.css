@@ -335,8 +335,8 @@ body.loaded .cursor-dot, body.loaded .cursor-outline { opacity: 1; }
 .modal-tech-stack span { padding: 4px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: 600; background: rgba(59,130,246,0.15); color: var(--accent-primary); }
 .badge { display: inline-block; padding: 4px 14px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; background: var(--gradient-primary); color: white; }
 .modal-visual { margin: 1.5rem 0; }
-.gallery-carousel { display: flex; gap: 1rem; overflow-x: auto; padding-bottom: 0.5rem; scroll-snap-type: x mandatory; }
-.gallery-carousel img, .gallery-carousel .plyr { max-height: 300px; border-radius: 12px; scroll-snap-align: start; cursor: pointer; transition: var(--transition); }
+.gallery-carousel { display: flex; gap: 1rem; overflow-x: auto; padding-bottom: 0.5rem; scroll-snap-type: x mandatory; align-items: center; }
+.gallery-carousel img, .gallery-carousel .plyr { flex-shrink: 0; width: auto; max-width: 90vw; max-height: 300px; object-fit: contain; border-radius: 12px; scroll-snap-align: start; cursor: pointer; transition: var(--transition); }
 .gallery-carousel .plyr.plyr--fullscreen-active { max-height: none; border-radius: 0; }
 .gallery-carousel img:hover { transform: scale(1.02); }
 .long-desc { color: var(--text-secondary); line-height: 1.8; font-size: 1rem; }
