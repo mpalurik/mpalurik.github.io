@@ -44,8 +44,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initLang();
     renderExperience();
     renderProjects('all');
-    AOS.init({ duration: 800, once: true });
-
+    setTimeout(initGSAP, 200);
+    
 
     // ----------------------------------------------------
     // RENDER EXPERIENCE
@@ -59,9 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const delay = index * 100;
             const el = document.createElement('div');
             el.className = 'timeline-item';
-            el.setAttribute('data-aos', 'fade-up');
-            el.setAttribute('data-aos-delay', delay);
-            
+                                    
             el.innerHTML = `
                 <div class="timeline-icon">
                     <i class="${item.icon}"></i>
@@ -119,9 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
             
             card.addEventListener('click', () => openModal(project));
-            card.setAttribute('data-aos', 'fade-up');
-            card.setAttribute('data-aos-delay', (index % 3) * 100);
-            projectsContainer.appendChild(card);
+                                    projectsContainer.appendChild(card);
         });
         
         if (typeof VanillaTilt !== 'undefined') {
@@ -134,8 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Refresh AOS to recognize new elements
-        if (typeof AOS !== 'undefined') AOS.refresh();
-    }
+            }
 
     // ----------------------------------------------------
     // FILTERS
@@ -287,8 +282,7 @@ document.addEventListener('DOMContentLoaded', () => {
         renderExperience();
         const activeFilter = document.querySelector('.filter-btn.active').getAttribute('data-filter');
         renderProjects(activeFilter);
-        if (typeof AOS !== 'undefined') AOS.refresh();
-    }
+            }
 
     langToggleBtn.addEventListener('click', () => {
         currentLang = currentLang === 'cz' ? 'en' : 'cz';
@@ -378,6 +372,90 @@ document.addEventListener('DOMContentLoaded', () => {
                 cursorOutline.classList.remove('hovered');
             }
         });
+    }
+
+
+    // ----------------------------------------------------
+    // GSAP & SCROLLTRIGGER
+    // ----------------------------------------------------
+    function initGSAP() {
+        if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+        gsap.registerPlugin(ScrollTrigger);
+
+        // 1. Hero Parallax
+        gsap.to('.hero-content', {
+            scrollTrigger: {
+                trigger: '#hero',
+                start: 'top top',
+                end: 'bottom top',
+                scrub: true
+            },
+            y: 250,
+            opacity: 0,
+            ease: 'none'
+        });
+
+        // 2. Timeline Progress Line
+        gsap.to('#timeline-progress', {
+            height: '100%',
+            ease: 'none',
+            scrollTrigger: {
+                trigger: '#experience',
+                start: 'top center',
+                end: 'bottom center',
+                scrub: true
+            }
+        });
+
+        // 3. Timeline Items Scrubbing
+        gsap.utils.toArray('.timeline-item').forEach((item, i) => {
+            // alternate from left and right
+            let isMobile = window.innerWidth < 768;
+            let startX = isMobile ? -50 : (i % 2 === 0 ? 100 : -100);
+            
+            gsap.from(item, {
+                scrollTrigger: {
+                    trigger: item,
+                    start: 'top 85%',
+                    end: 'top 50%',
+                    scrub: 1
+                },
+                x: startX,
+                opacity: 0,
+                duration: 1
+            });
+        });
+
+        // Refresh triggers on layout change
+        ScrollTrigger.refresh();
+    }
+
+    function refreshGSAPProjects() {
+        if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+        
+        // Kill old project triggers to avoid duplicates
+        ScrollTrigger.getAll().forEach(t => {
+            if (t.vars.trigger && t.vars.trigger.classList && t.vars.trigger.classList.contains('project-card')) {
+                t.kill();
+            }
+        });
+
+        // 4. Projects Grid Enhancements
+        gsap.utils.toArray('.project-card').forEach((card, i) => {
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 95%',
+                    end: 'top 60%',
+                    scrub: 1
+                },
+                y: 80,
+                scale: 0.85,
+                opacity: 0,
+                duration: 1
+            });
+        });
+        ScrollTrigger.refresh();
     }
 
     // ----------------------------------------------------
