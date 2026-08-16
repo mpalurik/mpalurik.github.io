@@ -244,7 +244,7 @@ body.loaded .cursor-dot, body.loaded .cursor-outline { opacity: 1; }
 }
 .project-panel-visual { flex: 0 0 45%; }
 .project-panel-visual img {
-    width: 100%; border-radius: 16px; object-fit: cover;
+    width: 100%; aspect-ratio: 16/9; border-radius: 16px; object-fit: cover;
     box-shadow: var(--shadow-lg); transition: var(--transition);
 }
 .project-panel-visual img:hover { transform: scale(1.03); }

@@ -61,8 +61,8 @@ const projectsData = [
         id: "hackathon",
         category: "school",
         title: {
-            cz: "FairBank - Bankovní systém",
-            en: "FairBank - Banking System"
+            cz: "Va-bank - Bankovní systém",
+            en: "Va-bank - Banking System"
         },
         badge: {
             cz: "Hackathon 2026",
