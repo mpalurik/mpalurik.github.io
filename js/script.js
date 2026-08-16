@@ -33,58 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalOverlay = document.getElementById('project-modal');
     const modalCloseBtn = document.getElementById('modal-close');
 
-    // ==================== BOOT SEQUENCE ====================
-    function runBootSequence() {
-        const terminal = document.getElementById('boot-terminal');
-        const progressBar = document.getElementById('boot-progress');
-        const statusEl = document.getElementById('boot-status');
-        document.body.style.overflow = 'hidden';
-
-        const lines = [
-            { t: '[BIOS] Initializing hardware...', c: 'info', d: 200 },
-            { t: '[OK] CPU: ARM Cortex-M4 @ 168MHz', c: 'ok', d: 400 },
-            { t: '[OK] RAM: 512KB SRAM allocated', c: 'ok', d: 600 },
-            { t: '[OK] Flash: 2MB NOR ready', c: 'ok', d: 750 },
-            { t: '[SYS] Loading firmware v2.6.0...', c: 'info', d: 1000 },
-            { t: '[OK] GPIO pins configured (48/48)', c: 'ok', d: 1200 },
-            { t: '[OK] I2C bus initialized @ 400kHz', c: 'ok', d: 1400 },
-            { t: '[OK] SPI interface ready', c: 'ok', d: 1550 },
-            { t: '[OK] UART0: 115200 baud', c: 'ok', d: 1700 },
-            { t: '[NET] Connecting to network...', c: 'info', d: 1900 },
-            { t: '[OK] WiFi: Connected (RSSI: -42dBm)', c: 'ok', d: 2200 },
-            { t: '[OK] TCP/IP stack initialized', c: 'ok', d: 2350 },
-            { t: '[TEST] Running self-diagnostics...', c: 'warn', d: 2500 },
-            { t: '[OK] Sensor array: 12/12 online', c: 'ok', d: 2700 },
-            { t: '[OK] ADC calibration: PASS', c: 'ok', d: 2850 },
-            { t: '[OK] PWM outputs verified', c: 'ok', d: 3000 },
-            { t: '[SYS] Compiling shaders...', c: 'info', d: 3100 },
-            { t: '[OK] WebGL context acquired', c: 'ok', d: 3300 },
-            { t: '[OK] All systems nominal', c: 'ok', d: 3500 },
-            { t: '[BOOT] Portfolio ready. Welcome, user.', c: 'accent', d: 3800 },
-        ];
-
-        lines.forEach((line, i) => {
-            setTimeout(() => {
-                const el = document.createElement('div');
-                el.className = 'line ' + line.c;
-                el.textContent = line.t;
-                terminal.appendChild(el);
-                terminal.scrollTop = terminal.scrollHeight;
-                progressBar.style.width = Math.min(((i+1)/lines.length)*100, 100) + '%';
-                statusEl.textContent = line.t.replace(/\[.*?\]\s*/, '');
-            }, line.d);
-        });
-
-        setTimeout(() => {
-            document.getElementById('loading-screen').classList.add('hidden');
-            document.body.classList.add('loaded');
-            document.body.style.overflow = '';
-            document.getElementById('main-nav').classList.add('visible');
-            window.scrollTo(0, 0);
-            setTimeout(() => { initParticles(); initScrollAnimations(); }, 200);
-        }, 4200);
-    }
-
     // ==================== RENDER EXPERIENCE ====================
     function renderExperience() {
         const c = document.getElementById('timeline-container');
@@ -424,7 +372,29 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (!sessionStorage.getItem('booted')) {
         sessionStorage.setItem('booted', 'true');
-        runBootSequence();
+        
+        if (typeof gsap !== 'undefined') {
+            gsap.to('.loading-title', { opacity: 1, y: 0, duration: 1, ease: 'power3.out' });
+            gsap.to('#loading-bar', { 
+                width: '100%', 
+                duration: 2.2, 
+                ease: 'power2.inOut',
+                onComplete: () => {
+                    gsap.to('#loading-screen', {
+                        opacity: 0,
+                        duration: 1.2,
+                        ease: 'power3.inOut',
+                        onComplete: () => {
+                            document.getElementById('loading-screen').style.display = 'none';
+                            document.body.classList.add('loaded');
+                            document.getElementById('main-nav').classList.add('visible');
+                            initParticles();
+                            setTimeout(initScrollAnimations, 200);
+                        }
+                    });
+                }
+            });
+        }
     } else {
         document.getElementById('loading-screen').style.display = 'none';
         document.body.classList.add('loaded');
