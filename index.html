@@ -5,23 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Michal Paluřík | Portfolio</title>
     <meta name="description" content="Osobní portfolio - Michal Paluřík. Ukázky školních, pracovních a osobních projektů z oblasti vývoje software a hardware.">
-    
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
-    
-    <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
-    
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <!-- =============================================
-         LOADING SCREEN - "System Boot" 
-         ============================================= -->
+    <!-- Loading Screen -->
     <div id="loading-screen" class="loading-screen">
         <div class="boot-container">
             <div class="boot-logo">MP<span>.</span></div>
@@ -57,7 +49,7 @@
         </div>
     </nav>
 
-    <!-- Mobile Nav Overlay -->
+    <!-- Mobile Nav -->
     <div class="mobile-nav">
         <a href="#hero" class="mobile-link" data-i18n="nav-home">Domů</a>
         <a href="#experience" class="mobile-link" data-i18n="nav-experience">Zkušenosti</a>
@@ -65,22 +57,17 @@
         <a href="#contact" class="mobile-link" data-i18n="nav-contact">Kontakt</a>
     </div>
 
-    <!-- Hero Section -->
+    <!-- Hero -->
     <section id="hero" class="hero-cinematic">
         <div id="particles-js"></div>
         <div class="hero-inner">
             <h2 class="hero-greeting" data-i18n="hero-greeting">Ahoj, já jsem</h2>
             <h1 class="hero-name">Michal Paluřík</h1>
             <p class="hero-role" data-i18n="hero-role">Software &amp; Hardware Developer</p>
-            <p class="hero-bio" data-i18n="hero-bio">
-                Věnuji se vývoji mobilních aplikací, webových řešení a propojování světa hardwaru a softwaru. 
-                Rád zkoumám nové technologie, od IoT (ESP32, Matter, KNX) přes moderní architekturu až po databázové systémy.
-            </p>
+            <p class="hero-bio" data-i18n="hero-bio">Věnuji se vývoji mobilních aplikací, webových řešení a propojování světa hardwaru a softwaru.</p>
             <div class="hero-buttons">
-                <a href="#horizontal-wrapper" class="btn btn-primary" data-i18n="hero-btn-work">Moje práce</a>
-                <a href="https://github.com/mpalurik" target="_blank" class="btn btn-secondary">
-                    <i class="fab fa-github"></i> GitHub
-                </a>
+                <a href="#experience" class="btn btn-primary" data-i18n="hero-btn-work">Moje práce</a>
+                <a href="https://github.com/mpalurik" target="_blank" class="btn btn-secondary"><i class="fab fa-github"></i> GitHub</a>
             </div>
         </div>
         <div class="scroll-indicator">
@@ -89,73 +76,59 @@
         </div>
     </section>
 
-    <!-- Experience Section -->
-    <section id="experience" class="v-section section-experience-intro">
-        <div class="section-inner">
-            <h2 class="section-giant-title" data-i18n="exp-title">Pracovní <span>Zkušenosti</span> &amp; Vzdělání</h2>
-            <p class="section-subtitle" data-i18n="exp-subtitle">Můj profesní příběh od univerzity po průmysl</p>
+    <!-- Experience Section (title + cards together) -->
+    <section id="experience" class="content-section">
+        <h2 class="section-giant-title" data-i18n="exp-title">Pracovní <span>Zkušenosti</span> &amp; Vzdělání</h2>
+        <p class="section-subtitle" data-i18n="exp-subtitle">Můj profesní příběh od univerzity po průmysl</p>
+        <div class="experience-grid" id="timeline-container"></div>
+    </section>
+
+    <!-- Projects Section (title + filters + project cards together) -->
+    <section id="projects" class="content-section">
+        <h2 class="section-giant-title" data-i18n="projects-title">Vybrané <span>Projekty</span></h2>
+        <p class="section-subtitle" data-i18n="projects-subtitle">Od vášně k akademickým úspěchům.</p>
+        <div class="project-filters">
+            <button class="filter-btn active" data-filter="all" data-i18n="filter-all">Vše</button>
+            <button class="filter-btn" data-filter="school" data-i18n="filter-school">Škola</button>
+            <button class="filter-btn" data-filter="mobile" data-i18n="filter-mobile">Mobilní</button>
+            <button class="filter-btn" data-filter="other" data-i18n="filter-other">Hobby</button>
         </div>
+        <div id="project-panels-container"></div>
     </section>
-
-    <!-- Experience Timeline -->
-    <section class="v-section section-timeline">
-        <div class="timeline-cinematic" id="timeline-container"></div>
-    </section>
-
-    <!-- Projects Intro -->
-    <section id="projects" class="v-section section-projects-intro">
-        <div class="section-inner">
-            <h2 class="section-giant-title" data-i18n="projects-title">Vybrané <span>Projekty</span></h2>
-            <p class="section-subtitle" data-i18n="projects-subtitle">Od vášně k akademickým úspěchům.</p>
-            <div class="project-filters" id="project-filters">
-                <button class="filter-btn active" data-filter="all" data-i18n="filter-all">Vše</button>
-                <button class="filter-btn" data-filter="school" data-i18n="filter-school">Škola</button>
-                <button class="filter-btn" data-filter="mobile" data-i18n="filter-mobile">Mobilní</button>
-                <button class="filter-btn" data-filter="other" data-i18n="filter-other">Hobby</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Project Panels (injected via JS) -->
-    <div id="project-panels-container"></div>
 
     <!-- Contact -->
-    <section id="contact" class="v-section section-contact">
-        <div class="section-inner contact-content">
-            <h2 class="section-giant-title">Kontakt</h2>
-            <div class="contact-info">
-                <h3>Michal Paluřík</h3>
-                <p data-i18n="footer-desc">Otevřený novým výzvám v oblasti vývoje software a IoT.</p>
-                <div class="social-links-cinematic">
-                    <a href="https://github.com/mpalurik" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                </div>
-            </div>
-            <div class="footer-bottom-cinematic">
-                <p data-i18n="footer-rights">&copy; 2026 Michal Paluřík. Všechna práva vyhrazena.</p>
+    <footer id="contact" class="content-section section-contact">
+        <h2 class="section-giant-title">Kontakt</h2>
+        <div class="contact-info">
+            <h3>Michal Paluřík</h3>
+            <p data-i18n="footer-desc">Otevřený novým výzvám v oblasti vývoje software a IoT.</p>
+            <div class="social-links-cinematic">
+                <a href="https://github.com/mpalurik" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
             </div>
         </div>
-    </section>
+        <div class="footer-bottom-cinematic">
+            <p data-i18n="footer-rights">&copy; 2026 Michal Paluřík. Všechna práva vyhrazena.</p>
+        </div>
+    </footer>
 
-    <!-- Project Detail Modal -->
+    <!-- Modal -->
     <div id="project-modal" class="modal-overlay">
         <div class="modal-container">
             <button class="modal-close" id="modal-close"><i class="fas fa-times"></i></button>
             <div class="modal-content">
                 <div class="modal-header">
                     <span class="badge" id="modal-badge"></span>
-                    <h2 class="modal-title" id="modal-title">Project Title</h2>
+                    <h2 class="modal-title" id="modal-title"></h2>
                     <div class="modal-tech-stack" id="modal-tech"></div>
                 </div>
                 <div class="modal-visual" id="modal-visual-container"></div>
-                <div class="modal-body">
-                    <div class="long-desc" id="modal-desc"></div>
-                </div>
+                <div class="modal-body"><div class="long-desc" id="modal-desc"></div></div>
                 <div class="modal-footer" id="modal-links"></div>
             </div>
         </div>
     </div>
 
-    <!-- Lightbox Modal -->
+    <!-- Lightbox -->
     <div id="lightbox" class="lightbox-overlay">
         <button id="lightbox-close" class="lightbox-close"><i class="fas fa-times"></i></button>
         <img id="lightbox-img" src="" alt="Zoomed image">
