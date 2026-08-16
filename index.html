@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Michal Paluřík | Portfolio</title>
+    <link rel="icon" type="image/jpeg" href="./assets/img/favicon.jpg">
     <meta name="description" content="Osobní portfolio - Michal Paluřík. Ukázky školních, pracovních a osobních projektů z oblasti vývoje software a hardware.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -104,15 +105,35 @@
         <div class="contact-info">
             <h3>Michal Paluřík</h3>
             <p data-i18n="footer-desc">Otevřený novým výzvám v oblasti vývoje software a IoT.</p>
-            <div class="social-links-cinematic">
-                <a href="https://github.com/mpalurik" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/michal-palurik" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <div class="contact-cards">
+                <a href="https://github.com/mpalurik" target="_blank" class="contact-card">
+                    <i class="fab fa-github"></i>
+                    <div class="contact-card-text">
+                        <span class="contact-title" data-i18n="contact-github">Check out my projects</span>
+                        <span class="contact-subtitle">GitHub</span>
+                    </div>
+                </a>
+                <a href="https://www.linkedin.com/in/michal-palurik" target="_blank" class="contact-card">
+                    <i class="fab fa-linkedin"></i>
+                    <div class="contact-card-text">
+                        <span class="contact-title" data-i18n="contact-linkedin">Connect with me</span>
+                        <span class="contact-subtitle">LinkedIn</span>
+                    </div>
+                </a>
             </div>
         </div>
         <div class="footer-bottom-cinematic">
             <p data-i18n="footer-rights">&copy; 2026 Michal Paluřík. Všechna práva vyhrazena.</p>
         </div>
     </footer>
+
+    <!-- Scroll Navigation -->
+    <nav id="scroll-nav" class="scroll-nav">
+        <a href="#hero" class="scroll-dot active" aria-label="Home" title="Home"></a>
+        <a href="#experience" class="scroll-dot" aria-label="Experience" title="Experience"></a>
+        <a href="#projects" class="scroll-dot" aria-label="Projects" title="Projects"></a>
+        <a href="#contact" class="scroll-dot" aria-label="Contact" title="Contact"></a>
+    </nav>
 
     <!-- Modal -->
     <div id="project-modal" class="modal-overlay">

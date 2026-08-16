@@ -20,7 +20,9 @@ const translations = {
     "filter-mobile": { cz: "Mobilní", en: "Mobile" },
     "filter-other": { cz: "Hobby", en: "Hobby" },
     "footer-desc": { cz: "Otevřený novým výzvám v oblasti vývoje software a IoT.", en: "Open to new challenges in software development and IoT." },
-    "footer-rights": { cz: "© 2026 Michal Paluřík. Všechna práva vyhrazena.", en: "© 2026 Michal Paluřík. All rights reserved." }
+    "footer-rights": { cz: "© 2026 Michal Paluřík. Všechna práva vyhrazena.", en: "© 2026 Michal Paluřík. All rights reserved." },
+    "contact-github": { cz: "Podívejte se na mé projekty", en: "Check out my projects" },
+    "contact-linkedin": { cz: "Spojme se na LinkedInu", en: "Connect with me" }
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -242,7 +244,13 @@ document.addEventListener('DOMContentLoaded', () => {
     function openModal(project) {
         document.getElementById('modal-badge').textContent = project.badge[currentLang];
         document.getElementById('modal-title').textContent = project.title[currentLang];
-        document.getElementById('modal-desc').innerHTML = project.longDesc[currentLang].replace(/\n/g, '<br>');
+        
+        const formattedDesc = project.longDesc[currentLang]
+            .replace(/\n/g, '<br>')
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/`(.*?)`/g, '<code>$1</code>');
+        document.getElementById('modal-desc').innerHTML = formattedDesc;
+        
         document.getElementById('modal-tech').innerHTML = project.tech.map(t => '<span>' + t + '</span>').join('');
 
         const vc = document.getElementById('modal-visual-container');
@@ -384,9 +392,40 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // ==================== SCROLL NAVIGATION ====================
+    const sections = document.querySelectorAll('section, footer');
+    const navDots = document.querySelectorAll('.scroll-dot');
+    
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(sec => {
+            const sectionTop = sec.offsetTop;
+            const sectionHeight = sec.clientHeight;
+            if (scrollY >= (sectionTop - sectionHeight / 3)) {
+                current = sec.getAttribute('id');
+            }
+        });
+        navDots.forEach(dot => {
+            dot.classList.remove('active');
+            if (dot.getAttribute('href') === '#' + current) {
+                dot.classList.add('active');
+            }
+        });
+    });
+
     // ==================== INIT ====================
     renderExperience();
     renderProjectPanels('all');
     applyTranslations();
-    runBootSequence();
+    
+    if (!sessionStorage.getItem('booted')) {
+        sessionStorage.setItem('booted', 'true');
+        runBootSequence();
+    } else {
+        document.getElementById('loading-screen').style.display = 'none';
+        document.body.classList.add('loaded');
+        document.getElementById('main-nav').classList.add('visible');
+        initParticles();
+        setTimeout(initScrollAnimations, 200);
+    }
 });
