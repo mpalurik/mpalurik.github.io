@@ -45,6 +45,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const progressBar = document.getElementById('boot-progress');
         const statusEl = document.getElementById('boot-status');
         
+        // Lock scroll during boot
+        document.body.style.overflow = 'hidden';
+        
         const bootLines = [
             { text: '[BIOS] Initializing hardware...', cls: 'info', delay: 200 },
             { text: '[OK] CPU: ARM Cortex-M4 @ 168MHz', cls: 'ok', delay: 400 },
@@ -90,13 +93,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const loadingScreen = document.getElementById('loading-screen');
             loadingScreen.classList.add('hidden');
             document.body.classList.add('loaded');
+            document.body.style.overflow = '';
             document.getElementById('main-nav').classList.add('visible');
             
-            // Initialize everything after boot
+            // Scroll to top and initialize
+            window.scrollTo(0, 0);
             setTimeout(() => {
                 initParticles();
                 initHorizontalScroll();
-            }, 300);
+            }, 200);
         }, totalDuration);
     }
 
@@ -227,7 +232,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // Main horizontal scroll
-        horizontalTrigger = gsap.to(track, {
+        const scrollTween = gsap.to(track, {
             x: -(totalWidth - viewportWidth),
             ease: 'none',
             scrollTrigger: {
@@ -240,20 +245,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 invalidateOnRefresh: true,
             }
         });
+        
+        horizontalTrigger = scrollTween;
 
-        // Animate individual panels as they scroll into view
-        gsap.utils.toArray('.h-panel').forEach((panel) => {
-            gsap.from(panel.querySelectorAll('.panel-giant-title, .panel-subtitle, .project-panel-info, .timeline-card'), {
+        // Animate individual panels content on enter
+        const allPanels = gsap.utils.toArray('.h-panel');
+        allPanels.forEach((panel) => {
+            const innerEls = panel.querySelectorAll('.panel-giant-title, .panel-subtitle, .project-panel-info, .project-panel-visual, .timeline-card');
+            if (innerEls.length === 0) return;
+            
+            gsap.from(innerEls, {
                 scrollTrigger: {
                     trigger: panel,
-                    start: 'left 80%',
-                    end: 'left 30%',
+                    start: 'left 85%',
+                    end: 'left 40%',
                     scrub: 1,
-                    containerAnimation: horizontalTrigger,
+                    containerAnimation: scrollTween,
                 },
                 opacity: 0,
-                y: 60,
-                stagger: 0.1,
+                y: 50,
+                stagger: 0.05,
                 duration: 1
             });
         });
