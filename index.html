@@ -14,6 +14,7 @@
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/styles.css">
@@ -75,17 +76,29 @@
         </div>
     </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
+    <!-- Experience Section -->
+    <section id="experience" class="section experience-section">
         <div class="container">
-            <h2 class="section-title" data-i18n="projects-title">Vybrané <span>Projekty</span></h2>
+            <h2 class="section-title" data-i18n="exp-title">Pracovní <span>Zkušenosti</span> & Vzdělání</h2>
+            <div class="timeline" id="timeline-container">
+                <!-- Timeline items rendered via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section projects-section">
+        <div class="container">
+            <h2 class="section-title" data-i18n="projects-title" data-aos="fade-up">Vybrané <span>Projekty</span></h2>
+            <p class="section-subtitle" data-i18n="projects-subtitle" data-aos="fade-up" data-aos-delay="100" style="text-align: center; color: var(--text-secondary); max-width: 700px; margin: -1rem auto 2.5rem; font-size: 1rem; line-height: 1.5;"></p>
             
-            <!-- Filters -->
+            <div class="filter-container" data-aos="fade-up" data-aos-delay="200">
             <div class="project-filters">
                 <button class="filter-btn active" data-filter="all" data-i18n="filter-all">Vše</button>
                 <button class="filter-btn" data-filter="school" data-i18n="filter-school">Škola & Závěrečné práce</button>
                 <button class="filter-btn" data-filter="mobile" data-i18n="filter-mobile">Mobilní Aplikace</button>
                 <button class="filter-btn" data-filter="other" data-i18n="filter-other">Hobby & Ostatní</button>
+            </div>
             </div>
 
             <!-- Dynamic Projects Grid -->
@@ -154,6 +167,8 @@
 
     <!-- Scripts -->
     <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
     <script src="js/data.js"></script>
     <script src="js/script.js"></script>
 </body>

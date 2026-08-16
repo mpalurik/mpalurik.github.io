@@ -15,7 +15,9 @@ const translations = {
     "filter-mobile": { cz: "Mobilní Aplikace", en: "Mobile Apps" },
     "filter-other": { cz: "Hobby & Ostatní", en: "Hobby & Other" },
     "footer-desc": { cz: "Otevřený novým výzvám v oblasti vývoje software a IoT.", en: "Open to new challenges in software development and IoT." },
-    "footer-rights": { cz: "© 2026 Michal Paluřík. Všechna práva vyhrazena.", en: "© 2026 Michal Paluřík. All rights reserved." }
+    "footer-rights": { cz: "© 2026 Michal Paluřík. Všechna práva vyhrazena.", en: "© 2026 Michal Paluřík. All rights reserved." },
+    "exp-title": { cz: "Pracovní <span>Zkušenosti</span> & Vzdělání", en: "Work <span>Experience</span> & Education" },
+    "projects-subtitle": { cz: "Od vášně k akademickým úspěchům. Většina mých projektů začala jako čistý osobní koníček, který jsem následně rozvinul a aplikoval v rámci univerzitních a závěrečných prací.", en: "From passion to academia. Most of my projects started as pure personal hobbies, which I later expanded and applied in university courses and theses." }
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -38,9 +40,42 @@ document.addEventListener('DOMContentLoaded', () => {
     // ----------------------------------------------------
     // INIT
     // ----------------------------------------------------
+    AOS.init({ duration: 800, once: true });
     initTheme();
     initLang();
+    renderExperience();
     renderProjects('all');
+
+
+    // ----------------------------------------------------
+    // RENDER EXPERIENCE
+    // ----------------------------------------------------
+    function renderExperience() {
+        const timelineContainer = document.getElementById('timeline-container');
+        if(!timelineContainer || typeof experienceData === 'undefined') return;
+        
+        timelineContainer.innerHTML = '';
+        experienceData.forEach((item, index) => {
+            const delay = index * 100;
+            const el = document.createElement('div');
+            el.className = 'timeline-item';
+            el.setAttribute('data-aos', 'fade-up');
+            el.setAttribute('data-aos-delay', delay);
+            
+            el.innerHTML = `
+                <div class="timeline-icon">
+                    <i class="${item.icon}"></i>
+                </div>
+                <div class="timeline-content">
+                    <span class="timeline-date">${item.date[currentLang]}</span>
+                    <h3 class="timeline-title">${item.title[currentLang]}</h3>
+                    <div class="timeline-company">${item.company}</div>
+                    <p class="timeline-desc">${item.desc[currentLang]}</p>
+                </div>
+            `;
+            timelineContainer.appendChild(el);
+        });
+    }
 
     // ----------------------------------------------------
     // RENDER PROJECTS
@@ -84,8 +119,19 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
             
             card.addEventListener('click', () => openModal(project));
+            card.setAttribute('data-aos', 'fade-up');
+            card.setAttribute('data-aos-delay', (index % 3) * 100);
             projectsContainer.appendChild(card);
         });
+        
+        if (typeof VanillaTilt !== 'undefined') {
+            VanillaTilt.init(document.querySelectorAll('.project-card'), {
+                max: 10,
+                speed: 400,
+                glare: true,
+                'max-glare': 0.2
+            });
+        }
     }
 
     // ----------------------------------------------------
@@ -234,7 +280,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
         
-        // Re-render active filter
+        // Re-render
+        renderExperience();
         const activeFilter = document.querySelector('.filter-btn.active').getAttribute('data-filter');
         renderProjects(activeFilter);
     }
