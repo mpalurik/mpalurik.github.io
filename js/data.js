@@ -23,7 +23,7 @@ const projectsData = [
             \nThe gateway provides low-latency bidirectional state synchronization. Communication with the physical KNX bus is handled via the \`knxd\` daemon (KNX/IP Tunneling). The ecosystem includes a built-in web interface (port 8080) for easy device commissioning, live event logging, and KNX group address mapping.`
         },
         tech: ["KNX", "Matter", "i.MX93", "Embedded Python", "Thread BR", "Schneider Electric"],
-        images: ["assets/img/dipomka_1.png", "assets/img/diplomka_2.png", "assets/img/diplomka_3.png", "assets/img/diplomka_4.png", "assets/img/diplomka_5.png", "assets/img/diplomka_6.png", "assets/img/diplomka_7.png", "assets/img/diplomka_8.png"],
+        images: ["assets/img/diplomka_3.png", "assets/img/dipomka_1.png", "assets/img/diplomka_2.png", "assets/img/diplomka_4.png", "assets/img/diplomka_5.png", "assets/img/diplomka_6.png", "assets/img/diplomka_7.png", "assets/img/diplomka_8.png"],
         links: [
             { icon: "fas fa-microchip", url: "#", tooltip: "Hardware Project" }
         ]
@@ -108,7 +108,7 @@ const projectsData = [
             \nThe team operated under the Agile Scrum framework. We heavily utilized modern Git workflows (Trunk-based development), conducted rigorous Code Reviews, and implemented CI/CD pipelines (Azure) for automated unit testing and deployment.`
         },
         tech: ["C#", "Agile", "CI/CD", "Clean Architecture", "Teamwork"],
-        images: ["assets/img/lorax_1.png", "assets/img/lorax_2.png", "assets/img/lorax_3.png", "assets/img/lorax_4.png", "assets/img/lorax_5.png", "assets/img/lorax_6.png", "assets/img/lorax_7.png", "assets/img/lorax_8.png"],
+        images: ["assets/img/lorax_8.png", "assets/img/lorax_7.png", "assets/img/lorax_6.png", "assets/img/lorax_5.png", "assets/img/lorax_4.png", "assets/img/lorax_3.png", "assets/img/lorax_2.png", "assets/img/lorax_1.png"],
         links: [
             { icon: "fas fa-external-link-alt", url: "https://tomas-juri.github.io/STAG-AUIUI-P8VT/docs/2025/", tooltip: "Documentation" }
         ]
@@ -137,7 +137,7 @@ const projectsData = [
             \nThe absolute priority was an extreme focus on smooth animations, responsive design, and intuitive card-swiping logic. The app perfectly demonstrates the benefits of hybrid mobile development.`
         },
         tech: ["Ionic", "Angular", "TypeScript", "Capacitor", "UI/UX"],
-        images: ["assets/img/hscards_1.png", "assets/img/hscards_2.png", "assets/img/hscards_3.png", "assets/img/hscards_4.png"],
+        images: ["assets/img/hscards_2.png", "assets/img/hscards_3.png", "assets/img/hscards_4.png", "assets/img/hscards_1.png"],
         links: []
     },
     {
@@ -314,17 +314,6 @@ const experienceData = [
         icon: "fas fa-network-wired"
     },
     {
-        type: "work",
-        date: { cz: "Listopad 2024 – Březen 2026", en: "Nov 2024 – Mar 2026" },
-        title: { cz: "Programátor", en: "Programmer" },
-        company: "Wattee",
-        desc: { 
-            cz: "Vývoj na platformě ESP32 a displejů Nextion vč. vývoje knihoven. Integrace systémů eNode s vozy Tesla a IoT platformou ThingsBoard.", 
-            en: "ESP32 and Nextion display development including custom libraries. System integration of eNode with Tesla and ThingsBoard IoT platform." 
-        },
-        icon: "fas fa-code"
-    },
-    {
         type: "edu",
         date: { cz: "Srpen 2024 – Červen 2026", en: "Aug 2024 – Jun 2026" },
         title: { cz: "Inženýr (Ing.), Computer Software Engineering", en: "Master's Degree (Ing.), Computer Software Engineering" },
@@ -337,14 +326,14 @@ const experienceData = [
     },
     {
         type: "work",
-        date: { cz: "Leden 2024 – Září 2024", en: "Jan 2024 – Sep 2024" },
-        title: { cz: "Softwarové a elektromontážní práce", en: "Software and Electrical Assembly" },
-        company: "DOT CONTROLS a.s.",
+        date: { cz: "Listopad 2024 – Březen 2026", en: "Nov 2024 – Mar 2026" },
+        title: { cz: "Programátor", en: "Programmer" },
+        company: "Wattee",
         desc: { 
-            cz: "Vývoj tenkých klientů (thin clients) a sestavení serverů. Testování softwaru v jazyce C a instalace zařízení s technologií ChirpStack (LoRaWAN).", 
-            en: "Development of thin clients and server assembly. C software testing and installation of ChirpStack (LoRaWAN) devices." 
+            cz: "Vývoj na platformě ESP32 a displejů Nextion vč. vývoje knihoven. Integrace systémů eNode s vozy Tesla a IoT platformou ThingsBoard.", 
+            en: "ESP32 and Nextion display development including custom libraries. System integration of eNode with Tesla and ThingsBoard IoT platform." 
         },
-        icon: "fas fa-bolt"
+        icon: "fas fa-code"
     },
     {
         type: "edu",
@@ -353,6 +342,17 @@ const experienceData = [
         company: "Univerzita Tomáše Bati ve Zlíně",
         desc: { cz: "Závěrečná práce: Chytré řízení posuvné brány s ESP32.", en: "Thesis: Smart Sliding Gate Controller with ESP32." },
         icon: "fas fa-graduation-cap"
+    },
+    {
+        type: "work",
+        date: { cz: "Leden 2024 – Září 2024", en: "Jan 2024 – Sep 2024" },
+        title: { cz: "Softwarové a elektromontážní práce", en: "Software and Electrical Assembly" },
+        company: "DOT CONTROLS a.s.",
+        desc: { 
+            cz: "Vývoj tenkých klientů (thin clients) a sestavení serverů. Testování softwaru v jazyce C a instalace zařízení s technologií ChirpStack (LoRaWAN).", 
+            en: "Development of thin clients and server assembly. C software testing and installation of ChirpStack (LoRaWAN) devices." 
+        },
+        icon: "fas fa-bolt"
     },
     {
         type: "work",

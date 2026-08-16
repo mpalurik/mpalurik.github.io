@@ -248,7 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const vc = document.getElementById('modal-visual-container');
         if (project.images && project.images.length > 0) {
             vc.innerHTML = '<div class="gallery-carousel">' + project.images.map(m => {
-                if (m.endsWith('.mp4')) return '<video playsinline controls class="video-player" style="max-width:100%;border-radius:8px"><source src="' + m + '" type="video/mp4"/></video>';
+                if (m.endsWith('.mp4')) return '<video playsinline controls class="video-player"><source src="' + m + '" type="video/mp4"/></video>';
                 return '<img src="' + m + '" alt="' + project.title[currentLang] + '" class="carousel-img">';
             }).join('') + '</div>';
             vc.style.display = 'block';
@@ -297,15 +297,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         lbImg.src = src;
+        lbImg.style.opacity = '1';
         lbOverlay.classList.add('active');
     }
     
     function navigateLightbox(direction) {
         if (currentGallery.length <= 1) return;
-        currentGalleryIndex += direction;
-        if (currentGalleryIndex < 0) currentGalleryIndex = currentGallery.length - 1;
-        if (currentGalleryIndex >= currentGallery.length) currentGalleryIndex = 0;
-        lbImg.src = currentGallery[currentGalleryIndex];
+        lbImg.style.opacity = '0';
+        setTimeout(() => {
+            currentGalleryIndex += direction;
+            if (currentGalleryIndex < 0) currentGalleryIndex = currentGallery.length - 1;
+            if (currentGalleryIndex >= currentGallery.length) currentGalleryIndex = 0;
+            lbImg.src = currentGallery[currentGalleryIndex];
+            lbImg.style.opacity = '1';
+        }, 200);
     }
 
     function closeLightbox() {
