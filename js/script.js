@@ -158,24 +158,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Section titles
         gsap.utils.toArray('.section-giant-title').forEach(el => {
-            gsap.from(el, {
-                scrollTrigger: { trigger: el, start: 'top 95%', end: 'top 50%', scrub: 1 },
-                y: 60, opacity: 0, scale: 0.95
-            });
+            gsap.fromTo(el, 
+                { y: 60, opacity: 0, scale: 0.95 },
+                {
+                    scrollTrigger: { trigger: el, start: 'top 95%', end: 'top 50%', scrub: 1 },
+                    y: 0, opacity: 1, scale: 1, ease: 'none'
+                }
+            );
         });
         gsap.utils.toArray('.section-subtitle').forEach(el => {
-            gsap.from(el, {
-                scrollTrigger: { trigger: el, start: 'top 95%', end: 'top 50%', scrub: 1 },
-                y: 30, opacity: 0
-            });
+            gsap.fromTo(el,
+                { y: 30, opacity: 0 },
+                {
+                    scrollTrigger: { trigger: el, start: 'top 95%', end: 'top 50%', scrub: 1 },
+                    y: 0, opacity: 1, ease: 'none'
+                }
+            );
         });
 
         // Timeline cards (individual triggers)
         gsap.utils.toArray('.timeline-card').forEach((card, i) => {
-            gsap.from(card, {
-                scrollTrigger: { trigger: card, start: 'top 95%', end: 'top 60%', scrub: 1 },
-                y: 50, opacity: 0, scale: 0.95
-            });
+            gsap.fromTo(card,
+                { y: 50, opacity: 0, scale: 0.95 },
+                {
+                    scrollTrigger: { trigger: card, start: 'top 95%', end: 'top 60%', scrub: 1 },
+                    y: 0, opacity: 1, scale: 1, ease: 'none'
+                }
+            );
         });
 
         // Project panels: image slides from one side, info from other
@@ -184,16 +193,22 @@ document.addEventListener('DOMContentLoaded', () => {
             const info = panel.querySelector('.project-panel-info');
             
             if (vis) {
-                gsap.from(vis, {
-                    scrollTrigger: { trigger: panel, start: 'top 90%', end: 'top 45%', scrub: 1 },
-                    x: i % 2 === 0 ? -100 : 100, opacity: 0, scale: 0.95
-                });
+                gsap.fromTo(vis,
+                    { x: i % 2 === 0 ? -100 : 100, opacity: 0, scale: 0.95 },
+                    {
+                        scrollTrigger: { trigger: panel, start: 'top 90%', end: 'top 45%', scrub: 1 },
+                        x: 0, opacity: 1, scale: 1, ease: 'none'
+                    }
+                );
             }
             if (info) {
-                gsap.from(info, {
-                    scrollTrigger: { trigger: panel, start: 'top 85%', end: 'top 40%', scrub: 1 },
-                    x: i % 2 === 0 ? 80 : -80, opacity: 0
-                });
+                gsap.fromTo(info,
+                    { x: i % 2 === 0 ? 80 : -80, opacity: 0 },
+                    {
+                        scrollTrigger: { trigger: panel, start: 'top 85%', end: 'top 40%', scrub: 1 },
+                        x: 0, opacity: 1, ease: 'none'
+                    }
+                );
             }
         });
 

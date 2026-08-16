@@ -23,7 +23,7 @@ const projectsData = [
             \nThe gateway provides low-latency bidirectional state synchronization. Communication with the physical KNX bus is handled via the \`knxd\` daemon (KNX/IP Tunneling). The ecosystem includes a built-in web interface (port 8080) for easy device commissioning, live event logging, and KNX group address mapping.`
         },
         tech: ["KNX", "Matter", "i.MX93", "Embedded Python", "Thread BR", "Schneider Electric"],
-        images: ["assets/img/dipomka_1.png", "assets/img/diplomka_2.png", "assets/img/diplomka_3.png", "assets/img/diplomka_4.png", "assets/img/diplomka_5.png", "assets/img/diplomka_6.png", "assets/img/diplomka_7.png", "assets/img/diplomka_8.png"],
+        images: ["assets/img/diplomka_1.png", "assets/img/diplomka_2.png", "assets/img/diplomka_3.png", "assets/img/diplomka_4.png", "assets/img/diplomka_5.png", "assets/img/diplomka_6.png", "assets/img/diplomka_7.png", "assets/img/diplomka_8.png"],
         links: [
             { icon: "fas fa-microchip", url: "#", tooltip: "Hardware Project" }
         ]
