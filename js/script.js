@@ -159,21 +159,23 @@ document.addEventListener('DOMContentLoaded', () => {
         // Section titles
         gsap.utils.toArray('.section-giant-title').forEach(el => {
             gsap.from(el, {
-                scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play reverse play reverse' },
+                scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none reverse' },
                 y: 60, opacity: 0, scale: 0.95, duration: 0.8, ease: 'power3.out'
             });
         });
         gsap.utils.toArray('.section-subtitle').forEach(el => {
             gsap.from(el, {
-                scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play reverse play reverse' },
+                scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none reverse' },
                 y: 30, opacity: 0, duration: 0.8, delay: 0.1, ease: 'power3.out'
             });
         });
 
-        // Timeline cards (staggered)
-        gsap.from('.timeline-card', {
-            scrollTrigger: { trigger: '.experience-grid', start: 'top 85%', toggleActions: 'play reverse play reverse' },
-            y: 50, opacity: 0, scale: 0.95, duration: 0.6, stagger: 0.1, ease: 'power2.out'
+        // Timeline cards (individual triggers)
+        gsap.utils.toArray('.timeline-card').forEach((card, i) => {
+            gsap.from(card, {
+                scrollTrigger: { trigger: card, start: 'top 90%', toggleActions: 'play none none reverse' },
+                y: 50, opacity: 0, scale: 0.95, duration: 0.6, ease: 'power2.out'
+            });
         });
 
         // Project panels: image slides from one side, info from other
@@ -182,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const info = panel.querySelector('.project-panel-info');
             
             const tl = gsap.timeline({
-                scrollTrigger: { trigger: panel, start: 'top 75%', toggleActions: 'play reverse play reverse' }
+                scrollTrigger: { trigger: panel, start: 'top 75%', toggleActions: 'play none none reverse' }
             });
             
             if (vis) {
