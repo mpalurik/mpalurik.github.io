@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
         gsap.registerPlugin(ScrollTrigger);
         ScrollTrigger.getAll().forEach(t => t.kill());
 
-        // Hero parallax
+        // Hero parallax (keep scrub for hero parallax)
         gsap.to('.hero-inner', {
             scrollTrigger: { trigger: '.hero-cinematic', start: 'top top', end: 'bottom top', scrub: true },
             y: 200, opacity: 0, scale: 0.95, ease: 'none'
@@ -159,40 +159,41 @@ document.addEventListener('DOMContentLoaded', () => {
         // Section titles
         gsap.utils.toArray('.section-giant-title').forEach(el => {
             gsap.from(el, {
-                scrollTrigger: { trigger: el, start: 'top 90%', end: 'top 55%', scrub: 1 },
-                y: 80, opacity: 0, scale: 0.92
+                scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play reverse play reverse' },
+                y: 60, opacity: 0, scale: 0.95, duration: 0.8, ease: 'power3.out'
             });
         });
         gsap.utils.toArray('.section-subtitle').forEach(el => {
             gsap.from(el, {
-                scrollTrigger: { trigger: el, start: 'top 92%', end: 'top 65%', scrub: 1 },
-                y: 40, opacity: 0
+                scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play reverse play reverse' },
+                y: 30, opacity: 0, duration: 0.8, delay: 0.1, ease: 'power3.out'
             });
         });
 
-        // Timeline cards
-        gsap.utils.toArray('.timeline-card').forEach(card => {
-            gsap.from(card, {
-                scrollTrigger: { trigger: card, start: 'top 92%', end: 'top 65%', scrub: 1 },
-                y: 50, opacity: 0, scale: 0.95
-            });
+        // Timeline cards (staggered)
+        gsap.from('.timeline-card', {
+            scrollTrigger: { trigger: '.experience-grid', start: 'top 85%', toggleActions: 'play reverse play reverse' },
+            y: 50, opacity: 0, scale: 0.95, duration: 0.6, stagger: 0.1, ease: 'power2.out'
         });
 
         // Project panels: image slides from one side, info from other
         gsap.utils.toArray('.project-panel').forEach((panel, i) => {
             const vis = panel.querySelector('.project-panel-visual');
             const info = panel.querySelector('.project-panel-info');
+            
+            const tl = gsap.timeline({
+                scrollTrigger: { trigger: panel, start: 'top 75%', toggleActions: 'play reverse play reverse' }
+            });
+            
             if (vis) {
-                gsap.from(vis, {
-                    scrollTrigger: { trigger: panel, start: 'top 88%', end: 'top 45%', scrub: 1 },
-                    x: i % 2 === 0 ? -100 : 100, opacity: 0, scale: 0.9
-                });
+                tl.from(vis, {
+                    x: i % 2 === 0 ? -80 : 80, opacity: 0, scale: 0.95, duration: 0.8, ease: 'power3.out'
+                }, 0);
             }
             if (info) {
-                gsap.from(info, {
-                    scrollTrigger: { trigger: panel, start: 'top 85%', end: 'top 45%', scrub: 1 },
-                    x: i % 2 === 0 ? 80 : -80, opacity: 0
-                });
+                tl.from(info, {
+                    x: i % 2 === 0 ? 80 : -80, opacity: 0, duration: 0.8, ease: 'power3.out'
+                }, 0.1);
             }
         });
 
