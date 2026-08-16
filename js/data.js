@@ -296,7 +296,10 @@ const experienceData = [
         date: { cz: "Srpen 2026 – Současnost", en: "Aug 2026 – Present" },
         title: { cz: "Embedded Software Engineer", en: "Embedded Software Engineer" },
         company: "MESIT",
-        desc: { cz: "Vývoj vestavěného softwaru na plný úvazek.", en: "Full-time embedded software development." },
+        desc: { 
+            cz: "Vývoj softwaru pro vojenské (military) aplikace a procesy certifikace softwaru.", 
+            en: "Software development for military applications and software certification processes." 
+        },
         icon: "fas fa-microchip"
     },
     {
@@ -304,7 +307,10 @@ const experienceData = [
         date: { cz: "Srpen 2025 – Současnost", en: "Aug 2025 – Present" },
         title: { cz: "Firmware Engineering Junior Specialist", en: "Firmware Engineering Junior Specialist" },
         company: "Schneider Electric",
-        desc: { cz: "Práce na firmwaru pro IoT zařízení.", en: "Firmware development for IoT devices." },
+        desc: { 
+            cz: "Implementace protokolu Matter pro standard KNX. Testování, měření KNX zařízení a vývoj aktualizací firmwaru.", 
+            en: "Implementation of the Matter protocol for KNX standard. Testing, measuring KNX devices, and firmware updates." 
+        },
         icon: "fas fa-network-wired"
     },
     {
@@ -312,7 +318,10 @@ const experienceData = [
         date: { cz: "Listopad 2024 – Březen 2026", en: "Nov 2024 – Mar 2026" },
         title: { cz: "Programátor", en: "Programmer" },
         company: "Wattee",
-        desc: { cz: "Vývoj softwaru a programování aplikací.", en: "Software development and application programming." },
+        desc: { 
+            cz: "Vývoj na platformě ESP32 a displejů Nextion vč. vývoje knihoven. Integrace systémů eNode s vozy Tesla a IoT platformou ThingsBoard.", 
+            en: "ESP32 and Nextion display development including custom libraries. System integration of eNode with Tesla and ThingsBoard IoT platform." 
+        },
         icon: "fas fa-code"
     },
     {
@@ -320,7 +329,10 @@ const experienceData = [
         date: { cz: "Srpen 2024 – Červen 2026", en: "Aug 2024 – Jun 2026" },
         title: { cz: "Inženýr (Ing.), Computer Software Engineering", en: "Master's Degree (Ing.), Computer Software Engineering" },
         company: "Univerzita Tomáše Bati ve Zlíně",
-        desc: { cz: "Závěrečná práce: Propojení Matter a KNX (HW/SW Brána).", en: "Thesis: Matter & KNX Bridge (HW/SW Gateway)." },
+        desc: { 
+            cz: "Závěrečná práce: Propojení Matter a KNX (HW/SW Brána).", 
+            en: "Thesis: Matter & KNX Bridge (HW/SW Gateway)." 
+        },
         icon: "fas fa-graduation-cap"
     },
     {
@@ -328,7 +340,10 @@ const experienceData = [
         date: { cz: "Leden 2024 – Září 2024", en: "Jan 2024 – Sep 2024" },
         title: { cz: "Softwarové a elektromontážní práce", en: "Software and Electrical Assembly" },
         company: "DOT CONTROLS a.s.",
-        desc: { cz: "Softwarová a hardwarová integrace řídicích systémů.", en: "Software and hardware integration of control systems." },
+        desc: { 
+            cz: "Vývoj tenkých klientů (thin clients) a sestavení serverů. Testování softwaru v jazyce C a instalace zařízení s technologií ChirpStack (LoRaWAN).", 
+            en: "Development of thin clients and server assembly. C software testing and installation of ChirpStack (LoRaWAN) devices." 
+        },
         icon: "fas fa-bolt"
     },
     {
