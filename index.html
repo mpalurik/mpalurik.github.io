@@ -13,6 +13,7 @@
     
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/styles.css">
@@ -129,12 +130,6 @@
         </div>
     </div>
 
-    <!-- Lightbox Overlay -->
-    <div id="lightbox" class="lightbox-overlay">
-        <button class="lightbox-close" id="lightbox-close" aria-label="Close Lightbox"><i class="fas fa-times"></i></button>
-        <img id="lightbox-img" src="" alt="Fullscreen Image">
-    </div>
-
     <!-- Footer / Contact -->
     <footer id="contact" class="footer">
         <div class="container footer-content">
@@ -151,6 +146,14 @@
         </div>
     </footer>
 
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox-overlay">
+        <button id="lightbox-close" class="lightbox-close"><i class="fas fa-times"></i></button>
+        <img id="lightbox-img" src="" alt="Zoomed image">
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
     <script src="js/data.js"></script>
     <script src="js/script.js"></script>
 </body>

@@ -118,13 +118,21 @@ document.addEventListener('DOMContentLoaded', () => {
         if (project.images && project.images.length > 0) {
             const mediaHTML = project.images.map(media => {
                 if (media.endsWith('.mp4')) {
-                    return `<video src="${media}" controls muted loop playsinline class="carousel-media video-player" style="max-width: 100%; max-height: 400px; border-radius: 8px;"></video>`;
+                    return `<video playsinline controls data-poster="${project.images[0]}" class="carousel-media video-player" style="max-width: 100%; border-radius: 8px;">
+                                <source src="${media}" type="video/mp4" />
+                            </video>`;
                 } else {
                     return `<img src="${media}" alt="${project.title[currentLang]}" class="carousel-img">`;
                 }
             }).join('');
             visualContainer.innerHTML = `<div class="gallery-carousel">${mediaHTML}</div>`;
             visualContainer.style.display = 'block';
+            
+            // Initialize Plyr for videos
+            const videoElements = visualContainer.querySelectorAll('.video-player');
+            videoElements.forEach(video => {
+                new Plyr(video);
+            });
             
             // Attach lightbox events
             const carouselImages = visualContainer.querySelectorAll('.carousel-img');
