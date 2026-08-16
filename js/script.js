@@ -373,27 +373,74 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!sessionStorage.getItem('booted')) {
         sessionStorage.setItem('booted', 'true');
         
-        if (typeof gsap !== 'undefined') {
-            gsap.to('.loading-title', { opacity: 1, y: 0, duration: 1, ease: 'power3.out' });
-            gsap.to('#loading-bar', { 
-                width: '100%', 
-                duration: 2.2, 
-                ease: 'power2.inOut',
-                onComplete: () => {
-                    gsap.to('#loading-screen', {
-                        opacity: 0,
-                        duration: 1.2,
-                        ease: 'power3.inOut',
-                        onComplete: () => {
-                            document.getElementById('loading-screen').style.display = 'none';
-                            document.body.classList.add('loaded');
-                            document.getElementById('main-nav').classList.add('visible');
-                            initParticles();
-                            setTimeout(initScrollAnimations, 200);
-                        }
-                    });
+        // Matrix background initialization
+        const canvas = document.getElementById('matrix-canvas');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$+-*/=%""\'#&_(),.;:?!\\|{}<>[]^~'.split('');
+            const fontSize = 14;
+            const columns = canvas.width / fontSize;
+            const drops = [];
+            for (let x = 0; x < columns; x++) drops[x] = 1;
+            
+            function drawMatrix() {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = '#0F0';
+                ctx.font = fontSize + 'px monospace';
+                for (let i = 0; i < drops.length; i++) {
+                    const text = letters[Math.floor(Math.random() * letters.length)];
+                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                    drops[i]++;
                 }
+            }
+            const matrixInterval = setInterval(drawMatrix, 33);
+            
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
             });
+
+            if (typeof gsap !== 'undefined') {
+                gsap.to('.loading-title', { opacity: 1, y: 0, duration: 1, ease: 'power3.out' });
+                
+                const percentObj = { val: 0 };
+                const percentEl = document.getElementById('loading-percent');
+                
+                gsap.to(percentObj, {
+                    val: 100,
+                    duration: 2.2,
+                    ease: 'power2.inOut',
+                    onUpdate: function() {
+                        if (percentEl) percentEl.textContent = Math.round(percentObj.val) + '%';
+                    }
+                });
+
+                gsap.to('#loading-bar', { 
+                    width: '100%', 
+                    duration: 2.2, 
+                    ease: 'power2.inOut',
+                    onComplete: () => {
+                        clearInterval(matrixInterval);
+                        gsap.to('#loading-screen', {
+                            opacity: 0,
+                            scale: 1.5,
+                            duration: 1.2,
+                            ease: 'power3.inOut',
+                            onComplete: () => {
+                                document.getElementById('loading-screen').style.display = 'none';
+                                document.body.classList.add('loaded');
+                                document.getElementById('main-nav').classList.add('visible');
+                                initParticles();
+                                setTimeout(initScrollAnimations, 200);
+                            }
+                        });
+                    }
+                });
+            }
         }
     } else {
         document.getElementById('loading-screen').style.display = 'none';
