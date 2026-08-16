@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             panel.innerHTML = 
                 '<div class="project-panel-inner">' +
-                    (imgSrc ? '<div class="project-panel-visual"><img src="' + imgSrc + '" alt="' + project.title[currentLang] + '" loading="lazy"></div>' : '') +
+                    (imgSrc ? '<div class="project-panel-visual"><img src="' + imgSrc + '" alt="' + project.title[currentLang] + '" loading="lazy" class="clickable-project-img"></div>' : '') +
                     '<div class="project-panel-info">' +
                         '<span class="project-panel-badge">' + project.badge[currentLang] + '</span>' +
                         '<h2 class="project-panel-title">' + project.title[currentLang] + '</h2>' +
@@ -138,6 +138,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 '</div>';
 
             panel.querySelector('.project-detail-btn').addEventListener('click', () => openModal(project));
+            const imgEl = panel.querySelector('.clickable-project-img');
+            if (imgEl) {
+                imgEl.style.cursor = 'pointer';
+                imgEl.addEventListener('click', () => openModal(project));
+            }
             c.appendChild(panel);
         });
     }
@@ -400,8 +405,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let current = '';
         sections.forEach(sec => {
             const sectionTop = sec.offsetTop;
-            const sectionHeight = sec.clientHeight;
-            if (scrollY >= (sectionTop - sectionHeight / 3)) {
+            if (scrollY >= (sectionTop - window.innerHeight / 2)) {
                 current = sec.getAttribute('id');
             }
         });

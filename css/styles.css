@@ -312,11 +312,17 @@ body.loaded .cursor-dot, body.loaded .cursor-outline { opacity: 1; }
 .modal-overlay.active { opacity: 1; visibility: visible; }
 .modal-container {
     background: var(--bg-color-alt); border: 1px solid var(--card-border); border-radius: 20px;
-    max-width: 900px; width: 90%; max-height: 85vh; overflow-y: auto;
-    position: relative; padding: 2.5rem; box-shadow: var(--shadow-lg);
+    max-width: 900px; width: 90%; max-height: 85vh; overflow: hidden;
+    position: relative; box-shadow: var(--shadow-lg);
+    display: flex; flex-direction: column;
+}
+.modal-content-wrapper {
+    padding: 2.5rem;
+    overflow-y: auto;
+    height: 100%;
 }
 .modal-close {
-    position: absolute; top: 1.5rem; right: 1.5rem;
+    position: absolute; top: 1.5rem; right: 1.5rem; z-index: 20;
     background: rgba(255,255,255,0.1); border: none; color: var(--text-primary); font-size: 1.2rem;
     width: 40px; height: 40px; border-radius: 50%; cursor: pointer; transition: var(--transition);
     display: flex; align-items: center; justify-content: center; z-index: 10;
@@ -390,10 +396,10 @@ body.loaded .cursor-dot, body.loaded .cursor-outline { opacity: 1; }
 ::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 5px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--accent-primary); }
 
-.modal-container::-webkit-scrollbar { width: 8px; }
-.modal-container::-webkit-scrollbar-track { background: transparent; }
-.modal-container::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
-.modal-container::-webkit-scrollbar-thumb:hover { background: var(--accent-primary); }
+.modal-content-wrapper::-webkit-scrollbar { width: 8px; }
+.modal-content-wrapper::-webkit-scrollbar-track { background: transparent; }
+.modal-content-wrapper::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
+.modal-content-wrapper::-webkit-scrollbar-thumb:hover { background: var(--accent-primary); }
 
 .gallery-carousel::-webkit-scrollbar { height: 8px; }
 .gallery-carousel::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); border-radius: 4px; }
