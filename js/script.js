@@ -20,32 +20,23 @@ const translations = {
     "filter-mobile": { cz: "Mobilní", en: "Mobile" },
     "filter-other": { cz: "Hobby", en: "Hobby" },
     "footer-desc": { cz: "Otevřený novým výzvám v oblasti vývoje software a IoT.", en: "Open to new challenges in software development and IoT." },
-    "footer-rights": { cz: "© 2026 Michal Paluřík. Všechna práva vyhrazena.", en: "© 2026 Michal Paluřík. All rights reserved." },
-    "btn-detail": { cz: "Zobrazit detail", en: "View details" }
+    "footer-rights": { cz: "© 2026 Michal Paluřík. Všechna práva vyhrazena.", en: "© 2026 Michal Paluřík. All rights reserved." }
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-    // ====================================================
-    // STATE
-    // ====================================================
     let currentLang = localStorage.getItem('lang') || 'cz';
     let currentTheme = localStorage.getItem('theme') || 'dark';
-    let horizontalTrigger = null; // store GSAP trigger reference
     
     const langToggleBtn = document.getElementById('lang-toggle');
     const themeToggleBtn = document.getElementById('theme-toggle');
     const modalOverlay = document.getElementById('project-modal');
     const modalCloseBtn = document.getElementById('modal-close');
 
-    // ====================================================
-    // 1. LOADING SCREEN (System Boot)
-    // ====================================================
+    // ==================== BOOT SEQUENCE ====================
     function runBootSequence() {
         const terminal = document.getElementById('boot-terminal');
         const progressBar = document.getElementById('boot-progress');
         const statusEl = document.getElementById('boot-status');
-        
-        // Lock scroll during boot
         document.body.style.overflow = 'hidden';
         
         const bootLines = [
@@ -71,8 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
             { text: '[BOOT] Portfolio ready. Welcome, user.', cls: 'accent', delay: 3800 },
         ];
 
-        const totalDuration = 4200;
-        
         bootLines.forEach((line, i) => {
             setTimeout(() => {
                 const lineEl = document.createElement('div');
@@ -80,44 +69,34 @@ document.addEventListener('DOMContentLoaded', () => {
                 lineEl.textContent = line.text;
                 terminal.appendChild(lineEl);
                 terminal.scrollTop = terminal.scrollHeight;
-                
-                // Update progress
                 const progress = Math.min(((i + 1) / bootLines.length) * 100, 100);
                 progressBar.style.width = progress + '%';
                 statusEl.textContent = line.text.replace(/\[.*?\]\s*/, '');
             }, line.delay);
         });
 
-        // Hide loading screen
         setTimeout(() => {
-            const loadingScreen = document.getElementById('loading-screen');
-            loadingScreen.classList.add('hidden');
+            document.getElementById('loading-screen').classList.add('hidden');
             document.body.classList.add('loaded');
             document.body.style.overflow = '';
             document.getElementById('main-nav').classList.add('visible');
-            
-            // Scroll to top and initialize
             window.scrollTo(0, 0);
             setTimeout(() => {
                 initParticles();
-                initHorizontalScroll();
+                initScrollAnimations();
             }, 200);
-        }, totalDuration);
+        }, 4200);
     }
 
-    // ====================================================
-    // 2. RENDER EXPERIENCE (horizontal cards)
-    // ====================================================
+    // ==================== RENDER EXPERIENCE ====================
     function renderExperience() {
         const container = document.getElementById('timeline-container');
         if (!container || typeof experienceData === 'undefined') return;
-        
         container.innerHTML = '';
         
         experienceData.forEach((item) => {
             const card = document.createElement('div');
             card.className = 'timeline-card';
-            
             card.innerHTML = `
                 <span class="timeline-card-type ${item.type}">${item.type === 'work' ? '💼 Work' : '🎓 Education'}</span>
                 <div class="timeline-card-icon"><i class="${item.icon}"></i></div>
@@ -130,13 +109,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ====================================================
-    // 3. RENDER PROJECTS (as horizontal panels)
-    // ====================================================
+    // ==================== RENDER PROJECTS (full-screen panels) ====================
     function renderProjectPanels(filter) {
         const container = document.getElementById('project-panels-container');
         if (!container || typeof projectsData === 'undefined') return;
-        
         container.innerHTML = '';
         
         let filteredData = projectsData;
@@ -144,9 +120,9 @@ document.addEventListener('DOMContentLoaded', () => {
             filteredData = projectsData.filter(p => p.category === filter);
         }
 
-        filteredData.forEach((project, index) => {
-            const panel = document.createElement('div');
-            panel.className = 'h-panel panel-project';
+        filteredData.forEach((project) => {
+            const panel = document.createElement('section');
+            panel.className = 'project-panel';
             
             let imgSrc = '';
             if (project.images && project.images.length > 0) {
@@ -155,27 +131,23 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             
             const techHTML = project.tech.map(t => `<span>${t}</span>`).join('');
-            const detailBtnText = currentLang === 'cz' ? 'Zobrazit detail' : 'View details';
+            const detailBtnText = currentLang === 'cz' ? 'Zobrazit detail →' : 'View details →';
             
             panel.innerHTML = `
                 <div class="project-panel-inner">
-                    ${imgSrc ? `
-                    <div class="project-panel-visual">
-                        <img src="${imgSrc}" alt="${project.title[currentLang]}" loading="lazy">
-                    </div>` : ''}
+                    ${imgSrc ? `<div class="project-panel-visual"><img src="${imgSrc}" alt="${project.title[currentLang]}" loading="lazy"></div>` : ''}
                     <div class="project-panel-info">
                         <span class="project-panel-badge">${project.badge[currentLang]}</span>
                         <h2 class="project-panel-title">${project.title[currentLang]}</h2>
                         <p class="project-panel-desc">${project.shortDesc[currentLang]}</p>
                         <div class="project-panel-tech">${techHTML}</div>
                         <div class="project-panel-cta">
-                            <button class="btn btn-primary project-detail-btn">${detailBtnText} <i class="fas fa-arrow-right"></i></button>
+                            <button class="btn btn-primary project-detail-btn">${detailBtnText}</button>
                         </div>
                     </div>
                 </div>
             `;
             
-            // Bind detail button
             panel.querySelector('.project-detail-btn').addEventListener('click', (e) => {
                 e.stopPropagation();
                 openModal(project);
@@ -185,28 +157,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ====================================================
-    // 4. GSAP HORIZONTAL SCROLL
-    // ====================================================
-    function initHorizontalScroll() {
+    // ==================== GSAP SCROLL ANIMATIONS (VERTICAL) ====================
+    function initScrollAnimations() {
         if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
         gsap.registerPlugin(ScrollTrigger);
         
-        // Kill previous trigger if exists (for re-init on filter change)
-        if (horizontalTrigger) {
-            horizontalTrigger.kill();
-            ScrollTrigger.getAll().forEach(t => t.kill());
-        }
+        // Kill all old triggers
+        ScrollTrigger.getAll().forEach(t => t.kill());
 
-        const track = document.getElementById('horizontal-track');
-        const wrapper = document.getElementById('horizontal-wrapper');
-        
-        if (!track || !wrapper) return;
-        
-        const totalWidth = track.scrollWidth;
-        const viewportWidth = window.innerWidth;
-        
-        // Hero parallax (independent of horizontal)
+        // Hero parallax fade
         gsap.to('.hero-inner', {
             scrollTrigger: {
                 trigger: '.hero-cinematic',
@@ -214,12 +173,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 end: 'bottom top',
                 scrub: true
             },
-            y: 200,
-            opacity: 0,
-            scale: 0.95,
-            ease: 'none'
+            y: 200, opacity: 0, scale: 0.95, ease: 'none'
         });
-        
+
         gsap.to('.scroll-indicator', {
             scrollTrigger: {
                 trigger: '.hero-cinematic',
@@ -227,54 +183,84 @@ document.addEventListener('DOMContentLoaded', () => {
                 end: '30% top',
                 scrub: true
             },
-            opacity: 0,
-            ease: 'none'
+            opacity: 0, ease: 'none'
         });
 
-        // Main horizontal scroll
-        const scrollTween = gsap.to(track, {
-            x: -(totalWidth - viewportWidth),
-            ease: 'none',
-            scrollTrigger: {
-                trigger: wrapper,
-                start: 'top top',
-                end: () => `+=${totalWidth - viewportWidth}`,
-                scrub: 1,
-                pin: true,
-                anticipatePin: 1,
-                invalidateOnRefresh: true,
-            }
-        });
-        
-        horizontalTrigger = scrollTween;
-
-        // Animate individual panels content on enter
-        const allPanels = gsap.utils.toArray('.h-panel');
-        allPanels.forEach((panel) => {
-            const innerEls = panel.querySelectorAll('.panel-giant-title, .panel-subtitle, .project-panel-info, .project-panel-visual, .timeline-card');
-            if (innerEls.length === 0) return;
-            
-            gsap.from(innerEls, {
+        // Animate section titles
+        gsap.utils.toArray('.section-giant-title').forEach(title => {
+            gsap.from(title, {
                 scrollTrigger: {
-                    trigger: panel,
-                    start: 'left 85%',
-                    end: 'left 40%',
-                    scrub: 1,
-                    containerAnimation: scrollTween,
+                    trigger: title,
+                    start: 'top 85%',
+                    end: 'top 50%',
+                    scrub: 1
                 },
-                opacity: 0,
-                y: 50,
-                stagger: 0.05,
-                duration: 1
+                y: 80, opacity: 0, scale: 0.9
             });
+        });
+
+        gsap.utils.toArray('.section-subtitle').forEach(sub => {
+            gsap.from(sub, {
+                scrollTrigger: {
+                    trigger: sub,
+                    start: 'top 90%',
+                    end: 'top 60%',
+                    scrub: 1
+                },
+                y: 40, opacity: 0
+            });
+        });
+
+        // Timeline cards stagger
+        gsap.utils.toArray('.timeline-card').forEach((card, i) => {
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 90%',
+                    end: 'top 60%',
+                    scrub: 1
+                },
+                y: 60, opacity: 0, scale: 0.92,
+                delay: i * 0.05
+            });
+        });
+
+        // Project panels: image from left, info from right (alternating)
+        gsap.utils.toArray('.project-panel').forEach((panel, i) => {
+            const visual = panel.querySelector('.project-panel-visual');
+            const info = panel.querySelector('.project-panel-info');
+            
+            if (visual) {
+                gsap.from(visual, {
+                    scrollTrigger: {
+                        trigger: panel,
+                        start: 'top 85%',
+                        end: 'top 40%',
+                        scrub: 1
+                    },
+                    x: i % 2 === 0 ? -100 : 100,
+                    opacity: 0, scale: 0.9
+                });
+            }
+            
+            if (info) {
+                gsap.from(info, {
+                    scrollTrigger: {
+                        trigger: panel,
+                        start: 'top 80%',
+                        end: 'top 40%',
+                        scrub: 1
+                    },
+                    x: i % 2 === 0 ? 100 : -100,
+                    opacity: 0
+                });
+            }
         });
 
         ScrollTrigger.refresh();
     }
 
-    // ====================================================
-    // 5. PARTICLES.JS
-    // ====================================================
+    // ==================== PARTICLES.JS ====================
     function initParticles() {
         if (typeof particlesJS === 'undefined') return;
         particlesJS('particles-js', {
@@ -285,83 +271,53 @@ document.addEventListener('DOMContentLoaded', () => {
                 "opacity": { "value": 0.4, "random": false },
                 "size": { "value": 3, "random": true },
                 "line_linked": { "enable": true, "distance": 150, "color": "#3b82f6", "opacity": 0.3, "width": 1 },
-                "move": { "enable": true, "speed": 1, "direction": "none", "random": true, "straight": false, "out_mode": "out", "bounce": false }
+                "move": { "enable": true, "speed": 1, "direction": "none", "random": true, "straight": false, "out_mode": "out" }
             },
             "interactivity": {
                 "detect_on": "window",
-                "events": {
-                    "onhover": { "enable": true, "mode": "grab" },
-                    "onclick": { "enable": true, "mode": "push" },
-                    "resize": true
-                },
-                "modes": {
-                    "grab": { "distance": 150, "line_linked": { "opacity": 0.6 } },
-                    "push": { "particles_nb": 2 }
-                }
+                "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
+                "modes": { "grab": { "distance": 150, "line_linked": { "opacity": 0.6 } }, "push": { "particles_nb": 2 } }
             },
             "retina_detect": true
         });
     }
 
-    // ====================================================
-    // 6. CUSTOM CURSOR
-    // ====================================================
+    // ==================== CUSTOM CURSOR ====================
     const cursorDot = document.querySelector('[data-cursor-dot]');
     const cursorOutline = document.querySelector('[data-cursor-outline]');
-
     if (cursorDot && cursorOutline && window.matchMedia("(pointer: fine)").matches) {
         window.addEventListener('mousemove', (e) => {
             cursorDot.style.left = `${e.clientX}px`;
             cursorDot.style.top = `${e.clientY}px`;
-            cursorOutline.animate({
-                left: `${e.clientX}px`,
-                top: `${e.clientY}px`
-            }, { duration: 500, fill: "forwards" });
+            cursorOutline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 500, fill: "forwards" });
         });
-
         document.body.addEventListener('mouseover', (e) => {
-            if (e.target.closest('a, button, .clickable-card, .timeline-card, .project-detail-btn')) {
-                cursorOutline.classList.add('hovered');
-            }
+            if (e.target.closest('a, button, .timeline-card')) cursorOutline.classList.add('hovered');
         });
         document.body.addEventListener('mouseout', (e) => {
-            if (e.target.closest('a, button, .clickable-card, .timeline-card, .project-detail-btn')) {
-                cursorOutline.classList.remove('hovered');
-            }
+            if (e.target.closest('a, button, .timeline-card')) cursorOutline.classList.remove('hovered');
         });
     }
 
-    // ====================================================
-    // 7. MODAL LOGIC
-    // ====================================================
+    // ==================== MODAL ====================
     function openModal(project) {
         document.getElementById('modal-badge').textContent = project.badge[currentLang];
         document.getElementById('modal-title').textContent = project.title[currentLang];
-        
-        const formattedDesc = project.longDesc[currentLang].replace(/\n/g, '<br>');
-        document.getElementById('modal-desc').innerHTML = formattedDesc;
-        
+        document.getElementById('modal-desc').innerHTML = project.longDesc[currentLang].replace(/\n/g, '<br>');
         document.getElementById('modal-tech').innerHTML = project.tech.map(t => `<span>${t}</span>`).join('');
         
         const visualContainer = document.getElementById('modal-visual-container');
         if (project.images && project.images.length > 0) {
             const mediaHTML = project.images.map(media => {
                 if (media.endsWith('.mp4')) {
-                    return `<video playsinline controls class="carousel-media video-player" style="max-width: 100%; border-radius: 8px;">
-                                <source src="${media}" type="video/mp4" />
-                            </video>`;
-                } else {
-                    return `<img src="${media}" alt="${project.title[currentLang]}" class="carousel-img">`;
+                    return `<video playsinline controls class="video-player" style="max-width:100%;border-radius:8px;"><source src="${media}" type="video/mp4" /></video>`;
                 }
+                return `<img src="${media}" alt="${project.title[currentLang]}" class="carousel-img">`;
             }).join('');
             visualContainer.innerHTML = `<div class="gallery-carousel">${mediaHTML}</div>`;
             visualContainer.style.display = 'block';
-            
-            const videoElements = visualContainer.querySelectorAll('.video-player');
-            videoElements.forEach(video => { new Plyr(video); });
-            
-            const carouselImages = visualContainer.querySelectorAll('.carousel-img');
-            carouselImages.forEach(img => {
+            visualContainer.querySelectorAll('.video-player').forEach(v => new Plyr(v));
+            visualContainer.querySelectorAll('.carousel-img').forEach(img => {
                 img.addEventListener('click', () => openLightbox(img.src));
             });
         } else {
@@ -372,16 +328,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const linksContainer = document.getElementById('modal-links');
         if (project.links && project.links.length > 0) {
             linksContainer.innerHTML = project.links.map(link => 
-                `<a href="${link.url}" target="_blank" class="btn btn-secondary" title="${link.tooltip}">
-                    <i class="${link.icon}"></i> ${link.tooltip}
-                </a>`
+                `<a href="${link.url}" target="_blank" class="btn btn-secondary"><i class="${link.icon}"></i> ${link.tooltip}</a>`
             ).join('');
             linksContainer.style.display = 'flex';
         } else {
             linksContainer.innerHTML = '';
             linksContainer.style.display = 'none';
         }
-
         modalOverlay.classList.add('active');
         document.body.style.overflow = 'hidden';
     }
@@ -390,78 +343,37 @@ document.addEventListener('DOMContentLoaded', () => {
         modalOverlay.classList.remove('active');
         document.body.style.overflow = '';
     }
-
     modalCloseBtn.addEventListener('click', closeModal);
-    modalOverlay.addEventListener('click', (e) => {
-        if (e.target === modalOverlay) closeModal();
-    });
+    modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) closeModal(); });
 
-    // ====================================================
-    // 8. LIGHTBOX
-    // ====================================================
+    // ==================== LIGHTBOX ====================
     const lightboxOverlay = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const lightboxCloseBtn = document.getElementById('lightbox-close');
-
-    function openLightbox(src) {
-        if (!lightboxOverlay) return;
-        lightboxImg.src = src;
-        lightboxOverlay.classList.add('active');
-    }
-
-    function closeLightbox() {
-        if (!lightboxOverlay) return;
-        lightboxOverlay.classList.remove('active');
-        setTimeout(() => { lightboxImg.src = ''; }, 300);
-    }
-
+    function openLightbox(src) { if (!lightboxOverlay) return; lightboxImg.src = src; lightboxOverlay.classList.add('active'); }
+    function closeLightbox() { if (!lightboxOverlay) return; lightboxOverlay.classList.remove('active'); setTimeout(() => { lightboxImg.src = ''; }, 300); }
     if (lightboxCloseBtn) lightboxCloseBtn.addEventListener('click', closeLightbox);
-    if (lightboxOverlay) lightboxOverlay.addEventListener('click', (e) => {
-        if (e.target === lightboxOverlay) closeLightbox();
-    });
-
+    if (lightboxOverlay) lightboxOverlay.addEventListener('click', (e) => { if (e.target === lightboxOverlay) closeLightbox(); });
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
-            if (lightboxOverlay && lightboxOverlay.classList.contains('active')) {
-                closeLightbox();
-            } else if (modalOverlay.classList.contains('active')) {
-                closeModal();
-            }
+            if (lightboxOverlay && lightboxOverlay.classList.contains('active')) closeLightbox();
+            else if (modalOverlay.classList.contains('active')) closeModal();
         }
     });
 
-    // ====================================================
-    // 9. I18N
-    // ====================================================
-    function initLang() {
-        updateLangUI();
-        applyTranslations();
-    }
-
-    function updateLangUI() {
-        langToggleBtn.querySelector('.lang-text').textContent = currentLang === 'cz' ? 'EN' : 'CZ';
-    }
-
+    // ==================== I18N ====================
+    function initLang() { updateLangUI(); applyTranslations(); }
+    function updateLangUI() { langToggleBtn.querySelector('.lang-text').textContent = currentLang === 'cz' ? 'EN' : 'CZ'; }
     function applyTranslations() {
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
-            if (translations[key]) {
-                el.innerHTML = translations[key][currentLang];
-            }
+            if (translations[key]) el.innerHTML = translations[key][currentLang];
         });
-        
         renderExperience();
-        renderProjectPanels(getCurrentFilter());
-        
-        // Re-init horizontal scroll after content change
-        setTimeout(() => initHorizontalScroll(), 100);
-    }
-
-    function getCurrentFilter() {
         const activeBtn = document.querySelector('.filter-btn.active');
-        return activeBtn ? activeBtn.getAttribute('data-filter') : 'all';
+        renderProjectPanels(activeBtn ? activeBtn.getAttribute('data-filter') : 'all');
+        setTimeout(initScrollAnimations, 100);
     }
-
     langToggleBtn.addEventListener('click', () => {
         currentLang = currentLang === 'cz' ? 'en' : 'cz';
         localStorage.setItem('lang', currentLang);
@@ -469,76 +381,49 @@ document.addEventListener('DOMContentLoaded', () => {
         applyTranslations();
     });
 
-    // ====================================================
-    // 10. THEME
-    // ====================================================
+    // ==================== THEME ====================
     function initTheme() {
         document.documentElement.setAttribute('data-theme', currentTheme);
-        updateThemeIcon();
-    }
-
-    function updateThemeIcon() {
         const icon = themeToggleBtn.querySelector('i');
         icon.className = currentTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
     }
-
     themeToggleBtn.addEventListener('click', () => {
         currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
         document.documentElement.setAttribute('data-theme', currentTheme);
         localStorage.setItem('theme', currentTheme);
-        updateThemeIcon();
+        const icon = themeToggleBtn.querySelector('i');
+        icon.className = currentTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
     });
 
-    // ====================================================
-    // 11. MOBILE MENU
-    // ====================================================
+    // ==================== MOBILE MENU ====================
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const mobileNav = document.querySelector('.mobile-nav');
-    
     mobileMenuBtn.addEventListener('click', () => {
         mobileNav.classList.toggle('active');
         const icon = mobileMenuBtn.querySelector('i');
-        if (mobileNav.classList.contains('active')) {
-            icon.classList.remove('fa-bars'); icon.classList.add('fa-times');
-        } else {
-            icon.classList.remove('fa-times'); icon.classList.add('fa-bars');
-        }
+        icon.className = mobileNav.classList.contains('active') ? 'fas fa-times' : 'fas fa-bars';
     });
-    
     document.querySelectorAll('.mobile-link').forEach(link => {
         link.addEventListener('click', () => {
             mobileNav.classList.remove('active');
-            mobileMenuBtn.querySelector('i').classList.remove('fa-times');
-            mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+            mobileMenuBtn.querySelector('i').className = 'fas fa-bars';
         });
     });
 
-    // ====================================================
-    // 12. FILTER BUTTONS
-    // ====================================================
+    // ==================== FILTER BUTTONS ====================
     document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             e.target.classList.add('active');
             renderProjectPanels(e.target.getAttribute('data-filter'));
-            setTimeout(() => initHorizontalScroll(), 100);
+            setTimeout(initScrollAnimations, 100);
         });
     });
 
-    // ====================================================
-    // INIT SEQUENCE
-    // ====================================================
+    // ==================== INIT ====================
     initTheme();
     initLang();
     renderExperience();
     renderProjectPanels('all');
     runBootSequence();
-
-    // Handle resize
-    window.addEventListener('resize', () => {
-        clearTimeout(window._resizeTimer);
-        window._resizeTimer = setTimeout(() => {
-            initHorizontalScroll();
-        }, 250);
-    });
 });

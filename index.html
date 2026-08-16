@@ -89,57 +89,49 @@
         </div>
     </section>
 
-    <!-- Horizontal Scroll Wrapper -->
-    <section id="horizontal-wrapper" class="horizontal-wrapper">
-        <div class="horizontal-track" id="horizontal-track">
+    <!-- Experience Section -->
+    <section id="experience" class="v-section section-experience-intro">
+        <div class="section-inner">
+            <h2 class="section-giant-title" data-i18n="exp-title">Pracovní <span>Zkušenosti</span> &amp; Vzdělání</h2>
+            <p class="section-subtitle" data-i18n="exp-subtitle">Můj profesní příběh od univerzity po průmysl</p>
+        </div>
+    </section>
 
-            <!-- Panel: Experience Intro -->
-            <div class="h-panel panel-experience-intro" id="experience">
-                <div class="panel-content">
-                    <h2 class="panel-giant-title" data-i18n="exp-title">Pracovní <span>Zkušenosti</span> &amp; Vzdělání</h2>
-                    <p class="panel-subtitle" data-i18n="exp-subtitle">Můj profesní příběh od univerzity po průmysl</p>
+    <!-- Experience Timeline -->
+    <section class="v-section section-timeline">
+        <div class="timeline-cinematic" id="timeline-container"></div>
+    </section>
+
+    <!-- Projects Intro -->
+    <section id="projects" class="v-section section-projects-intro">
+        <div class="section-inner">
+            <h2 class="section-giant-title" data-i18n="projects-title">Vybrané <span>Projekty</span></h2>
+            <p class="section-subtitle" data-i18n="projects-subtitle">Od vášně k akademickým úspěchům.</p>
+            <div class="project-filters" id="project-filters">
+                <button class="filter-btn active" data-filter="all" data-i18n="filter-all">Vše</button>
+                <button class="filter-btn" data-filter="school" data-i18n="filter-school">Škola</button>
+                <button class="filter-btn" data-filter="mobile" data-i18n="filter-mobile">Mobilní</button>
+                <button class="filter-btn" data-filter="other" data-i18n="filter-other">Hobby</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Panels (injected via JS) -->
+    <div id="project-panels-container"></div>
+
+    <!-- Contact -->
+    <section id="contact" class="v-section section-contact">
+        <div class="section-inner contact-content">
+            <h2 class="section-giant-title">Kontakt</h2>
+            <div class="contact-info">
+                <h3>Michal Paluřík</h3>
+                <p data-i18n="footer-desc">Otevřený novým výzvám v oblasti vývoje software a IoT.</p>
+                <div class="social-links-cinematic">
+                    <a href="https://github.com/mpalurik" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
                 </div>
             </div>
-
-            <!-- Panel: Experience Timeline -->
-            <div class="h-panel panel-experience-timeline">
-                <div class="panel-content panel-timeline-scroll">
-                    <div class="timeline-cinematic" id="timeline-container"></div>
-                </div>
-            </div>
-
-            <!-- Panel: Projects Intro -->
-            <div class="h-panel panel-projects-intro" id="projects">
-                <div class="panel-content">
-                    <h2 class="panel-giant-title" data-i18n="projects-title">Vybrané <span>Projekty</span></h2>
-                    <p class="panel-subtitle" data-i18n="projects-subtitle">Od vášně k akademickým úspěchům.</p>
-                    <div class="project-filters" id="project-filters">
-                        <button class="filter-btn active" data-filter="all" data-i18n="filter-all">Vše</button>
-                        <button class="filter-btn" data-filter="school" data-i18n="filter-school">Škola</button>
-                        <button class="filter-btn" data-filter="mobile" data-i18n="filter-mobile">Mobilní</button>
-                        <button class="filter-btn" data-filter="other" data-i18n="filter-other">Hobby</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Project Panels Container (injected via JS) -->
-            <div id="project-panels-container" class="project-panels-inline"></div>
-
-            <!-- Final Panel: Contact -->
-            <div class="h-panel panel-contact" id="contact">
-                <div class="panel-content contact-content">
-                    <h2 class="panel-giant-title">Kontakt</h2>
-                    <div class="contact-info">
-                        <h3>Michal Paluřík</h3>
-                        <p data-i18n="footer-desc">Otevřený novým výzvám v oblasti vývoje software a IoT.</p>
-                        <div class="social-links-cinematic">
-                            <a href="https://github.com/mpalurik" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                        </div>
-                    </div>
-                    <div class="footer-bottom-cinematic">
-                        <p data-i18n="footer-rights">&copy; 2026 Michal Paluřík. Všechna práva vyhrazena.</p>
-                    </div>
-                </div>
+            <div class="footer-bottom-cinematic">
+                <p data-i18n="footer-rights">&copy; 2026 Michal Paluřík. Všechna práva vyhrazena.</p>
             </div>
         </div>
     </section>
