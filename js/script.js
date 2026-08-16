@@ -424,14 +424,15 @@ document.addEventListener('DOMContentLoaded', () => {
             tl.to(percentObj, { val: 100, duration: 2.2, ease: 'power2.inOut', onUpdate: updatePercent });
             tl.to('#loading-bar', { width: '100%', duration: 2.2, ease: 'power2.inOut' }, "<");
 
-            // 4. Blend text color to our primary blue accent
-            tl.to('.loading-title', { 
-                color: '#3b82f6', 
-                textShadow: '0 0 30px rgba(59, 130, 246, 0.8)', 
+            // 4. Blend background to our primary blue accent and fade out matrix
+            tl.to('#loading-screen', { 
+                backgroundColor: '#3b82f6', 
                 duration: 0.6,
                 ease: 'power2.out'
             });
-            tl.to('.loading-bar', { backgroundColor: '#3b82f6', boxShadow: '0 0 20px #3b82f6', duration: 0.6 }, "<");
+            tl.to('#matrix-canvas', { opacity: 0, duration: 0.6 }, "<");
+            tl.to('.loading-title', { opacity: 0, duration: 0.6 }, "<");
+            tl.to('.loading-bar-wrapper', { opacity: 0, duration: 0.6 }, "<");
 
             // 5. Cinematic zoom out
             tl.to('#loading-screen', {
