@@ -402,44 +402,52 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (typeof gsap !== 'undefined') {
-            gsap.fromTo('.loading-title', 
-                { opacity: 0, y: 20 },
-                { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }
-            );
-            
+            const tl = gsap.timeline();
             const percentObj = { val: 0 };
             const percentEl = document.getElementById('loading-percent');
             
-            gsap.to(percentObj, {
-                val: 100,
-                duration: 2.2,
-                ease: 'power2.inOut',
-                onUpdate: function() {
-                    if (percentEl) percentEl.textContent = Math.round(percentObj.val) + '%';
-                }
-            });
+            const updatePercent = () => {
+                if (percentEl) percentEl.textContent = Math.round(percentObj.val) + '%';
+            };
 
-            gsap.to('#loading-bar', { 
-                width: '100%', 
-                duration: 2.2, 
-                ease: 'power2.inOut',
-                onComplete: () => {
-                    clearInterval(matrixInterval);
-                    gsap.to('#loading-screen', {
-                        opacity: 0,
-                        scale: 1.5,
-                        duration: 1.2,
-                        ease: 'power3.inOut',
-                        onComplete: () => {
-                            document.getElementById('loading-screen').style.display = 'none';
-                            document.body.classList.add('loaded');
-                            document.getElementById('main-nav').classList.add('visible');
-                            initParticles();
-                            setTimeout(initScrollAnimations, 200);
-                        }
-                    });
-                }
+            // 1. Text fades in
+            tl.fromTo('.loading-title', 
+                { opacity: 0, y: 20, color: '#e2e8f0', textShadow: '0 0 20px rgba(0, 255, 150, 0.3)' },
+                { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }
+            );
+            
+            // 2. Fast load to 55%
+            tl.to(percentObj, { val: 55, duration: 0.8, ease: 'power1.out', onUpdate: updatePercent }, "-=0.5");
+            tl.to('#loading-bar', { width: '55%', duration: 0.8, ease: 'power1.out' }, "<");
+            
+            // 3. Slow dramatic load to 100%
+            tl.to(percentObj, { val: 100, duration: 2.2, ease: 'power2.inOut', onUpdate: updatePercent });
+            tl.to('#loading-bar', { width: '100%', duration: 2.2, ease: 'power2.inOut' }, "<");
+
+            // 4. Blend text color to our primary blue accent
+            tl.to('.loading-title', { 
+                color: '#3b82f6', 
+                textShadow: '0 0 30px rgba(59, 130, 246, 0.8)', 
+                duration: 0.6,
+                ease: 'power2.out'
             });
+            tl.to('.loading-bar', { backgroundColor: '#3b82f6', boxShadow: '0 0 20px #3b82f6', duration: 0.6 }, "<");
+
+            // 5. Cinematic zoom out
+            tl.to('#loading-screen', {
+                opacity: 0,
+                scale: 1.5,
+                duration: 1.2,
+                ease: 'power3.inOut',
+                onStart: () => clearInterval(matrixInterval),
+                onComplete: () => {
+                    document.getElementById('loading-screen').style.display = 'none';
+                    document.body.classList.add('loaded');
+                    document.getElementById('main-nav').classList.add('visible');
+                    initParticles();
+                    setTimeout(initScrollAnimations, 200);
+                }
+            }, "+=0.2");
         }
     }
 });
