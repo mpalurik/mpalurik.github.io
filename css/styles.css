@@ -130,13 +130,22 @@ body.loaded .cursor-dot, body.loaded .cursor-outline { opacity: 1; }
 .btn-secondary:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
 
 /* =========================================
+   GLOBAL BACKGROUND (Particles & Glow)
+   ========================================= */
+#particles-js { position: fixed; width: 100vw; height: 100vh; top: 0; left: 0; z-index: 0; pointer-events: none; }
+.ambient-glow { position: fixed; border-radius: 50%; filter: blur(120px); z-index: 0; pointer-events: none; opacity: 0.15; transition: opacity 0.5s ease; }
+.glow-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: var(--accent-primary); animation: floatGlow 20s infinite alternate ease-in-out; }
+.glow-2 { bottom: -10%; right: -10%; width: 40vw; height: 40vw; background: var(--accent-secondary); animation: floatGlow 25s infinite alternate-reverse ease-in-out; }
+@keyframes floatGlow { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(5%, 10%) scale(1.1); } }
+[data-theme="light"] .ambient-glow { opacity: 0.2; }
+
+/* =========================================
    HERO
    ========================================= */
 .hero-cinematic {
     min-height: 100vh; display: flex; align-items: center; justify-content: center;
     position: relative; padding: 2rem; overflow: hidden;
 }
-#particles-js { position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 0; }
 .hero-inner { position: relative; z-index: 10; text-align: center; max-width: 800px; }
 .hero-greeting { color: var(--accent-primary); font-size: 1.2rem; margin-bottom: 0.5rem; font-family: var(--font-mono); }
 .hero-name {
@@ -159,6 +168,7 @@ body.loaded .cursor-dot, body.loaded .cursor-outline { opacity: 1; }
    CONTENT SECTIONS
    ========================================= */
 .content-section {
+    position: relative; z-index: 10;
     max-width: 1200px;
     margin: 0 auto;
     padding: 6rem 2rem;
@@ -222,6 +232,7 @@ body.loaded .cursor-dot, body.loaded .cursor-outline { opacity: 1; }
    PROJECT PANELS (full-width, alternating)
    ========================================= */
 .project-panel {
+    position: relative; z-index: 10;
     display: flex; align-items: center; justify-content: center;
     padding: 5rem 2rem; max-width: 1100px; margin: 0 auto;
 }
