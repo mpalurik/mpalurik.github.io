@@ -159,22 +159,22 @@ document.addEventListener('DOMContentLoaded', () => {
         // Section titles
         gsap.utils.toArray('.section-giant-title').forEach(el => {
             gsap.from(el, {
-                scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none reverse' },
-                y: 60, opacity: 0, scale: 0.95, duration: 0.8, ease: 'power3.out'
+                scrollTrigger: { trigger: el, start: 'top 95%', end: 'top 50%', scrub: 1 },
+                y: 60, opacity: 0, scale: 0.95
             });
         });
         gsap.utils.toArray('.section-subtitle').forEach(el => {
             gsap.from(el, {
-                scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none reverse' },
-                y: 30, opacity: 0, duration: 0.8, delay: 0.1, ease: 'power3.out'
+                scrollTrigger: { trigger: el, start: 'top 95%', end: 'top 50%', scrub: 1 },
+                y: 30, opacity: 0
             });
         });
 
         // Timeline cards (individual triggers)
         gsap.utils.toArray('.timeline-card').forEach((card, i) => {
             gsap.from(card, {
-                scrollTrigger: { trigger: card, start: 'top 90%', toggleActions: 'play none none reverse' },
-                y: 50, opacity: 0, scale: 0.95, duration: 0.6, ease: 'power2.out'
+                scrollTrigger: { trigger: card, start: 'top 95%', end: 'top 60%', scrub: 1 },
+                y: 50, opacity: 0, scale: 0.95
             });
         });
 
@@ -183,19 +183,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const vis = panel.querySelector('.project-panel-visual');
             const info = panel.querySelector('.project-panel-info');
             
-            const tl = gsap.timeline({
-                scrollTrigger: { trigger: panel, start: 'top 75%', toggleActions: 'play none none reverse' }
-            });
-            
             if (vis) {
-                tl.from(vis, {
-                    x: i % 2 === 0 ? -80 : 80, opacity: 0, scale: 0.95, duration: 0.8, ease: 'power3.out'
-                }, 0);
+                gsap.from(vis, {
+                    scrollTrigger: { trigger: panel, start: 'top 90%', end: 'top 45%', scrub: 1 },
+                    x: i % 2 === 0 ? -100 : 100, opacity: 0, scale: 0.95
+                });
             }
             if (info) {
-                tl.from(info, {
-                    x: i % 2 === 0 ? 80 : -80, opacity: 0, duration: 0.8, ease: 'power3.out'
-                }, 0.1);
+                gsap.from(info, {
+                    scrollTrigger: { trigger: panel, start: 'top 85%', end: 'top 40%', scrub: 1 },
+                    x: i % 2 === 0 ? 80 : -80, opacity: 0
+                });
             }
         });
 
@@ -240,7 +238,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }).join('') + '</div>';
             vc.style.display = 'block';
             vc.querySelectorAll('.video-player').forEach(v => new Plyr(v));
-            vc.querySelectorAll('.carousel-img').forEach(img => img.addEventListener('click', () => openLightbox(img.src)));
+            vc.querySelectorAll('.carousel-img').forEach(img => img.addEventListener('click', () => openLightbox(img.src, project.images)));
         } else { vc.innerHTML = ''; vc.style.display = 'none'; }
 
         const lc = document.getElementById('modal-links');
@@ -257,17 +255,62 @@ document.addEventListener('DOMContentLoaded', () => {
     modalOverlay.addEventListener('click', e => { if (e.target === modalOverlay) closeModal(); });
 
     // ==================== LIGHTBOX ====================
+    let currentGallery = [];
+    let currentGalleryIndex = 0;
     const lbOverlay = document.getElementById('lightbox');
     const lbImg = document.getElementById('lightbox-img');
     const lbClose = document.getElementById('lightbox-close');
-    function openLightbox(src) { if (!lbOverlay) return; lbImg.src = src; lbOverlay.classList.add('active'); }
-    function closeLightbox() { if (!lbOverlay) return; lbOverlay.classList.remove('active'); setTimeout(() => lbImg.src = '', 300); }
+    const lbPrev = document.getElementById('lightbox-prev');
+    const lbNext = document.getElementById('lightbox-next');
+
+    function openLightbox(src, gallery = []) {
+        if (!lbOverlay) return;
+        
+        currentGallery = gallery.filter(item => !item.endsWith('.mp4'));
+        
+        // Find index by absolute URL matching
+        const filename = src.split('/').pop();
+        currentGalleryIndex = currentGallery.findIndex(item => item.endsWith(filename));
+        if (currentGalleryIndex === -1) currentGalleryIndex = 0;
+        
+        if (currentGallery.length > 1) {
+            if (lbPrev) lbPrev.style.display = 'flex';
+            if (lbNext) lbNext.style.display = 'flex';
+        } else {
+            if (lbPrev) lbPrev.style.display = 'none';
+            if (lbNext) lbNext.style.display = 'none';
+        }
+
+        lbImg.src = src;
+        lbOverlay.classList.add('active');
+    }
+    
+    function navigateLightbox(direction) {
+        if (currentGallery.length <= 1) return;
+        currentGalleryIndex += direction;
+        if (currentGalleryIndex < 0) currentGalleryIndex = currentGallery.length - 1;
+        if (currentGalleryIndex >= currentGallery.length) currentGalleryIndex = 0;
+        lbImg.src = currentGallery[currentGalleryIndex];
+    }
+
+    function closeLightbox() {
+        if (!lbOverlay) return;
+        lbOverlay.classList.remove('active');
+        setTimeout(() => lbImg.src = '', 300);
+    }
+
+    if (lbPrev) lbPrev.addEventListener('click', () => navigateLightbox(-1));
+    if (lbNext) lbNext.addEventListener('click', () => navigateLightbox(1));
     if (lbClose) lbClose.addEventListener('click', closeLightbox);
     if (lbOverlay) lbOverlay.addEventListener('click', e => { if (e.target === lbOverlay) closeLightbox(); });
+    
     document.addEventListener('keydown', e => {
-        if (e.key === 'Escape') {
-            if (lbOverlay && lbOverlay.classList.contains('active')) closeLightbox();
-            else if (modalOverlay.classList.contains('active')) closeModal();
+        if (lbOverlay && lbOverlay.classList.contains('active')) {
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') navigateLightbox(-1);
+            if (e.key === 'ArrowRight') navigateLightbox(1);
+        } else if (modalOverlay.classList.contains('active') && e.key === 'Escape') {
+            closeModal();
         }
     });
 
