@@ -424,21 +424,21 @@ document.addEventListener('DOMContentLoaded', () => {
             tl.to(percentObj, { val: 100, duration: 2.2, ease: 'power2.inOut', onUpdate: updatePercent });
             tl.to('#loading-bar', { width: '100%', duration: 2.2, ease: 'power2.inOut' }, "<");
 
-            // 4. Blend background to our primary blue accent and fade out matrix
+            // 4. Gradual blend to a deep blue glow, fading out inner elements
             tl.to('#loading-screen', { 
-                backgroundColor: '#3b82f6', 
-                duration: 0.6,
-                ease: 'power2.out'
+                backgroundColor: 'rgba(59, 130, 246, 0.15)', // Gradual subtle blue blend
+                duration: 1.5,
+                ease: 'power2.inOut'
             });
-            tl.to('#matrix-canvas', { opacity: 0, duration: 0.6 }, "<");
-            tl.to('.loading-title', { opacity: 0, duration: 0.6 }, "<");
-            tl.to('.loading-bar-wrapper', { opacity: 0, duration: 0.6 }, "<");
+            tl.to('#matrix-canvas', { opacity: 0, duration: 1.0 }, "<");
+            tl.to('.loading-title', { opacity: 0, scale: 1.1, duration: 1.5, ease: 'power2.inOut' }, "<");
+            tl.to('.loading-bar-wrapper', { opacity: 0, duration: 1.0 }, "<");
 
-            // 5. Cinematic zoom out
+            // 5. Cinematic zoom out and fade to reveal main page
             tl.to('#loading-screen', {
                 opacity: 0,
-                scale: 1.5,
-                duration: 1.2,
+                scale: 1.1,
+                duration: 1.5,
                 ease: 'power3.inOut',
                 onStart: () => clearInterval(matrixInterval),
                 onComplete: () => {
@@ -448,7 +448,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     initParticles();
                     setTimeout(initScrollAnimations, 200);
                 }
-            }, "+=0.2");
+            }, "-=0.5");
         }
     }
 });
