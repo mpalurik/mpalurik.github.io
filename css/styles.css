@@ -374,9 +374,6 @@ body.loaded .cursor-dot, body.loaded .cursor-outline { opacity: 1; }
     .section-giant-title { font-size: 2.5rem; }
     .hero-title { font-size: 3rem; }
     .hero-glitch::before, .hero-glitch::after { font-size: 3rem; }
-    .timeline-container::before { left: 20px; }
-    .timeline-card { width: calc(100% - 40px); left: 40px !important; }
-    .timeline-card::before { left: -28px !important; }
     .project-panel { flex-direction: column !important; text-align: center; }
     .scroll-nav { display: none; }
     .contact-cards { flex-direction: column; }
