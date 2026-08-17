@@ -6,8 +6,8 @@ const translations = {
     "hero-greeting": { cz: "Ahoj, já jsem", en: "Hello, I am" },
     "hero-role": { cz: "Software & Hardware Developer", en: "Software & Hardware Developer" },
     "hero-bio": { 
-        cz: "Věnuji se vývoji mobilních a webových aplikací a rád propojuji svět softwaru s hardwarem. Baví mě nízkoúrovňové programování a vývoj vlastních IoT zařízení, ať už na platformách ESP32, STM, NXP nebo Raspberry Pi. Rád zkoumám moderní softwarovou architekturu a databázové systémy.", 
-        en: "I specialize in mobile and web app development, and I love connecting the worlds of software and hardware. I enjoy low-level programming and building custom IoT devices, whether on ESP32, STM, NXP, or Raspberry Pi platforms. I also enjoy exploring modern software architecture and database systems." 
+        cz: "Věnuji se vývoji mobilních a webových aplikací a rád propojuji svět softwaru s hardwarem. Baví mě nízkoúrovňové programování a vývoj vlastních IoT zařízení, ať už na platformách ESP32, STM, NXP nebo Raspberry Pi. Rád zkoumám nové technologie, od IoT a chytrého hardwaru až po databázové systémy.", 
+        en: "I specialize in mobile and web app development, and I love connecting the worlds of software and hardware. I enjoy low-level programming and building custom IoT devices, whether on ESP32, STM, NXP, or Raspberry Pi platforms. I love exploring new technologies, from IoT and smart hardware to database systems." 
     },
     "hero-btn-work": { cz: "Moje práce", en: "My Work" },
     "scroll-hint": { cz: "Scrolluj dolů", en: "Scroll down" },
@@ -416,25 +416,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }
             );
             
-            // 2. Fast load to 50% (linear speed, no slowing down yet)
-            tl.to(percentObj, { val: 50, duration: 0.6, ease: 'none', onUpdate: updatePercent }, "-=0.5");
-            tl.to('#loading-bar', { width: '50%', duration: 0.6, ease: 'none' }, "<");
+            // 2. Continuous dynamic load (exactly 55% in 1.5s, remaining in 3s with continuous slowdown)
+            tl.to(percentObj, { val: 100, duration: 4.5, ease: 'power1.out', onUpdate: updatePercent }, "-=0.5");
+            tl.to('#loading-bar', { width: '100%', duration: 4.5, ease: 'power1.out' }, "<");
 
-            // 3. Drastic slow down from 50% to 100%
-            tl.to(percentObj, { val: 100, duration: 3.5, ease: 'power4.out', onUpdate: updatePercent });
-            tl.to('#loading-bar', { width: '100%', duration: 3.5, ease: 'power4.out' }, "<");
-
-            // 4. Gradual blend to a deep blue glow, fading out inner elements
-            tl.to('#loading-screen', { 
-                backgroundColor: 'rgba(59, 130, 246, 0.15)', // Gradual subtle blue blend
-                duration: 1.5,
-                ease: 'power2.inOut'
-            });
-            tl.to('#matrix-canvas', { opacity: 0, duration: 1.0 }, "<");
+            // 3. Fade out inner elements
+            tl.to('#matrix-canvas', { opacity: 0, duration: 1.0 }, "-=0.5");
             tl.to('.loading-title', { opacity: 0, scale: 1.1, duration: 1.5, ease: 'power2.inOut' }, "<");
             tl.to('.loading-bar-wrapper', { opacity: 0, duration: 1.0 }, "<");
 
-            // 5. Cinematic zoom out and fade to reveal main page
+            // 4. Cinematic zoom out and exact fade to background (no blue tint)
             tl.to('#loading-screen', {
                 opacity: 0,
                 scale: 1.1,
