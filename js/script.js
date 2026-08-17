@@ -416,9 +416,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }
             );
             
-            // 2. Continuous dynamic load (fast start, slow suspenseful finish)
-            tl.to(percentObj, { val: 100, duration: 3.5, ease: 'expo.out', onUpdate: updatePercent }, "-=0.5");
-            tl.to('#loading-bar', { width: '100%', duration: 3.5, ease: 'expo.out' }, "<");
+            // 2. Fast load to 50% (linear speed, no slowing down yet)
+            tl.to(percentObj, { val: 50, duration: 0.6, ease: 'none', onUpdate: updatePercent }, "-=0.5");
+            tl.to('#loading-bar', { width: '50%', duration: 0.6, ease: 'none' }, "<");
+
+            // 3. Drastic slow down from 50% to 100%
+            tl.to(percentObj, { val: 100, duration: 3.5, ease: 'power4.out', onUpdate: updatePercent });
+            tl.to('#loading-bar', { width: '100%', duration: 3.5, ease: 'power4.out' }, "<");
 
             // 4. Gradual blend to a deep blue glow, fading out inner elements
             tl.to('#loading-screen', { 
