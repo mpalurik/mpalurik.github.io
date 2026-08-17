@@ -6,8 +6,8 @@ const translations = {
     "hero-greeting": { cz: "Ahoj, já jsem", en: "Hello, I am" },
     "hero-role": { cz: "Software & Hardware Developer", en: "Software & Hardware Developer" },
     "hero-bio": { 
-        cz: "Věnuji se vývoji mobilních aplikací, webových řešení a propojování světa hardwaru a softwaru. Rád zkoumám nové technologie, od IoT (ESP32, Matter, KNX) přes moderní architekturu až po databázové systémy.", 
-        en: "I specialize in mobile app development, web solutions, and bridging the gap between hardware and software. I love exploring new technologies, from IoT (ESP32, Matter, KNX) and modern architecture to database systems." 
+        cz: "Věnuji se vývoji mobilních a webových aplikací a rád propojuji svět softwaru s hardwarem. Baví mě nízkoúrovňové programování a vývoj vlastních IoT zařízení, ať už na platformách ESP32, STM, NXP nebo Raspberry Pi. Rád zkoumám moderní softwarovou architekturu a databázové systémy.", 
+        en: "I specialize in mobile and web app development, and I love connecting the worlds of software and hardware. I enjoy low-level programming and building custom IoT devices, whether on ESP32, STM, NXP, or Raspberry Pi platforms. I also enjoy exploring modern software architecture and database systems." 
     },
     "hero-btn-work": { cz: "Moje práce", en: "My Work" },
     "scroll-hint": { cz: "Scrolluj dolů", en: "Scroll down" },
