@@ -95,6 +95,10 @@ body.loaded .cursor-dot, body.loaded .cursor-outline { opacity: 1; }
 @media (pointer: fine) { body { cursor: none; } a, button { cursor: none; } }
 @media (pointer: coarse) { .cursor-dot, .cursor-outline { display: none !important; } }
 
+body.show-native-cursor { cursor: default !important; }
+body.show-native-cursor a, body.show-native-cursor button { cursor: pointer !important; }
+body.show-native-cursor .cursor-dot, body.show-native-cursor .cursor-outline { opacity: 0 !important; }
+
 /* =========================================
    NAVIGATION
    ========================================= */
