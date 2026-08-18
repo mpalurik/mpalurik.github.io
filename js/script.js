@@ -331,6 +331,28 @@ document.addEventListener('DOMContentLoaded', () => {
         mNav.classList.toggle('active');
         mmBtn.querySelector('i').className = mNav.classList.contains('active') ? 'fas fa-times' : 'fas fa-bars';
     });
+
+    // ==================== JS SMOOTH SCROLLING ====================
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            const targetEl = document.querySelector(targetId);
+            if (targetEl) {
+                // Close mobile menu if open
+                if (mNav.classList.contains('active')) {
+                    mNav.classList.remove('active');
+                    mmBtn.querySelector('i').className = 'fas fa-bars';
+                }
+                const offsetTop = targetEl.getBoundingClientRect().top + window.scrollY - 80; // 80px offset for navbar
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
     document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', () => {
         mNav.classList.remove('active'); mmBtn.querySelector('i').className = 'fas fa-bars';
     }));
