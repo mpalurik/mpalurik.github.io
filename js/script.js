@@ -420,17 +420,22 @@ document.addEventListener('DOMContentLoaded', () => {
             tl.to(percentObj, { val: 100, duration: 4.5, ease: 'power1.out', onUpdate: updatePercent }, "-=0.5");
             tl.to('#loading-bar', { width: '100%', duration: 4.5, ease: 'power1.out' }, "<");
 
-            // 3. Fade out inner elements
-            tl.to('#matrix-canvas', { opacity: 0, duration: 1.0 }, "-=0.5");
+            // 3. Gradual blend to a deep blue glow, fading out inner elements
+            tl.to('#loading-screen', { 
+                backgroundColor: 'rgba(59, 130, 246, 0.15)',
+                duration: 1.5,
+                ease: 'power2.inOut'
+            }, "-=0.5");
+            tl.to('#matrix-canvas', { opacity: 0, duration: 1.0 }, "<");
             tl.to('.loading-title', { opacity: 0, scale: 1.1, duration: 1.5, ease: 'power2.inOut' }, "<");
             tl.to('.loading-bar-wrapper', { opacity: 0, duration: 1.0 }, "<");
 
-            // 4. Cinematic zoom out and exact fade to background (no blue tint)
+            // 4. Cinematic zoom out and exact fade to background
             tl.to('#loading-screen', {
                 opacity: 0,
                 scale: 1.1,
-                duration: 1.5,
-                ease: 'power3.inOut',
+                duration: 2.5, // Increased fade duration for a smoother transition
+                ease: 'power2.inOut',
                 onStart: () => {
                     clearInterval(matrixInterval);
                     document.body.classList.add('loaded');
