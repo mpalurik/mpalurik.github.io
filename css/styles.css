@@ -217,7 +217,9 @@ body.loaded .cursor-dot, body.loaded .cursor-outline { opacity: 1; }
 .timeline-card-type.edu { background: rgba(139,92,246,0.2); color: var(--accent-secondary); }
 
 /* Focus hover */
-.experience-grid:hover .timeline-card:not(:hover) { opacity: 0.4; filter: blur(1px); }
+@media (hover: hover) and (pointer: fine) {
+    .experience-grid:hover .timeline-card:not(:hover) { opacity: 0.4; filter: blur(1px); }
+}
 
 /* =========================================
    PROJECT FILTERS
